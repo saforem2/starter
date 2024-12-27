@@ -1,43 +1,31 @@
 return {
   {
-    "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
-    dependencies = "rafamadriz/friendly-snippets",
+    "f-person/git-blame.nvim",
+    -- load the plugin at startup
+    event = "VeryLazy",
+    -- opts = {
+    --   -- your configuration comes here
+    --   -- for example
+    --   enabled = true, -- if you want to enable the plugin
+    --   message_template = " <summary> • <date> • <author> • <<sha>>", -- template for the blame message, check the Message template section for more options
+    --   date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
+    --   virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
+    -- },
+    opts = function(_, opts)
+      -- Lua
+      vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
+      local git_blame = require("gitblame")
 
-    -- use a release tag to download pre-built binaries
-    version = "*",
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- See the full "keymap" documentation for information on defining your own keymap.
-      keymap = { preset = "default" },
-
-      appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
-        use_nvim_cmp_as_default = true,
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = "mono",
-      },
-
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-      },
-    },
-    opts_extend = { "sources.default" },
+      require("lualine").setup({
+        sections = {
+          lualine_c = {
+            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
+          },
+        },
+      })
+    end,
   },
+
   {
     "projekt0n/github-nvim-theme",
     lazy = false,
@@ -398,12 +386,12 @@ return {
   --     vim.cmd("nmap [v <Plug>Markdown_MoveToPreviousHeader")
   --   end,
   -- },
-  -- { -- install without yarn or npm
-  --   "iamcco/markdown-preview.nvim",
-  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  --   ft = { "markdown" },
-  --   -- build = function() vim.fn["mkdp#util#install"]() end,
-  -- },
+  { -- install without yarn or npm
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    -- build = function() vim.fn["mkdp#util#install"]() end,
+  },
   {
     "MeanderingProgrammer/markdown.nvim",
     name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
@@ -695,37 +683,37 @@ return {
   },
 
   -- color html colors
-  {
-    "NvChad/nvim-colorizer.lua",
-    enabled = true,
-    opts = {
-      filetypes = { "*" },
-      user_default_options = {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
-        names = true, -- "Name" codes like Blue or blue
-        RRGGBBAA = true, -- #RRGGBBAA hex codes
-        AARRGGBB = false, -- 0xAARRGGBB hex codes
-        rgb_fn = true, -- CSS rgb() and rgba() functions
-        hsl_fn = true, -- CSS hsl() and hsla() functions
-        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-        -- Available modes for `mode`: foreground, background,  virtualtext
-        mode = "both", -- Set the display mode.
-        -- Available methods are false / true / "normal" / "lsp" / "both"
-        -- True is same as normal
-        tailwind = true, -- Enable tailwind colors
-        -- parsers can contain values used in |user_default_options|
-        sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
-        virtualtext = "■",
-        -- update color values even if buffer is not focused
-        -- example use: cmp_menu, cmp_docs
-        always_update = true,
-        -- all the sub-options of filetypes apply to buftypes
-      },
-      buftypes = {},
-    },
-  },
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   enabled = true,
+  --   opts = {
+  --     filetypes = { "*" },
+  --     user_default_options = {
+  --       RGB = true, -- #RGB hex codes
+  --       RRGGBB = true, -- #RRGGBB hex codes
+  --       names = true, -- "Name" codes like Blue or blue
+  --       RRGGBBAA = true, -- #RRGGBBAA hex codes
+  --       AARRGGBB = false, -- 0xAARRGGBB hex codes
+  --       rgb_fn = true, -- CSS rgb() and rgba() functions
+  --       hsl_fn = true, -- CSS hsl() and hsla() functions
+  --       css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+  --       css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+  --       -- Available modes for `mode`: foreground, background,  virtualtext
+  --       mode = "both", -- Set the display mode.
+  --       -- Available methods are false / true / "normal" / "lsp" / "both"
+  --       -- True is same as normal
+  --       tailwind = true, -- Enable tailwind colors
+  --       -- parsers can contain values used in |user_default_options|
+  --       sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
+  --       virtualtext = "■",
+  --       -- update color values even if buffer is not focused
+  --       -- example use: cmp_menu, cmp_docs
+  --       always_update = true,
+  --       -- all the sub-options of filetypes apply to buftypes
+  --     },
+  --     buftypes = {},
+  --   },
+  -- },
   {
     "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
@@ -801,16 +789,16 @@ return {
     end,
   },
 
-  -- {
-  --   "toppair/peek.nvim",
-  --   event = { "VeryLazy" },
-  --   build = "deno task --quiet build:fast",
-  --   config = function()
-  --     require("peek").setup()
-  --     vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-  --     vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
-  --   end,
-  -- },
+  {
+    "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    config = function()
+      require("peek").setup()
+      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+    end,
+  },
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
