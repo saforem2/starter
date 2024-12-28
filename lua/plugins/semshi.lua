@@ -1,3 +1,5 @@
+if true then return {} end
+
 return {
   -- "numiras/semshi",
   "wookayin/semshi", -- use a maintained fork
