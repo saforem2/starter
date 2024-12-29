@@ -1,6 +1,9 @@
 local api = vim.api
 local ts = vim.treesitter
 
+vim.opt.shiftwidth = 4 -- Size of an indent
+vim.pt.tabstop = 4 -- Number of spaces tabs count for
+
 vim.b.slime_cell_delimiter = '```'
 vim.b['quarto_is_r_mode'] = nil
 vim.b['reticulate_running'] = false

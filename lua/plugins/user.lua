@@ -14,6 +14,168 @@
 -- treesj
 -- slime"
 return {
+
+  {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup({
+        signs = true, -- show icons in the signs column
+        sign_priority = 8, -- sign priority
+        -- keywords recognized as todo comments
+        keywords = {
+          FIX = {
+            icon = " ", -- icon used for the sign, and in search results
+            color = "error", -- can be a hex color, or a named color (see below)
+            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+            -- signs = false, -- configure signs for some keywords individually
+          },
+          TODO = { icon = " ", color = "info" },
+          HACK = { icon = " ", color = "warning" },
+          WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+          PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+          NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+          TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+        },
+        gui_style = {
+          fg = "NONE", -- The gui style to use for the fg highlight group.
+          bg = "BOLD", -- The gui style to use for the bg highlight group.
+        },
+        merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+        -- highlighting of the line containing the todo comment
+        -- * before: highlights before the keyword (typically comment characters)
+        -- * keyword: highlights of the keyword
+        -- * after: highlights after the keyword (todo text)
+        highlight = {
+          multiline = true, -- enable multine todo comments
+          multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
+          multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
+          before = "", -- "fg" or "bg" or empty
+          keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+          after = "", -- "fg" or "bg" or empty
+          pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
+          comments_only = true, -- uses treesitter to match keywords in comments only
+          max_line_len = 400, -- ignore lines longer than this
+          exclude = {}, -- list of file types to exclude highlighting
+        },
+        -- list of named colors where we try to extract the guifg from the
+        -- list of highlight groups or use the hex color if hl not found as a fallback
+        colors = {
+          error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+          warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+          info = { "DiagnosticInfo", "#2563EB" },
+          hint = { "DiagnosticHint", "#10B981" },
+          default = { "Identifier", "#7C3AED" },
+          test = { "Identifier", "#FF00FF" },
+        },
+        search = {
+          command = "rg",
+          args = {
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+          },
+          -- regex that will be used to match keywords.
+          -- don't replace the (KEYWORDS) placeholder
+          pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+          -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+        },
+      })
+    end,
+  },
+  {
+    "mikesmithgh/kitty-scrollback.nvim",
+    enabled = true,
+    lazy = true,
+    cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
+    event = { "User KittyScrollbackLaunch" },
+    -- version = '*', -- latest stable version, may have breaking changes if major version changed
+    -- version = '^5.0.0', -- pin major version, include fixes and features that do not have breaking changes
+    config = function()
+      require("kitty-scrollback").setup()
+    end,
+  },
+
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   event = "BufEnter",
+  --   config = function()
+  --     --   require("codeium").setup({})
+  --     vim.g.codeium_disable_bindings = 1
+  --     vim.keymap.set("i", "<C-g>", function()
+  --       return vim.fn["codeium#Accept"]()
+  --     end, { expr = true })
+  --     vim.keymap.set("i", "<c-;>", function()
+  --       return vim.fn["codeium#CycleCompletions"](1)
+  --     end, { expr = true })
+  --     vim.keymap.set("i", "<c-,>", function()
+  --       return vim.fn["codeium#CycleCompletions"](-1)
+  --     end, { expr = true })
+  --     vim.keymap.set("i", "<c-x>", function()
+  --       return vim.fn["codeium#Clear"]()
+  --     end, { expr = true })
+  --   end,
+  --   -- dependencies = {
+  --   --   "nvim-lua/plenary.nvim",
+  --   --   "hrsh7th/nvim-cmp",
+  --   -- },
+  --   -- lazy = false,
+  --   -- enabled = true,
+  --   -- config = function() require("codeium").setup {} end,
+  -- },
+
+  {
+    -- "code-stats/code-stats-vim",
+    "https://gitlab.com/code-stats/code-stats-vim.git",
+    config = function()
+      -- REQUIRED: set your API key
+      -- TODO: Replace with environment variable ??
+      vim.g["codestats_api_key"] = { os.getenv("CODESTATS_API_KEY") }
+      -- vim.g['codestats_api_key'] = {os.getenv('CODESTATS_API_KEY')}
+    end,
+  },
+
+  {
+    "f-person/git-blame.nvim",
+    -- load the plugin at startup
+    event = "VeryLazy",
+    -- opts = {
+    --   -- your configuration comes here
+    --   -- for example
+    --   enabled = true, -- if you want to enable the plugin
+    --   message_template = " <summary> • <date> • <author> • <<sha>>", -- template for the blame message, check the Message template section for more options
+    --   date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
+    --   virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
+    -- },
+    opts = function(_, opts)
+      -- Lua
+      vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
+      local git_blame = require("gitblame")
+
+      require("lualine").setup({
+        sections = {
+          lualine_c = {
+            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
+          },
+        },
+      })
+    end,
+  },
+
+  { "jghauser/mkdir.nvim" },
+  { "rrethy/vim-illuminate" },
+  { "dhruvasagar/vim-table-mode" },
+  { "folke/trouble.nvim", cmd = "TroubleToggle" },
+  { "wakatime/vim-wakatime", lazy = false },
+  { "mbbill/undotree" },
+  { "machakann/vim-sandwich" },
+  { "vim-python/python-syntax" },
+  { "Vimjas/vim-python-pep8-indent" },
+  { "tpope/vim-repeat" },
+  { "lervag/vimtex" },
+  { "github/copilot.vim", lazy = false, enabled = true },
   { "hkupty/iron.nvim" },
   { "bfredl/nvim-ipy" },
   { "ggandor/lightspeed.nvim", event = "BufRead" },
@@ -57,7 +219,7 @@ return {
   {
     "jmbuhr/otter.nvim",
     dependencies = {
-      "hrsh7th/nvim-cmp", -- optional, for completion
+      -- "hrsh7th/nvim-cmp", -- optional, for completion
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
@@ -159,7 +321,6 @@ return {
     run = "npm install --prefix server",
   },
 
-
   {
     "simrat39/rust-tools.nvim",
     config = function()
@@ -206,205 +367,205 @@ return {
   },
 }
 
-  -- {
-  --   "kevinhwang91/nvim-ufo",
-  --   lazy = false,
-  --   enabled = true,
-  --   dependencies = {
-  --     "kevinhwang91/promise-async",
-  --   },
-  --   config = function()
-  --     vim.o.foldcolumn = "1" -- '0' is not bad
-  --     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-  --     vim.o.foldlevelstart = 99
-  --     vim.o.foldenable = true
-  --
-  --     -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-  --     vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-  --     vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-  --
-  --     -- Option 1: coc.nvim as LSP client
-  --     -- use({ "neoclide/coc.nvim", branch = "master", run = "yarn install --frozen-lockfile" })
-  --     -- require("ufo").setup()
-  --     --
-  --
-  --     -- Option 2: nvim lsp as LSP client
-  --     -- Tell the server the capability of foldingRange,
-  --     -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
-  --     local capabilities = vim.lsp.protocol.make_client_capabilities()
-  --     capabilities.textDocument.foldingRange = {
-  --       dynamicRegistration = false,
-  --       lineFoldingOnly = true,
-  --     }
-  --     local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-  --     for _, ls in ipairs(language_servers) do
-  --       require("lspconfig")[ls].setup({
-  --         capabilities = capabilities,
-  --         -- you can add other fields for setting up lsp server in this table
-  --       })
-  --     end
-  --     -- require("ufo").setup()
-  --     --
-  --
-  --     -- Option 3: treesitter as a main provider instead
-  --     -- (Note: the `nvim-treesitter` plugin is *not* needed.)
-  --     -- ufo uses the same query files for folding (queries/<lang>/folds.scm)
-  --     -- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`
-  --     require("ufo").setup({
-  --       provider_selector = function(bufnr, filetype, buftype)
-  --         return { "treesitter", "indent" }
-  --       end,
-  --     })
-  --     --
-  --
-  --     -- Option 4: disable all providers for all buffers
-  --     -- Not recommend, AFAIK, the ufo's providers are the best performance in Neovim
-  --     -- require("ufo").setup({
-  --     --   provider_selector = function(bufnr, filetype, buftype)
-  --     --     return ""
-  --     --   end,
-  --     -- })
-  --     -- require("ufo").setup()
-  --   end,
-  -- },
-  -- {
-  --   "romgrk/kirby.nvim",
-  --   enabled = true,
-  --   dependencies = {
-  --     { "romgrk/fzy-lua-native", build = "make all" },
-  --     { "romgrk/kui.nvim" },
-  --     { "nvim-tree/nvim-web-devicons" },
-  --     { "nvim-lua/plenary.nvim" },
-  --   },
-  -- },
-  -- { "ggml-org/llama.vim", lazy = false, enabled = true },
-  -- { "dasupradyumna/midnight.nvim", lazy = false, priority = 1000 },
-  -- { "saforem2/glitz", lazy = false, enabled = true },
-  -- { "wakatime/vim-wakatime", lazy = false },
-  --   {
-  --   "preservim/vim-markdown",
-  --   branch = "master",
-  --   dependencies = { "godlygeek/tabular" },
-  --   ft = { "markdown", "quarto" },
-  --   config = function()
-  --     vim.cmd("nmap ]v <Plug>Markdown_MoveToNextHeader")
-  --     vim.cmd("nmap [v <Plug>Markdown_MoveToPreviousHeader")
-  --   end,
-  -- },
+-- {
+--   "kevinhwang91/nvim-ufo",
+--   lazy = false,
+--   enabled = true,
+--   dependencies = {
+--     "kevinhwang91/promise-async",
+--   },
+--   config = function()
+--     vim.o.foldcolumn = "1" -- '0' is not bad
+--     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+--     vim.o.foldlevelstart = 99
+--     vim.o.foldenable = true
+--
+--     -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+--     vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+--     vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+--
+--     -- Option 1: coc.nvim as LSP client
+--     -- use({ "neoclide/coc.nvim", branch = "master", run = "yarn install --frozen-lockfile" })
+--     -- require("ufo").setup()
+--     --
+--
+--     -- Option 2: nvim lsp as LSP client
+--     -- Tell the server the capability of foldingRange,
+--     -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+--     local capabilities = vim.lsp.protocol.make_client_capabilities()
+--     capabilities.textDocument.foldingRange = {
+--       dynamicRegistration = false,
+--       lineFoldingOnly = true,
+--     }
+--     local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+--     for _, ls in ipairs(language_servers) do
+--       require("lspconfig")[ls].setup({
+--         capabilities = capabilities,
+--         -- you can add other fields for setting up lsp server in this table
+--       })
+--     end
+--     -- require("ufo").setup()
+--     --
+--
+--     -- Option 3: treesitter as a main provider instead
+--     -- (Note: the `nvim-treesitter` plugin is *not* needed.)
+--     -- ufo uses the same query files for folding (queries/<lang>/folds.scm)
+--     -- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`
+--     require("ufo").setup({
+--       provider_selector = function(bufnr, filetype, buftype)
+--         return { "treesitter", "indent" }
+--       end,
+--     })
+--     --
+--
+--     -- Option 4: disable all providers for all buffers
+--     -- Not recommend, AFAIK, the ufo's providers are the best performance in Neovim
+--     -- require("ufo").setup({
+--     --   provider_selector = function(bufnr, filetype, buftype)
+--     --     return ""
+--     --   end,
+--     -- })
+--     -- require("ufo").setup()
+--   end,
+-- },
+-- {
+--   "romgrk/kirby.nvim",
+--   enabled = true,
+--   dependencies = {
+--     { "romgrk/fzy-lua-native", build = "make all" },
+--     { "romgrk/kui.nvim" },
+--     { "nvim-tree/nvim-web-devicons" },
+--     { "nvim-lua/plenary.nvim" },
+--   },
+-- },
+-- { "ggml-org/llama.vim", lazy = false, enabled = true },
+-- { "dasupradyumna/midnight.nvim", lazy = false, priority = 1000 },
+-- { "saforem2/glitz", lazy = false, enabled = true },
+-- { "wakatime/vim-wakatime", lazy = false },
+--   {
+--   "preservim/vim-markdown",
+--   branch = "master",
+--   dependencies = { "godlygeek/tabular" },
+--   ft = { "markdown", "quarto" },
+--   config = function()
+--     vim.cmd("nmap ]v <Plug>Markdown_MoveToNextHeader")
+--     vim.cmd("nmap [v <Plug>Markdown_MoveToPreviousHeader")
+--   end,
+-- },
 
-  -- {
-  --   "preservim/vim-markdown",
-  --   branch = "master",
-  --   dependencies = { "godlygeek/tabular" },
-  --   ft = { "markdown", "quarto" },
-  --   config = function()
-  --     vim.cmd("nmap ]v <Plug>Markdown_MoveToNextHeader")
-  --     vim.cmd("nmap [v <Plug>Markdown_MoveToPreviousHeader")
-  --   end,
-  -- },
-  -- { -- install without yarn or npm
-  --   "iamcco/markdown-preview.nvim",
-  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  --   ft = { "markdown" },
-  --   -- build = function() vim.fn["mkdp#util#install"]() end,
-  -- },
-  -- {
-  --   "MeanderingProgrammer/markdown.nvim",
-  --   name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
-  --   ft = { "markdown", "quarto" },
-  --   dependencies = {
-  --     { "nvim-treesitter/nvim-treesitter" },
-  --     {
-  --       "echasnovski/mini.icons",
-  --       version = false,
-  --       config = function()
-  --         require("mini.icons").setup()
-  --       end,
-  --     },
-  --     -- { "echasnovski/mini.icons" },
-  --     {
-  --       "tadmccorkle/markdown.nvim",
-  --       event = "VeryLazy",
-  --       ft = { "markdown", "quarto", "qmd" },
-  --       opts = {
-  --         mappings = {
-  --           inline_surround_toggle = "gs", -- (string|boolean) toggle inline style
-  --           inline_surround_toggle_line = "gss", -- (string|boolean) line-wise toggle inline style
-  --           inline_surround_delete = "ds", -- (string|boolean) delete emphasis surrounding cursor
-  --           inline_surround_change = "cs", -- (string|boolean) change emphasis surrounding cursor
-  --           link_add = "gl", -- (string|boolean) add link
-  --           link_follow = "gx", -- (string|boolean) follow link
-  --           go_curr_heading = "]c", -- (string|boolean) set cursor to current section heading
-  --           go_parent_heading = "]p", -- (string|boolean) set cursor to parent section heading
-  --           go_next_heading = "]]", -- (string|boolean) set cursor to next section heading
-  --           go_prev_heading = "[[", -- (string|boolean) set cursor to previous section heading
-  --         },
-  --       },
-  --     },
-  --   },
-  --   config = function()
-  --     require("render-markdown").setup({
-  --       enabled = true,
-  --       preset = "obsidian",
-  --       win_options = {
-  --         conceallevel = {
-  --           -- Used when not being rendered, get user setting
-  --           default = 0,
-  --           -- default = vim.api.nvim_get_option_value("conceallevel", { 2 }),
-  --           -- Used when being rendered, concealed text is completely hidden
-  --           rendered = 2,
-  --         },
-  --       },
-  --       file_types = {
-  --         "markdown",
-  --         "quarto",
-  --       },
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   "Pocco81/HighStr.nvim",
-  --   config = function()
-  --     local high_str = require("high-str")
-  --     high_str.setup({
-  --       verbosity = 1,
-  --       saving_path = "/tmp/highstr/",
-  --       highlight_colors = {
-  --         color_0 = { "#0c0d0e", "smart" }, -- Cosmic charcoal
-  --         color_1 = { "#e5c07b", "smart" }, -- Pastel yellow
-  --         color_2 = { "#7FFFD4", "smart" }, -- Aqua menthe
-  --         color_3 = { "#8A2BE2", "smart" }, -- Proton purple
-  --         color_4 = { "#FF4500", "smart" }, -- Orange red
-  --         color_5 = { "#008000", "smart" }, -- Office green
-  --         color_6 = { "#0000FF", "smart" }, -- Just blue
-  --         color_7 = { "#FFC0CB", "smart" }, -- Blush pink
-  --         color_8 = { "#FFF9E3", "smart" }, -- Cosmic latte
-  --         color_9 = { "#7d5c34", "smart" }, -- Fallow brown
-  --       },
-  --     })
-  --     vim.api.nvim_set_keymap("v", "<F3>", ":<c-U>HSHighlight 1<CR>", {
-  --       noremap = true,
-  --       silent = true,
-  --     })
-  --     vim.api.nvim_set_keymap("v", "<F4>", ":<c-U>HSRmHighlight<CR>", {
-  --       noremap = true,
-  --       silent = true,
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   "quarto-dev/quarto-nvim",
-  --   requires = {
-  --     "neovim/nvim-lspconfig",
-  --     "jmbuhr/otter.nvim",
-  --   },
-  -- },
-  -- {
-  --   "projekt0n/circles.nvim",
-  --   requires = { "nvim-tree/nvim-web-devicons" },
-  -- },
-  --
-  -- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
+-- {
+--   "preservim/vim-markdown",
+--   branch = "master",
+--   dependencies = { "godlygeek/tabular" },
+--   ft = { "markdown", "quarto" },
+--   config = function()
+--     vim.cmd("nmap ]v <Plug>Markdown_MoveToNextHeader")
+--     vim.cmd("nmap [v <Plug>Markdown_MoveToPreviousHeader")
+--   end,
+-- },
+-- { -- install without yarn or npm
+--   "iamcco/markdown-preview.nvim",
+--   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+--   ft = { "markdown" },
+--   -- build = function() vim.fn["mkdp#util#install"]() end,
+-- },
+-- {
+--   "MeanderingProgrammer/markdown.nvim",
+--   name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+--   ft = { "markdown", "quarto" },
+--   dependencies = {
+--     { "nvim-treesitter/nvim-treesitter" },
+--     {
+--       "echasnovski/mini.icons",
+--       version = false,
+--       config = function()
+--         require("mini.icons").setup()
+--       end,
+--     },
+--     -- { "echasnovski/mini.icons" },
+--     {
+--       "tadmccorkle/markdown.nvim",
+--       event = "VeryLazy",
+--       ft = { "markdown", "quarto", "qmd" },
+--       opts = {
+--         mappings = {
+--           inline_surround_toggle = "gs", -- (string|boolean) toggle inline style
+--           inline_surround_toggle_line = "gss", -- (string|boolean) line-wise toggle inline style
+--           inline_surround_delete = "ds", -- (string|boolean) delete emphasis surrounding cursor
+--           inline_surround_change = "cs", -- (string|boolean) change emphasis surrounding cursor
+--           link_add = "gl", -- (string|boolean) add link
+--           link_follow = "gx", -- (string|boolean) follow link
+--           go_curr_heading = "]c", -- (string|boolean) set cursor to current section heading
+--           go_parent_heading = "]p", -- (string|boolean) set cursor to parent section heading
+--           go_next_heading = "]]", -- (string|boolean) set cursor to next section heading
+--           go_prev_heading = "[[", -- (string|boolean) set cursor to previous section heading
+--         },
+--       },
+--     },
+--   },
+--   config = function()
+--     require("render-markdown").setup({
+--       enabled = true,
+--       preset = "obsidian",
+--       win_options = {
+--         conceallevel = {
+--           -- Used when not being rendered, get user setting
+--           default = 0,
+--           -- default = vim.api.nvim_get_option_value("conceallevel", { 2 }),
+--           -- Used when being rendered, concealed text is completely hidden
+--           rendered = 2,
+--         },
+--       },
+--       file_types = {
+--         "markdown",
+--         "quarto",
+--       },
+--     })
+--   end,
+-- },
+-- {
+--   "Pocco81/HighStr.nvim",
+--   config = function()
+--     local high_str = require("high-str")
+--     high_str.setup({
+--       verbosity = 1,
+--       saving_path = "/tmp/highstr/",
+--       highlight_colors = {
+--         color_0 = { "#0c0d0e", "smart" }, -- Cosmic charcoal
+--         color_1 = { "#e5c07b", "smart" }, -- Pastel yellow
+--         color_2 = { "#7FFFD4", "smart" }, -- Aqua menthe
+--         color_3 = { "#8A2BE2", "smart" }, -- Proton purple
+--         color_4 = { "#FF4500", "smart" }, -- Orange red
+--         color_5 = { "#008000", "smart" }, -- Office green
+--         color_6 = { "#0000FF", "smart" }, -- Just blue
+--         color_7 = { "#FFC0CB", "smart" }, -- Blush pink
+--         color_8 = { "#FFF9E3", "smart" }, -- Cosmic latte
+--         color_9 = { "#7d5c34", "smart" }, -- Fallow brown
+--       },
+--     })
+--     vim.api.nvim_set_keymap("v", "<F3>", ":<c-U>HSHighlight 1<CR>", {
+--       noremap = true,
+--       silent = true,
+--     })
+--     vim.api.nvim_set_keymap("v", "<F4>", ":<c-U>HSRmHighlight<CR>", {
+--       noremap = true,
+--       silent = true,
+--     })
+--   end,
+-- },
+-- {
+--   "quarto-dev/quarto-nvim",
+--   requires = {
+--     "neovim/nvim-lspconfig",
+--     "jmbuhr/otter.nvim",
+--   },
+-- },
+-- {
+--   "projekt0n/circles.nvim",
+--   requires = { "nvim-tree/nvim-web-devicons" },
+-- },
+--
+-- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
 -- {
 --   "nvim-telescope/telescope-fzf-native.nvim",
 --   run = "make",
