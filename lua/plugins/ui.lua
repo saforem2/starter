@@ -471,5 +471,4 @@ return {
       })
     end,
   },
->>>>>>> f20a347 (Update config)
 }
