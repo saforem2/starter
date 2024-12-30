@@ -14,7 +14,6 @@
 -- treesj
 -- slime"
 return {
-
   {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -176,6 +175,7 @@ return {
   { "tpope/vim-repeat" },
   { "lervag/vimtex" },
   { "github/copilot.vim", lazy = false, enabled = true },
+  { "fladson/vim-kitty", ft = "kitty", enabled = true, lazy = false },
   { "hkupty/iron.nvim" },
   { "bfredl/nvim-ipy" },
   { "ggandor/lightspeed.nvim", event = "BufRead" },

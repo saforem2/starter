@@ -16,6 +16,44 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
 })
 vim.g.copilot_no_tab_map = true
 
+-- if !get(g:, 'copilot_no_maps')
+--   imap <Plug>(copilot-dismiss)     <Cmd>call copilot#Dismiss()<CR>
+--   if empty(mapcheck('<C-]>', 'i'))
+--     imap <silent><script><nowait><expr> <C-]> copilot#Dismiss() . "\<C-]>"
+--   endif
+--   imap <Plug>(copilot-next)     <Cmd>call copilot#Next()<CR>
+--   imap <Plug>(copilot-previous) <Cmd>call copilot#Previous()<CR>
+--   imap <Plug>(copilot-suggest)  <Cmd>call copilot#Suggest()<CR>
+--   imap <script><silent><nowait><expr> <Plug>(copilot-accept-word) copilot#AcceptWord()
+--   imap <script><silent><nowait><expr> <Plug>(copilot-accept-line) copilot#AcceptLine()
+--   try
+--     if !has('nvim') && &encoding ==# 'utf-8'
+--       " avoid 8-bit meta collision with UTF-8 characters
+--       let s:restore_encoding = 1
+--       silent noautocmd set encoding=cp949
+--     endif
+--     if empty(mapcheck('<M-]>', 'i'))
+--       imap <M-]> <Plug>(copilot-next)
+--     endif
+--     if empty(mapcheck('<M-[>', 'i'))
+--       imap <M-[> <Plug>(copilot-previous)
+--     endif
+--     if empty(mapcheck('<M-Bslash>', 'i'))
+--       imap <M-Bslash> <Plug>(copilot-suggest)
+--     endif
+--     if empty(mapcheck('<M-Right>', 'i'))
+--       imap <M-Right> <Plug>(copilot-accept-word)
+--     endif
+--     if empty(mapcheck('<M-C-Right>', 'i'))
+--       imap <M-C-Right> <Plug>(copilot-accept-line)
+--     endif
+--   finally
+--     if exists('s:restore_encoding')
+--       silent noautocmd set encoding=utf-8
+--     endif
+--   endtry
+-- endif
+
 vim.keymap.set(
   { "v" },
   "<leader>c",
