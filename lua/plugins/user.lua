@@ -15,6 +15,15 @@
 -- slime"
 return {
   {
+    "s1n7ax/nvim-window-picker",
+    name = "window-picker",
+    event = "VeryLazy",
+    -- version = "2.*",
+    config = function()
+      require("window-picker").setup()
+    end,
+  },
+  {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
@@ -34,7 +43,7 @@ return {
           WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
           PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
           NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-          TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+          TEST = { icon = " ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
         },
         gui_style = {
           fg = "NONE", -- The gui style to use for the fg highlight group.
@@ -43,7 +52,7 @@ return {
         merge_keywords = true, -- when true, custom keywords will be merged with the defaults
         -- highlighting of the line containing the todo comment
         -- * before: highlights before the keyword (typically comment characters)
-        -- * keyword: highlights of the keyword
+        -- * keyword: highligh s of the keyword
         -- * after: highlights after the keyword (todo text)
         highlight = {
           multiline = true, -- enable multine todo comments
