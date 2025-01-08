@@ -1,9 +1,6 @@
-if true then return {} end
-
 return {
   {
     "romgrk/nvim-treesitter-context",
-    enabled = false,
     config = function()
       require("treesitter-context").setup({
         min_window_height = 50,

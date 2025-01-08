@@ -1,5 +1,3 @@
--- if true then return {} end
-
 return {
   -- "numiras/semshi",
   "wookayin/semshi", -- use a maintained fork
@@ -18,7 +16,7 @@ return {
       group = vim.api.nvim_create_augroup("SemanticHighlight", {}),
       callback = function()
         -- Only add style, inherit or link to the LSP's colors
-        vim.cmd([[
+        vim.cmd [[
             highlight! semshiGlobal gui=italic
             highlight! semshiImported gui=bold
             highlight! link semshiParameter @lsp.type.parameter
@@ -27,7 +25,7 @@ return {
             highlight! link semshiAttribute @attribute
             highlight! link semshiSelf @lsp.type.selfKeyword
             highlight! link semshiUnresolved @lsp.type.unresolvedReference
-            ]])
+            ]]
       end,
     })
   end,
