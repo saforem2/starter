@@ -10,7 +10,7 @@ return {
         vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true }),
         colorscheme = "cyberdream",
         -- Enable transparent background
-        transparent = false,
+        transparent = true,
         -- Enable italics comments
         italic_comments = false,
 
@@ -45,7 +45,7 @@ return {
             -- Example:
             return {
               Keyword = { fg = "#00CCFF" },
-              Normal = { bg = "#1c1c1c", fg = "#B3B3B3" },
+              -- Normal = { bg = "#1c1c1c", fg = "#B3B3B3" },
               Comment = { italic = false, fg = "#5F6972" },
               -- ["@variable"] = { fg = "#cccccc" },
               ["@keyword.import"] = { fg = "#D3FF3B" },
