@@ -136,7 +136,6 @@ return {
           "dot",
           "javascript",
           "mermaid",
-          "norg",
           "typescript",
         },
         highlight = {
