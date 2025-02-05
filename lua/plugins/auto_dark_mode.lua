@@ -8,7 +8,13 @@ return {
       end,
       set_light_mode = function()
         vim.api.nvim_set_option_value("background", "light", {})
-        vim.cmd("colorscheme material-lighter")
+        vim.cmd("colorscheme bluoco-light")
+        vim.cmd([[
+            highlight @variable.member guifg=#EA76CB
+            highlight @string.documentation.python guifg=#cccccc
+            highlight @string guifg=#FF5722
+            ]])
+
       end,
       -- your configuration comes here
       -- or leave it empty to use the default settings

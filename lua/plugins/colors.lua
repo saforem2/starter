@@ -90,7 +90,17 @@ return {
     priority = 1000,
     dependencies = { "rktjmp/lush.nvim" },
     config = function()
-      -- your optional config goes here, see below.
+      require("bluloco").setup({
+        -- theme = "onedark",
+        italic_comments = true,
+        italic_keywords = true,
+        italic_functions = false,
+        italic_variables = false,
+        contrast = true,
+        -- dark_sidebar = true,
+        -- dark_float = true,
+        hide_eob = true,
+      })
     end,
   },
   {

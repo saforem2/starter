@@ -8,6 +8,14 @@ return {
     end
   },
   {
+    "nvim-lualine/lualine.nvim",
+    enabled = false,
+    -- event = "VeryLazy",
+    -- opts = function(_, opts)
+    --   table.insert(opts.sections.lualine_x, "😄")
+    -- end,
+  },
+  {
     "jakewvincent/mkdnflow.nvim",
     ft = { "markdown", "quarto" },
     config = function()
@@ -331,25 +339,129 @@ return {
         },
       },
     },
-    config = function()
-      require("render-markdown").setup({
+    opts = {
+      heading = {
+        -- Turn on / off heading icon & background rendering
         enabled = true,
-        preset = "obsidian",
-        win_options = {
-          conceallevel = {
-            -- Used when not being rendered, get user setting
-            default = 0,
-            -- default = vim.api.nvim_get_option_value("conceallevel", { 2 }),
-            -- Used when being rendered, concealed text is completely hidden
-            rendered = 2,
-          },
+        -- Turn on / off any sign column related rendering
+        sign = false,
+        -- Determines how icons fill the available space:
+        --  inline:  underlying '#'s are concealed resulting in a left aligned icon
+        --  overlay: result is left padded with spaces to hide any additional '#'
+        position = "inline",
+        -- Replaces '#+' of 'atx_h._marker'
+        -- The number of '#' in the heading determines the 'level'
+        -- The 'level' is used to index into the array using a cycle
+        -- icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+        -- icons = { "1️⃣ ", "2️⃣ ", "3️⃣ ", "4️⃣ ", "5️⃣ ", "6️⃣ " }, -- {
+        -- Added to the sign column if enabled
+        -- The 'level' is used to index into the array using a cycle
+        signs = { "󰫎 " },
+        -- signs = { "" },
+        -- Width of the heading background:
+        --  block: width of the heading text
+        --  full:  full width of the window
+        -- Can also be an array of the above values in which case the 'level' is used
+        -- to index into the array using a clamp
+        width = "block",
+        -- Amount of padding to add to the left of headings
+        left_pad = 0,
+        -- Amount of padding to add to the right of headings when width is 'block'
+        right_pad = 0,
+        -- Minimum width to use for headings when width is 'block'
+        min_width = 0,
+        -- Determins if a border is added above and below headings
+        border = false,
+        -- Highlight the start of the border using the foreground highlight
+        border_prefix = true,
+        -- Used above heading for border
+        above = "▄",
+        -- Used below heading for border
+        below = "▀",
+        -- The 'level' is used to index into the array using a clamp
+        -- Highlight for the heading icon and extends through the entire line
+        backgrounds = {
+          "RenderMarkdownH1Bg",
+          "RenderMarkdownH2Bg",
+          "RenderMarkdownH3Bg",
+          "RenderMarkdownH4Bg",
+          "RenderMarkdownH5Bg",
+          "RenderMarkdownH6Bg",
         },
-        file_types = {
-          "markdown",
-          "quarto",
+        -- The 'level' is used to index into the array using a clamp
+        -- Highlight for the heading and sign icons
+        foregrounds = {
+          "RenderMarkdownH1",
+          "RenderMarkdownH2",
+          "RenderMarkdownH3",
+          "RenderMarkdownH4",
+          "RenderMarkdownH5",
+          "RenderMarkdownH6",
         },
-      })
-    end,
+      },
+    },
+    code = {
+      -- Turn on / off code block & inline code rendering
+      enabled = true,
+      -- Turn on / off any sign column related rendering
+      sign = false,
+      -- Determines how code blocks & inline code are rendered:
+      --  none:     disables all rendering
+      --  normal:   adds highlight group to code blocks & inline code, adds padding to code blocks
+      --  language: adds language icon to sign column if enabled and icon + name above code blocks
+      --  full:     normal + language
+      style = "full",
+      -- Determines where language icon is rendered:
+      --  right: right side of code block
+      --  left:  left side of code block
+      position = "right",
+      -- Amount of padding to add around the language
+      language_pad = 0,
+      -- An array of language names for which background highlighting will be disabled
+      -- Likely because that language has background highlights itself
+      disable_background = { "diff" },
+      -- Width of the code block background:
+      --  block: width of the code block
+      --  full:  full width of the window
+      width = "block",
+      -- Amount of padding to add to the left of code blocks
+      left_pad = 0,
+      -- Amount of padding to add to the right of code blocks when width is 'block'
+      right_pad = 0,
+      -- Minimum width to use for code blocks when width is 'block'
+      min_width = 0,
+      -- Determins how the top / bottom of code block are rendered:
+      --  thick: use the same highlight as the code body
+      --  thin:  when lines are empty overlay the above & below icons
+      border = "thin",
+      -- Used above code blocks for thin border
+      above = "▄",
+      -- Used below code blocks for thin border
+      below = "▀",
+      -- Highlight for code blocks
+      highlight = "RenderMarkdownCode",
+      -- Highlight for inline code
+      highlight_inline = "RenderMarkdownCodeInline",
+    },
+    -- config = function()
+    --   require("render-markdown").setup({
+    --     enabled = true,
+    --     preset = "obsidian",
+    --     win_options = {
+    --       conceallevel = {
+    --         -- Used when not being rendered, get user setting
+    --         default = 0,
+    --         -- default = vim.api.nvim_get_option_value("conceallevel", { 2 }),
+    --         -- Used when being rendered, concealed text is completely hidden
+    --         rendered = 2,
+    --       },
+    --     },
+    --     file_types = {
+    --       "markdown",
+    --       "quarto",
+    --     },
+    --   })
+    -- end,
   },
 
   { -- interactive global search and replace
@@ -554,11 +666,14 @@ return {
     config = function()
       --   require("codeium").setup({})
       vim.g.codeium_disable_bindings = 1
-      nvim_set_keymap("i", "<C-g>", "v:lua.codeium#Accept()", { expr = true })
+      vim.keymap.set("i", "<c-g>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true })
+      -- nvim_set_keymap("i", "<C-g>", "v:lua.codeium#Accept()", { expr = true })
       -- vim.keymap.set("i", "<C-g>", function()
       -- return vim.fn["codeium#Accept"]()
       -- end, { expr = true })
-      vim.keymap.set("i", "<c-;>", function()
+      vim.keymap.set("i", "<c-.>", function()
         return vim.fn["codeium#CycleCompletions"](1)
       end, { expr = true })
       vim.keymap.set("i", "<c-,>", function()
@@ -695,555 +810,4 @@ return {
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
   },
-
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    opts = {
-      heading = {
-        -- Turn on / off heading icon & background rendering
-        enabled = true,
-        -- Turn on / off any sign column related rendering
-        sign = false,
-        -- Determines how icons fill the available space:
-        --  inline:  underlying '#'s are concealed resulting in a left aligned icon
-        --  overlay: result is left padded with spaces to hide any additional '#'
-        position = "inline",
-        -- Replaces '#+' of 'atx_h._marker'
-        -- The number of '#' in the heading determines the 'level'
-        -- The 'level' is used to index into the array using a cycle
-        -- icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
-        -- icons = { "1️⃣ ", "2️⃣ ", "3️⃣ ", "4️⃣ ", "5️⃣ ", "6️⃣ " }, -- {
-        -- Added to the sign column if enabled
-        -- The 'level' is used to index into the array using a cycle
-        signs = { "󰫎 " },
-        -- signs = { "" },
-        -- Width of the heading background:
-        --  block: width of the heading text
-        --  full:  full width of the window
-        -- Can also be an array of the above values in which case the 'level' is used
-        -- to index into the array using a clamp
-        width = "block",
-        -- Amount of padding to add to the left of headings
-        left_pad = 0,
-        -- Amount of padding to add to the right of headings when width is 'block'
-        right_pad = 0,
-        -- Minimum width to use for headings when width is 'block'
-        min_width = 0,
-        -- Determins if a border is added above and below headings
-        border = false,
-        -- Highlight the start of the border using the foreground highlight
-        border_prefix = true,
-        -- Used above heading for border
-        above = "▄",
-        -- Used below heading for border
-        below = "▀",
-        -- The 'level' is used to index into the array using a clamp
-        -- Highlight for the heading icon and extends through the entire line
-        backgrounds = {
-          "RenderMarkdownH1Bg",
-          "RenderMarkdownH2Bg",
-          "RenderMarkdownH3Bg",
-          "RenderMarkdownH4Bg",
-          "RenderMarkdownH5Bg",
-          "RenderMarkdownH6Bg",
-        },
-        -- The 'level' is used to index into the array using a clamp
-        -- Highlight for the heading and sign icons
-        foregrounds = {
-          "RenderMarkdownH1",
-          "RenderMarkdownH2",
-          "RenderMarkdownH3",
-          "RenderMarkdownH4",
-          "RenderMarkdownH5",
-          "RenderMarkdownH6",
-        },
-      },
-    },
-    code = {
-      -- Turn on / off code block & inline code rendering
-      enabled = true,
-      -- Turn on / off any sign column related rendering
-      sign = false,
-      -- Determines how code blocks & inline code are rendered:
-      --  none:     disables all rendering
-      --  normal:   adds highlight group to code blocks & inline code, adds padding to code blocks
-      --  language: adds language icon to sign column if enabled and icon + name above code blocks
-      --  full:     normal + language
-      style = "full",
-      -- Determines where language icon is rendered:
-      --  right: right side of code block
-      --  left:  left side of code block
-      position = "right",
-      -- Amount of padding to add around the language
-      language_pad = 0,
-      -- An array of language names for which background highlighting will be disabled
-      -- Likely because that language has background highlights itself
-      disable_background = { "diff" },
-      -- Width of the code block background:
-      --  block: width of the code block
-      --  full:  full width of the window
-      width = "block",
-      -- Amount of padding to add to the left of code blocks
-      left_pad = 0,
-      -- Amount of padding to add to the right of code blocks when width is 'block'
-      right_pad = 0,
-      -- Minimum width to use for code blocks when width is 'block'
-      min_width = 0,
-      -- Determins how the top / bottom of code block are rendered:
-      --  thick: use the same highlight as the code body
-      --  thin:  when lines are empty overlay the above & below icons
-      border = "thin",
-      -- Used above code blocks for thin border
-      above = "▄",
-      -- Used below code blocks for thin border
-      below = "▀",
-      -- Highlight for code blocks
-      highlight = "RenderMarkdownCode",
-      -- Highlight for inline code
-      highlight_inline = "RenderMarkdownCodeInline",
-    },
-  },
-
-  {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-    config = function()
-      --   require("codeium").setup({})
-      vim.g.codeium_disable_bindings = 1
-      vim.keymap.set("i", "<C-g>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true })
-      vim.keymap.set("i", "<c-;>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true })
-      vim.keymap.set("i", "<c-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true })
-      vim.keymap.set("i", "<c-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true })
-    end,
-    -- dependencies = {
-    --   "nvim-lua/plenary.nvim",
-    --   "hrsh7th/nvim-cmp",
-    -- },
-    -- lazy = false,
-    -- enabled = true,
-    -- config = function() require("codeium").setup {} end,
-  },
-
-  {
-    -- "code-stats/code-stats-vim",
-    "https://gitlab.com/code-stats/code-stats-vim.git",
-    config = function()
-      -- REQUIRED: set your API key
-      -- TODO: Replace with environment variable ??
-      vim.g["codestats_api_key"] = { os.getenv("CODESTATS_API_KEY") }
-      -- vim.g['codestats_api_key'] = {os.getenv('CODESTATS_API_KEY')}
-    end,
-  },
 }
-
--- {
---   "nvim-telescope/telescope-fzf-native.nvim",
---   run = "make",
---   lazy = false,
--- },
--- {
---   "mfussenegger/nvim-dap-python",
---   config = function() require("dap-python").setup "~/.virtualenvs/debugpy/bin/python" end,
--- },
--- { "felipec/vim-sanegx" },
--- { "godlygeek/tabular" },
--- {
---   "ojroques/nvim-osc52"
--- },
--- return {
--- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
--- { "LunarVim/bigfile.nvim" },
--- { "lukas-reineke/onedark.nvim", name="lukas-onedark", lazy=false, enabled = true },
--- { "dstein64/vim-startuptime" },
--- { "rktjmp/shipwright.nvim" },
--- { "navarasu/onedark.nvim", lazy=false, enabled=true },
--- { "navarasu/onedark.nvim" },
--- { "bluz71/vim-nightfly-guicolors" },
--- { "rafamadriz/neon" },
--- { "sainnhe/sonokai" },
--- { "kosayoda/nvim-lightbulb" },
--- { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline" },
--- { "chaoren/vim-wordmotion" },
--- { "jbyuki/nabla.nvim" },
--- { "HiPhish/nvim-ts-rainbow2" },
--- { "npxbr/glow.nvim", ft = { "markdown", "quarto" } },
-
--- { "preservim/vim-pencil" },
--- { "lvimuser/lsp-inlayhints.nvim" },
--- { "vim-pandoc/vim-pandoc" },
--- { "vim-pandoc/vim-pandoc-syntax" },
-
--- {
---   "ray-x/lsp_signature.nvim",
---   event = "BufRead",
---   config = function()
---     require("lsp_signature").setup({
---       bind = true,
---       floating_window = false,
---       hint_enable = true,
---       hint_prefix = " ",
---       hi_parameter = "LspSignatureActiveParameter",
---       -- toggle_key = '<C-s>',
---       handler_opts = {
---         border = "rounded",
---       },
---       always_trigger = true,
---       extra_trigger_chars = { "(", "," },
---       timer_interval = 100,
---     })
---   end,
--- },
--- {
---   "hoschi/yode-nvim",
---   config = function() require("yode-nvim").setup {} end,
--- },
-
--- {
---   "kdheepak/tabline.nvim",
---   config = function()
---     require("tabline").setup {
---       -- Defaults configuration options
---       enable = true,
---       options = {
---         -- If lualine is installed tabline will use separators configured in lualine by default.
---         -- These options can be used to override those settings.
---         -- section_separators = { '', '' },
---         -- component_separators = { '', '' },
---         max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
---         show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
---         show_devicons = true, -- this shows devicons in buffer section
---         show_bufnr = false, -- this appends [bufnr] to buffer section,
---         show_filename_only = true, -- shows base filename only instead of relative path in filename
---         -- modified_icon = "+ ", -- change the default modified icon
---         modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
---         show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
---       },
---     }
---   end,
--- },
-
--- {
---   "norcalli/nvim-terminal.lua",
---   config = function() require("terminal").setup() end,
--- },
--- {
---   "norcalli/nvim-terminal.lua",
---   config = function() require("terminal").setup() end,
--- },
--- {
---   "phaazon/hop.nvim",
---   event = "BufRead",
---   config = function()
---     require("hop").setup()
---     vim.api.nvim_set_keymap("n", ";", ":HopChar2<CR>", { silent = true })
---     vim.api.nvim_set_keymap("n", "W", ":HopWord<CR>", { silent = true })
---   end,
--- },
--- {
---   "kevinhwang91/nvim-bqf",
---   event = { "BufRead", "BufNew" },
---   config = function()
---     require("bqf").setup {
---       auto_enable = true,
---       preview = {
---         win_height = 12,
---         win_vheight = 12,
---         delay_syntax = 80,
---         border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
---       },
---       func_map = {
---         vsplit = "",
---         ptogglemode = "z,",
---         stoggleup = "",
---       },
---       filter = {
---         fzf = {
---           action_for = { ["ctrl-s"] = "split" },
---           extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
---         },
---       },
---     }
---   end,
--- },
--- {
---   "rafi/awesome-vim-colorschemes",
--- },
--- {
---   "flazz/vim-colorschemes",
--- },
--- {
---   'NvChad/nvim-colorizer.lua',
---   config = require('colorizer').setup({
---     user_default_options = {
---       RGB      = true;         -- #RGB hex codes
---       RRGGBB   = true;         -- #RRGGBB hex codes
---       names    = true;         -- "Name" codes like Blue
---       RRGGBBAA = true;        -- #RRGGBBAA hex codes
---       rgb_fn   = true;        -- CSS rgb() and rgba() functions
---       hsl_fn   = true;        -- CSS hsl() and hsla() functions
---       css      = true;        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
---       css_fn   = true;        -- Enable all CSS *functions*: rgb_fn, hsl_fn
---       -- Available modes: foreground, background
---       mode     = 'virtualtext'; -- Set the display mode.
---       tailwind = true,
---       sass = { enable = true, parsers = {"css"} },
---       virtualtext = "■",
---     },
---   })
--- },
--- {
---   'brenoprata10/nvim-highlight-colors',
---   config = function()
---     require('nvim-highlight-colors').setup({
---       render = 'foreground',
---       enable_named_colors = true,
---       enable_tailwind = true,
---     })
---   end,
--- },
--- {
---   "folke/zen-mode.nvim",
---   config = function()
---     require("zen-mode").setup {
---       window = {
---         backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
---         -- height and width can be:
---         -- * an absolute number of cells when > 1
---         -- * a percentage of the width / height of the editor when <= 1
---         -- * a function that returns the width or the height
---         -- by default, no options are changed for the Zen window
---         -- uncomment any of the options below, or add other vim.wo options you want to apply
---         width = 120, -- width of the Zen window
---         height = 1, -- height of the Zen window
---         options = {
---           -- signcolumn = "no", -- disable signcolumn
---           number = false, -- disable number column
---           relativenumber = false, -- disable relative numbers
---           cursorline = false, -- disable cursorline
---           cursorcolumn = false, -- disable cursor column
---           foldcolumn = "0", -- disable fold column
---           list = false, -- disable whitespace characters
---         },
---       },
---       plugins = {
---         options = {
---           enabled = true,
---           ruler = false, -- disables the ruler text in the cmd line area
---           showcmd = false, -- disables the command in the last line of the screen,
---           twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
---           gitsigns = { enabled = false }, -- disables git signs
---           tmux = { enabled = false }, -- disables the tmux statusline this will change the font size on kitty when in zen mode
---           kitty = {
---             enabled = true,
---             font = "+4", -- font size increment
---           },
---         },
---       },
---     }
---   end,
--- },
--- {
---   "johnfrankmorgan/whitespace.nvim",
---   config = function()
---     require('whitespace-nvim').setup({
---       -- configuration options and their defaults `highlight` configures
---       -- which highlight is used to display
---       -- trailing whitespace
---       highlight = 'DiffDelete',
---       -- `ignored_filetypes` configures which filetypes to ignore when
---       -- displaying trailing whitespace
---       ignored_filetypes = { 'TelescopePrompt' },
---       -- remove trailing whitespace with a keybinding
---       vim.api.nvim_set_keymap(
---         'n',
---         '<Leader>t', "[[<cmd>lua require('whitespace-nvim').trim()<CR>]]",
---         { noremap = true }
---       )
---     })
---   end,
--- },
--- { 'Iron-E/nvim-highlite' },
--- {
---   'rrethy/vim-hexokinase',
---   run = 'make hexokinase',
---   config = function()
---     vim.g["Hexokinase_highlighters"] = {
---       'virtual',
---       'sign_column',
---     }
---   end,
--- },
--- {
---   "folke/todo-comments.nvim",
---   lazy = false,
---   -- config = function()
---   --   require('todo-comments.nvim').setup({})
---   -- end
---   -- config = function()
---   -- require("user.todo-comments").config()
---   -- end,
--- },
--- {
---   "luk400/vim-jukit",
---   config = function()
---     -- vim.api.nvim_set_var('jukit#mappings#ext#enabled', {'py', 'ipynb'})
---     vim.g.jukit_mappings_ext_enabled = { "py", "ipynb" }
---     vim.g.jukit_layout = -1
---     -- vim.g['jukit#mappings#ext#enabled'] = {"py", "ipynb"}
---     -- g.jukit_mappings_ext_enabled = {"py", "ipynb"}
---     -- vim.opt.jukit_mappings_ext_enabled = {"py", "ipynb"}
---   end,
--- },
--- { "tomtom/tcomment_vim" },
--- {
---   "Cassin01/wf.nvim",
---   config = function()
---   require('wf').setup()
---   end
--- }
-
--- {
---   "3rd/image.nvim",
---   -- default config
---   config = function()
---     require("image").setup({
---       backend = "kitty",
---       integrations = {
---         markdown = {
---           enabled = true,
---           clear_in_insert_mode = false,
---           download_remote_images = true,
---           only_render_image_at_cursor = false,
---           filetypes = { "markdown", "vimwiki", "quarto" }, -- markdown extensions (ie. quarto) can go here
---         },
---         neorg = {
---           enabled = true,
---           clear_in_insert_mode = false,
---           download_remote_images = true,
---           only_render_image_at_cursor = false,
---           filetypes = { "norg" },
---         },
---         html = {
---           enabled = false,
---         },
---         css = {
---           enabled = false,
---         },
---       },
---       max_width = nil,
---       max_height = nil,
---       max_width_window_percentage = nil,
---       max_height_window_percentage = 50,
---       window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
---       window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
---       editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
---       tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
---       hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
---     })
---   end,
--- },
-
--- { -- install without yarn or npm
---   "iamcco/markdown-preview.nvim",
---   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
---   ft = { "markdown" },
---   build = function()
---     vim.fn["mkdp#util#install"]()
---   end,
--- },
-
--- {
---   "MeanderingProgrammer/markdown.nvim",
---   name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
---   ft = { "markdown", "quarto" },
---   dependencies = {
---     { "nvim-treesitter/nvim-treesitter" },
---     {
---       "echasnovski/mini.icons",
---       version = false,
---       config = function()
---         require("mini.icons").setup()
---       end,
---     },
---     -- { "echasnovski/mini.icons" },
---     {
---       "tadmccorkle/markdown.nvim",
---       event = "VeryLazy",
---       ft = { "markdown", "quarto" },
---       opts = {
---         mappings = {
---           inline_surround_toggle = "gs", -- (string|boolean) toggle inline style
---           inline_surround_toggle_line = "gss", -- (string|boolean) line-wise toggle inline style
---           inline_surround_delete = "ds", -- (string|boolean) delete emphasis surrounding cursor
---           inline_surround_change = "cs", -- (string|boolean) change emphasis surrounding cursor
---           link_add = "gl", -- (string|boolean) add link
---           link_follow = "gx", -- (string|boolean) follow link
---           go_curr_heading = "]c", -- (string|boolean) set cursor to current section heading
---           go_parent_heading = "]p", -- (string|boolean) set cursor to parent section heading
---           go_next_heading = "]]", -- (string|boolean) set cursor to next section heading
---           go_prev_heading = "[[", -- (string|boolean) set cursor to previous section heading
---         },
---       },
---     },
---   },
---   config = function()
---     require("render-markdown").setup({
---       win_options = {
---         conceallevel = {
---           -- Used when not being rendered, get user setting
---           default = vim.api.nvim_get_option_value("conceallevel", { 2 }),
---           -- Used when being rendered, concealed text is completely hidden
---           rendered = 2,
---         },
---       },
---       file_types = {
---         "markdown",
---         "quarto",
---       },
---     })
---   end,
--- },
-
--- color html colors
--- {
---   "NvChad/nvim-colorizer.lua",
---   enabled = true,
---   opts = {
---     filetypes = { "*" },
---     user_default_options = {
---       RGB = true, -- #RGB hex codes
---       RRGGBB = true, -- #RRGGBB hex codes
---       names = true, -- "Name" codes like Blue or blue
---       RRGGBBAA = true, -- #RRGGBBAA hex codes
---       AARRGGBB = false, -- 0xAARRGGBB hex codes
---       rgb_fn = true, -- CSS rgb() and rgba() functions
---       hsl_fn = true, -- CSS hsl() and hsla() functions
---       css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
---       css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
---       -- Available modes for `mode`: foreground, background,  virtualtext
---       mode = "virtualtext", -- Set the display mode.
---       -- Available methods are false / true / "normal" / "lsp" / "both"
---       -- True is same as normal
---       tailwind = true, -- Enable tailwind colors
---       -- parsers can contain values used in |user_default_options|
---       -- sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
---       virtualtext = "■",
---       -- update color values even if buffer is not focused
---       -- example use: cmp_menu, cmp_docs
---       always_update = false,
---       -- all the sub-options of filetypes apply to buftypes
---     },
---     buftypes = {},
---   },
--- },

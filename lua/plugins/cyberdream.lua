@@ -1,3 +1,5 @@
+-- return {}
+-- return {} if true else
 return {
   {
     "scottmckendry/cyberdream.nvim",
@@ -92,7 +94,7 @@ return {
           colors = {
             -- For a list of colors see `lua/cyberdream/colours.lua`
             -- Example:
-            bg = "#1c1c1c",
+            -- bg = "#1c1c1c",
             -- green = "#00ff00",
             -- magenta = "#ff00ff",
           },
