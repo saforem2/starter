@@ -8,7 +8,37 @@
 -- map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 -- map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 -- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
---
+
+local nmap = function(key, effect)
+  vim.keymap.set("n", key, effect, { silent = true, noremap = true })
+end
+
+local vmap = function(key, effect)
+  vim.keymap.set("v", key, effect, { silent = true, noremap = true })
+end
+
+local imap = function(key, effect)
+  vim.keymap.set("i", key, effect, { silent = true, noremap = true })
+end
+
+local cmap = function(key, effect)
+  vim.keymap.set("c", key, effect, { silent = true, noremap = true })
+end
+
+
+-- save with ctrl+s
+imap('<C-s>', '<esc>:update<cr><esc>')
+nmap('<C-s>', '<cmd>:update<cr><esc>')
+
+-- keep selection after indent / dedent
+vmap('>', '>gv')
+vmap('<', '<gv')
+
+-- center after search and jumps
+nmap('n', 'nzz')
+nmap('<c-d>', '<c-d>zz')
+nmap('<c-u>', '<c-u>zz')
+
 
 -- BarBar
 local map = vim.api.nvim_set_keymap
@@ -64,6 +94,15 @@ map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
 map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
 map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
+
+
+local function toggle_light_dark_theme()
+  if vim.o.background == 'light' then
+    vim.o.background = 'dark'
+  else
+    vim.o.background = 'light'
+  end
+end
 
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)

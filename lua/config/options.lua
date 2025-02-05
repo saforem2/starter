@@ -5,6 +5,23 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 --
+local animals = require('style').animals
+vim.opt.termguicolors = true
+
+vim.opt.shortmess:append 'A'
+
+-- Sets how neovim will display certain whitespace in the editor.
+--  See :help 'list'
+--  and :help 'listchars'
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- don't continue comments automagically
+-- https://neovim.io/doc/user/options.html#'formatoptions'
+vim.opt.formatoptions:remove 'c'
+vim.opt.formatoptions:remove 'r'
+vim.opt.formatoptions:remove 'o'
+
 vim.g.vim_markdown_auto_insert_bullets = 0
 vim.g.vim_markdown_new_list_item_indent = 0
 vim.g.vim_markdown_strikethrough = 1
