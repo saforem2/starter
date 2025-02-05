@@ -1,4 +1,15 @@
 return {
+
+  {
+  "CodeGradox/onehalf-lush",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    vim.api.nvim_set_option("background", "light")
+    vim.cmd("colorscheme onehalf-lush")
+  end
+},
+
   -- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
   { "saforem2/glitz", lazy = false, enabled = true },
   { "p00f/nvim-ts-rainbow" },
