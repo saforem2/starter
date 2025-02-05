@@ -101,6 +101,15 @@ return {
         -- dark_float = true,
         hide_eob = true,
       })
+      vim.api.nvim_set_option_value("background", "light", {})
+      -- vim.cmd("colorscheme bluoco-light")
+      -- vim.cmd("TSEnable highlight")
+      -- vim.cmd("syntax enable")
+      vim.cmd([[
+          highlight @variable.member guifg=#EA76CB
+          highlight @string.documentation.python guifg=#cccccc
+          highlight @string guifg=#FF5722
+          ]])
     end,
   },
   {

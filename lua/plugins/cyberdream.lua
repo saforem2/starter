@@ -1,5 +1,8 @@
 -- return {}
 -- return {} if true else
+--
+--
+
 return {
   {
     "scottmckendry/cyberdream.nvim",
@@ -7,10 +10,15 @@ return {
     enabled = true,
     priority = 1000,
     config = function()
+      -- if vim.o.background == 'light' then
+      --   vim.cmd("colorscheme bluoco-light")
+      -- else
+      --   vim.cmd("colorscheme cyberdream")
+      -- end
       require("cyberdream").setup({
         -- Add a custom keybinding to toggle the colorscheme
         vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true }),
-        colorscheme = "cyberdream",
+        -- vim.cmd("colorscheme ".. require('config.keymaps').get_color_scheme()),
         -- Enable transparent background
         transparent = true,
         -- Enable italics comments

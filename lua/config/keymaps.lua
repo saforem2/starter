@@ -21,9 +21,26 @@ local imap = function(key, effect)
   vim.keymap.set("i", key, effect, { silent = true, noremap = true })
 end
 
+local function toggle_light_dark_theme()
+  if vim.o.background == 'light' then
+    vim.o.background = 'dark'
+  else
+    vim.o.background = 'light'
+  end
+end
+
+local function get_color_scheme()
+  if vim.o.background == 'light' then
+    return 'bluoco-light'
+  else
+    return 'onelight'
+  end
+end
+
 local cmap = function(key, effect)
   vim.keymap.set("c", key, effect, { silent = true, noremap = true })
 end
+
 
 
 -- save with ctrl+s
@@ -95,14 +112,6 @@ map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
 map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 
-
-local function toggle_light_dark_theme()
-  if vim.o.background == 'light' then
-    vim.o.background = 'dark'
-  else
-    vim.o.background = 'light'
-  end
-end
 
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)

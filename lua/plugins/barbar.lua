@@ -1,4 +1,5 @@
 return {
+  { "lewis6991/gitsigns.nvim", enabled = false },
   { "akinsho/bufferline.nvim", enabled = false,},
   { "nvim-lualine/lualine.lua", enabled = false },
   {
@@ -6,7 +7,7 @@ return {
     lazy = false,
     enabled = true,
     dependencies = {
-      "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+      -- "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
       "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
     },
     init = function()
@@ -18,6 +19,5 @@ return {
       -- insert_at_start = true,
       -- …etc.
     },
-    version = "^1.0.0", -- optional: only update when a new 1.x version is released
   },
 }
