@@ -36,7 +36,7 @@ return {
   { "tpope/vim-repeat" },
   { "easymotion/vim-easymotion" },
   { "lervag/vimtex" },
-  { "folke/trouble.nvim", cmd = "TroubleToggle" },
+  { "folke/trouble.nvim", cmd = "TroubleToggle", enabled = true, lazy = false },
   { "knubie/vim-kitty-navigator" },
   { "fladson/vim-kitty" },
   { "nvim-telescope/telescope-file-browser.nvim" },
