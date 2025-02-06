@@ -1,15 +1,121 @@
 return {
+  { "lukas-reinke/indent-blankline.nvim", enabled = false },
   { "nvim-lualine/lualine.nvim", enabled = false },
   {
-    'echasnovski/mini.statusline',
+    "echasnovski/mini.statusline",
     version = false,
     enabled = true,
     config = function()
-      require('mini.statusline').setup()
-    end
+      require("mini.statusline").setup()
+    end,
+  },
+  {
+    "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    config = function()
+      require("peek").setup()
+      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+    end,
+  },
+  {
+    "github/copilot.vim",
+    lazy = false,
+    enabled = true,
+  },
+  { "lyokha/vim-publish-helper", lazy = false, enabled = true },
+  { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
+  { "p00f/nvim-ts-rainbow" },
+  { "wakatime/vim-wakatime", lazy = false },
+  { "mbbill/undotree" },
+  { "machakann/vim-sandwich" },
+  { "vim-python/python-syntax" },
+  { "Vimjas/vim-python-pep8-indent" },
+  { "rafcamlet/nvim-luapad" },
+  { "tpope/vim-repeat" },
+  { "easymotion/vim-easymotion" },
+  { "lervag/vimtex" },
+  { "folke/trouble.nvim", cmd = "TroubleToggle" },
+  { "knubie/vim-kitty-navigator" },
+  { "fladson/vim-kitty" },
+  { "nvim-telescope/telescope-file-browser.nvim" },
+  { "rrethy/vim-illuminate" },
+  { "dhruvasagar/vim-table-mode" },
+  { "jghauser/mkdir.nvim" },
+  { "hkupty/iron.nvim" },
+  { "rktjmp/lush.nvim", lazy = false, enabled = true },
+  { "bfredl/nvim-ipy" },
+  { "ggandor/lightspeed.nvim", event = "BufRead" },
+  { "godlygeek/tabular", enabled = true, lazy = false },
+  {
+    "mrjones2014/legendary.nvim",
+    -- since legendary.nvim handles all your keymaps/commands,
+    -- its recommended to load legendary.nvim before other plugins
+    priority = 10000,
+    lazy = false,
+    -- sqlite is only needed if you want to use frecency sorting
+    -- dependencies = { 'kkharji/sqlite.lua' }
   },
 
-  { "github/copilot.vim", lazy = false, enabled = true },
+  {
+    "jmbuhr/otter.nvim",
+    dependencies = {
+      "hrsh7th/nvim-cmp", -- optional, for completion
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("otter").setup({
+        lsp = {
+          hover = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+          },
+          -- `:h events` that cause the diagnostics to update. Set to:
+          -- { "BufWritePost", "InsertLeave", "TextChanged" } for less performant
+          -- but more instant diagnostic updates
+          diagnostic_update_events = { "BufWritePost", "InsertLeave", "TextChanged" },
+        },
+        buffers = {
+          -- if set to true, the filetype of the otterbuffers will be set.
+          -- otherwise only the autocommand of lspconfig that attaches
+          -- the language server will be executed without setting the filetype
+          set_filetype = false,
+          -- write <path>.otter.<embedded language extension> files
+          -- to disk on save of main buffer.
+          -- usefule for some linters that require actual files
+          -- otter files are deleted on quit or main buffer close
+          write_to_disk = false,
+        },
+        strip_wrapping_quote_characters = { "'", '"', "`" },
+        -- Otter may not work the way you expect when entire code blocks are indented (eg. in Org files)
+        -- When true, otter handles these cases fully. This is a (minor) performance hit
+        handle_leading_whitespace = true,
+      })
+    end,
+  },
+
+  -- { -- gh copilot
+  --   'zbirenbaum/copilot.lua',
+  --   enabled = false,
+  --   config = function()
+  --     require('copilot').setup {
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         debounce = 75,
+  --         keymap = {
+  --           accept = '<c-a>',
+  --           accept_word = false,
+  --           accept_line = false,
+  --           next = '<M-]>',
+  --           prev = '<M-[>',
+  --           dismiss = '<C-]>',
+  --         },
+  --       },
+  --       panel = { enabled = false },
+  --     }
+  --   end,
+  -- },
   -- {
   --   "kevinhwang91/nvim-ufo",
   --   lazy = false,
@@ -71,7 +177,6 @@ return {
   --     -- require("ufo").setup()
   --   end,
   -- },
-  { "lyokha/vim-publish-helper", lazy = false, enabled = true },
   -- {
   --   "romgrk/kirby.nvim",
   --   enabled = true,
@@ -84,119 +189,24 @@ return {
   -- },
   -- { "ggml-org/llama.vim", lazy = false, enabled = true },
   -- { "dasupradyumna/midnight.nvim", lazy = false, priority = 1000 },
-  { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
   -- { "saforem2/glitz", lazy = false, enabled = true },
-  { "p00f/nvim-ts-rainbow" },
-  { "wakatime/vim-wakatime", lazy = false },
-  { "mbbill/undotree" },
-  { "machakann/vim-sandwich" },
-  { "vim-python/python-syntax" },
-  { "Vimjas/vim-python-pep8-indent" },
-  { "rafcamlet/nvim-luapad" },
-  { "tpope/vim-repeat" },
-  { "easymotion/vim-easymotion" },
-  { "lervag/vimtex" },
-  { "folke/trouble.nvim", cmd = "TroubleToggle" },
-  { "knubie/vim-kitty-navigator" },
-  { "fladson/vim-kitty" },
-  {
-    "AntonVanAssche/md-headers.nvim",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      -- 'nvim-treesitter/nvim-treesitter',
-    },
-    config = function()
-      require("md-headers").setup({
-        width = 60,
-        height = 10,
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        popup_auto_close = true,
-      })
-    end,
-  },
-  {
-    "mrjones2014/legendary.nvim",
-    -- since legendary.nvim handles all your keymaps/commands,
-    -- its recommended to load legendary.nvim before other plugins
-    priority = 10000,
-    lazy = false,
-    -- sqlite is only needed if you want to use frecency sorting
-    -- dependencies = { 'kkharji/sqlite.lua' }
-  },
-  {
-    "ojroques/nvim-osc52",
-    keys = {
-      {
-        "<leader>y",
-        function()
-          return require("osc52").copy_operator()
-        end, -- <-- previously I wasn't using a return statement here
-        desc = "copy selection to system clipboard (normal mode)",
-        expr = true,
-      },
-      {
-        "<leader>Y",
-        "<leader>y_",
-        remap = true,
-        desc = "copy current line into system clipboard (normal mode)",
-      },
-      {
-        mode = "v",
-        "<leader>y",
-        function()
-          require("osc52").copy_visual()
-        end,
-        desc = "copy selection to system clipboard (visual mode)",
-      },
-    },
-  },
-  { "lukas-reinke/indent-blankline.nvim", enabled = false },
-  {
-    "jmbuhr/otter.nvim",
-    dependencies = {
-      "hrsh7th/nvim-cmp", -- optional, for completion
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("otter").setup({
-        lsp = {
-          hover = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-          },
-          -- `:h events` that cause the diagnostics to update. Set to:
-          -- { "BufWritePost", "InsertLeave", "TextChanged" } for less performant
-          -- but more instant diagnostic updates
-          diagnostic_update_events = { "BufWritePost", "InsertLeave", "TextChanged" },
-        },
-        buffers = {
-          -- if set to true, the filetype of the otterbuffers will be set.
-          -- otherwise only the autocommand of lspconfig that attaches
-          -- the language server will be executed without setting the filetype
-          set_filetype = false,
-          -- write <path>.otter.<embedded language extension> files
-          -- to disk on save of main buffer.
-          -- usefule for some linters that require actual files
-          -- otter files are deleted on quit or main buffer close
-          write_to_disk = false,
-        },
-        strip_wrapping_quote_characters = { "'", '"', "`" },
-        -- Otter may not work the way you expect when entire code blocks are indented (eg. in Org files)
-        -- When true, otter handles these cases fully. This is a (minor) performance hit
-        handle_leading_whitespace = true,
-      })
-    end,
-  },
-  { "nvim-telescope/telescope-file-browser.nvim" },
-  { "rrethy/vim-illuminate" },
-  { "dhruvasagar/vim-table-mode" },
-  { "jghauser/mkdir.nvim" },
-  { "hkupty/iron.nvim" },
-  { "rktjmp/lush.nvim", lazy = false, enabled = true },
-  { "bfredl/nvim-ipy" },
-  { "ggandor/lightspeed.nvim", event = "BufRead" },
-  { "godlygeek/tabular", enabled = true, lazy = false },
+  -- {
+  --   "AntonVanAssche/md-headers.nvim",
+  --   version = "*",
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     -- 'nvim-treesitter/nvim-treesitter',
+  --   },
+  --   config = function()
+  --     require("md-headers").setup({
+  --       width = 60,
+  --       height = 10,
+  --       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  --       popup_auto_close = true,
+  --     })
+  --   end,
+  -- },
   --   {
   --   "preservim/vim-markdown",
   --   branch = "master",
@@ -218,6 +228,20 @@ return {
   --     vim.cmd("nmap [v <Plug>Markdown_MoveToPreviousHeader")
   --   end,
   -- },
+  {
+    "chentoast/marks.nvim",
+    config = function()
+      require("marks").setup({
+        default_mappings = true,
+        -- builtin_marks = {'.', '<', '>', '^'},
+        cyclic = true,
+        force_write_shada = false,
+        refresh_interval = 250,
+        sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
+        bookmark_0 = { sign = "⚑", virt_text = "hello world" },
+      })
+    end,
+  },
 
   { -- interactive global search and replace
     "nvim-pack/nvim-spectre",
@@ -238,27 +262,6 @@ return {
     end,
   },
   {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
-  {
-    "chentoast/marks.nvim",
-    config = function()
-      require("marks").setup({
-        default_mappings = true,
-        -- builtin_marks = {'.', '<', '>', '^'},
-        cyclic = true,
-        force_write_shada = false,
-        refresh_interval = 250,
-        sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-        bookmark_0 = { sign = "⚑", virt_text = "hello world" },
-      })
-    end,
-  },
-  {
     "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup({
@@ -271,6 +274,7 @@ return {
       })
     end,
   },
+
   {
     "glacambre/firenvim",
     run = function()
@@ -283,10 +287,18 @@ return {
   },
 
   {
-    "turbio/bracey.vim",
-    cmd = { "Bracey", "BraceyStop", "BraceyReload", "BraceyEval" },
-    run = "npm install --prefix server",
+    "andymass/vim-matchup",
+    event = "CursorMoved",
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
   },
+
+  -- {
+  --   "turbio/bracey.vim",
+  --   cmd = { "Bracey", "BraceyStop", "BraceyReload", "BraceyEval" },
+  --   run = "npm install --prefix server",
+  -- },
 
   {
     "folke/todo-comments.nvim",
@@ -388,17 +400,8 @@ return {
       })
     end,
   },
-  {
-    "quarto-dev/quarto-nvim",
-    requires = {
-      "neovim/nvim-lspconfig",
-      "jmbuhr/otter.nvim",
-    },
-  },
-  {
-    "projekt0n/circles.nvim",
-    requires = { "nvim-tree/nvim-web-devicons" },
-  },
+
+  { "projekt0n/circles.nvim", requires = { "nvim-tree/nvim-web-devicons" } },
   {
     "simrat39/rust-tools.nvim",
     config = function()
@@ -415,37 +418,7 @@ return {
       })
     end,
   },
-  {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-    config = function()
-      --   require("codeium").setup({})
-      vim.g.codeium_disable_bindings = 1
-      vim.keymap.set("i", "<c-g>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true })
-      -- nvim_set_keymap("i", "<C-g>", "v:lua.codeium#Accept()", { expr = true })
-      -- vim.keymap.set("i", "<C-g>", function()
-      -- return vim.fn["codeium#Accept"]()
-      -- end, { expr = true })
-      vim.keymap.set("i", "<c-.>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true })
-      vim.keymap.set("i", "<c-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true })
-      vim.keymap.set("i", "<c-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true })
-    end,
-    -- dependencies = {
-    --   "nvim-lua/plenary.nvim",
-    --   "hrsh7th/nvim-cmp",
-    -- },
-    -- lazy = false,
-    -- enabled = true,
-    -- config = function() require("codeium").setup {} end,
-  },
+
   {
     -- "code-stats/code-stats-vim",
     "https://gitlab.com/code-stats/code-stats-vim.git",
@@ -519,7 +492,6 @@ return {
   --     })
   --   end,
   -- },
-
   {
     "ojroques/nvim-osc52",
     keys = {
@@ -552,17 +524,6 @@ return {
     "HiPhish/rainbow-delimiters.nvim",
     config = function()
       require("rainbow-delimiters.setup").setup({})
-    end,
-  },
-
-  {
-    "toppair/peek.nvim",
-    event = { "VeryLazy" },
-    build = "deno task --quiet build:fast",
-    config = function()
-      require("peek").setup()
-      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
   },
 }
