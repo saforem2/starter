@@ -8,14 +8,14 @@ return {
 
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow", ft = { "markdown", "quarto" } },
   { "vim-pandoc/vim-pandoc-syntax", lazy = false, filetypes = { "markdown", "vimwiki", "quarto" } },
-  {
-    "hedyhli/markdown-toc.nvim",
-    ft = "markdown", -- Lazy load on markdown filetype
-    cmd = { "Mtoc" }, -- Or, lazy load on "Mtoc" command
-    opts = {
-      -- Your configuration here (optional)
-    },
-  },
+  -- {
+  --   "hedyhli/markdown-toc.nvim",
+  --   ft = "markdown", -- Lazy load on markdown filetype
+  --   cmd = { "Mtoc" }, -- Or, lazy load on "Mtoc" command
+  --   opts = {
+  --     -- Your configuration here (optional)
+  --   },
+  -- },
   {
     "jakewvincent/mkdnflow.nvim",
     ft = { "markdown", "quarto" },
@@ -90,9 +90,12 @@ return {
   },
 
   {
-    "MeanderingProgrammer/markdown.nvim",
-    name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
-    ft = { "markdown", "quarto" },
+    -- "MeanderingProgrammer/markdown.nvim",
+    "MeanderingProgrammer/render-markdown.nvim",
+    -- name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+    enabled = true,
+    lazy = false,
+    ft = { "markdown", "quarto", "qmd" },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
       {
@@ -105,7 +108,9 @@ return {
       -- { "echasnovski/mini.icons" },
       {
         "tadmccorkle/markdown.nvim",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
+        enabled = true,
+        lazy = false,
         ft = { "markdown", "quarto", "qmd" },
         opts = {
           mappings = {
@@ -128,7 +133,7 @@ return {
         -- Turn on / off heading icon & background rendering
         enabled = true,
         -- Turn on / off any sign column related rendering
-        sign = false,
+        sign = true,
         -- Determines how icons fill the available space:
         --  inline:  underlying '#'s are concealed resulting in a left aligned icon
         --  overlay: result is left padded with spaces to hide any additional '#'
@@ -136,7 +141,7 @@ return {
         -- Replaces '#+' of 'atx_h._marker'
         -- The number of '#' in the heading determines the 'level'
         -- The 'level' is used to index into the array using a cycle
-        -- icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+        icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
         -- icons = { "1️⃣ ", "2️⃣ ", "3️⃣ ", "4️⃣ ", "5️⃣ ", "6️⃣ " }, -- {
         -- Added to the sign column if enabled
         -- The 'level' is used to index into the array using a cycle

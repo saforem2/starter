@@ -2,16 +2,17 @@ return {
   {
     "CodeGradox/onehalf-lush",
     lazy = false,
-    priority = 1000,
-    config = function()
-      vim.api.nvim_set_option("background", "light")
-      vim.cmd("colorscheme onehalf-lush")
-    end,
+    enabled = true,
+    -- priority = 1000,
+    -- config = function()
+    --   vim.api.nvim_set_option("background", "light")
+    --   vim.cmd("colorscheme onehalf-lush")
+    -- end,
   },
 
   -- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
   { "saforem2/glitz", lazy = false, enabled = true },
-  { "p00f/nvim-ts-rainbow" },
+  { "p00f/nvim-ts-rainbow", enabled = true, lazy = false },
 
   { "NTBBloodbath/doom-one.nvim" },
   { "marko-cerovac/material.nvim" },
@@ -97,7 +98,7 @@ return {
   {
     "uloco/bluloco.nvim",
     lazy = false,
-    priority = 1000,
+    enabeld = true,
     dependencies = { "rktjmp/lush.nvim" },
     config = function()
       require("bluloco").setup({
@@ -135,8 +136,8 @@ return {
   },
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "cyberdream",
-    },
+    -- opts = {
+    --   colorscheme = "cyberdream",
+    -- },
   },
 }

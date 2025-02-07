@@ -28,12 +28,12 @@ return {
         hide_fillchars = false,
 
         -- Modern borderless telescope theme
-        borderless_telescope = true,
+        borderless_pickers = true,
 
         -- Set terminal colors used in `:terminal`
         terminal_colors = true,
 
-        theme = {
+        opts = {
           variant = "auto", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
           highlights = {
             -- Highlight groups to override, adding new groups is also possible
