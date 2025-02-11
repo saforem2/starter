@@ -1,90 +1,39 @@
--- if true then return {} end
-
 return {
-  { "saforem2/glitz", lazy = false, enabled = true },
-  { "p00f/nvim-ts-rainbow" },
-
   {
-    "HiPhish/rainbow-delimiters.nvim",
-    config = function()
-      require("rainbow-delimiters.setup").setup({})
-    end,
+    "CodeGradox/onehalf-lush",
+    lazy = false,
+    enabled = true,
+    -- priority = 1000,
+    -- config = function()
+    --   vim.api.nvim_set_option("background", "light")
+    --   vim.cmd("colorscheme onehalf-lush")
+    -- end,
   },
+
+  -- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
+  { "saforem2/glitz", lazy = false, enabled = true },
+  { "p00f/nvim-ts-rainbow", enabled = true, lazy = false },
+
   { "NTBBloodbath/doom-one.nvim" },
   { "marko-cerovac/material.nvim" },
   { "sainnhe/sonokai" },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "tanvirtin/monokai.nvim" },
+  { "folke/lsp-colors.nvim", event = "BufRead" },
+  { "brenoprata10/nvim-highlight-colors" },
   {
     "HiPhish/rainbow-delimiters.nvim",
     config = function()
       require("rainbow-delimiters.setup").setup({})
     end,
   },
-  { "rktjmp/lush.nvim", lazy = false, enabled = true },
-  { "folke/lsp-colors.nvim", event = "BufRead" },
-  { "brenoprata10/nvim-highlight-colors" },
-  {
-    "AntonVanAssche/md-headers.nvim",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("md-headers").setup({
-        width = 60,
-        height = 10,
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        popup_auto_close = true,
-      })
-    end,
-  },
-  {
-    "AntonVanAssche/md-headers.nvim",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      -- 'nvim-treesitter/nvim-treesitter',
-    },
-    config = function()
-      require("md-headers").setup({
-        width = 60,
-        height = 10,
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        popup_auto_close = true,
-      })
-    end,
-  },
-  -- { "rktjmp/lush.nvim" },
-  { "p00f/nvim-ts-rainbow" },
   { "NTBBloodbath/doom-one.nvim" },
   { "marko-cerovac/material.nvim" },
   -- { "sainnhe/sonokai" },
   { "nyoom-engineering/oxocarbon.nvim" },
   -- { "tanvirtin/monokai.nvim" },
   { "yonlu/omni.vim", lazy = false },
-  { "lyokha/vim-publish-helper", lazy = false, enabled = true },
-  { "vim-pandoc/vim-pandoc-syntax", lazy = false, filetypes = { "markdown", "vimwiki", "quarto" } },
-  { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
-  {
-    "olimorris/onedarkpro.nvim",
-    priority = 1000, -- Ensure it loads first
-  },
-  {
-    "zootedb0t/citruszest.nvim",
-    lazy = false,
-    priority = 1000,
-    enabled = true,
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "cyberdream",
-    },
-  },
+  { "rktjmp/lush.nvim" },
   {
     "projekt0n/github-nvim-theme",
     lazy = false,
@@ -141,36 +90,54 @@ return {
     end,
   },
 
-  -- color html colors
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = true,
-  --   opts = {
-  --     filetypes = { "*" },
-  --     user_default_options = {
-  --       RGB = true, -- #RGB hex codes
-  --       RRGGBB = true, -- #RRGGBB hex codes
-  --       names = true, -- "Name" codes like Blue or blue
-  --       RRGGBBAA = true, -- #RRGGBBAA hex codes
-  --       AARRGGBB = false, -- 0xAARRGGBB hex codes
-  --       rgb_fn = true, -- CSS rgb() and rgba() functions
-  --       hsl_fn = true, -- CSS hsl() and hsla() functions
-  --       css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-  --       css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-  --       -- Available modes for `mode`: foreground, background,  virtualtext
-  --       mode = "both", -- Set the display mode.
-  --       -- Available methods are false / true / "normal" / "lsp" / "both"
-  --       -- True is same as normal
-  --       tailwind = true, -- Enable tailwind colors
-  --       -- parsers can contain values used in |user_default_options|
-  --       sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
-  --       virtualtext = "■",
-  --       -- update color values even if buffer is not focused
-  --       -- example use: cmp_menu, cmp_docs
-  --       always_update = true,
-  --       -- all the sub-options of filetypes apply to buftypes
-  --     },
-  --     buftypes = {},
-  --   },
-  -- },
+  {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000, -- Ensure it loads first
+  },
+
+  {
+    "uloco/bluloco.nvim",
+    lazy = false,
+    enabeld = true,
+    dependencies = { "rktjmp/lush.nvim" },
+    config = function()
+      require("bluloco").setup({
+        -- theme = "onedark",
+        italic_comments = true,
+        italic_keywords = true,
+        italic_functions = false,
+        italic_variables = false,
+        contrast = true,
+        -- dark_sidebar = true,
+        -- dark_float = true,
+        hide_eob = true,
+      })
+      vim.api.nvim_set_option_value("background", "light", {})
+      -- vim.cmd("colorscheme bluoco-light")
+      -- vim.cmd("TSEnable highlight")
+      -- vim.cmd("syntax enable")
+      vim.cmd([[
+          highlight @variable.member guifg=#EA76CB
+          highlight @string.documentation.python guifg=#cccccc
+          highlight @string guifg=#FF5722
+          ]])
+    end,
+  },
+  {
+    "kjssad/quantum.vim",
+    lazy = false,
+    enabled = true,
+  },
+  {
+    "zootedb0t/citruszest.nvim",
+    lazy = false,
+    priority = 1000,
+    enabled = true,
+  },
+  {
+    "LazyVim/LazyVim",
+    -- opts = {
+    --   colorscheme = "cyberdream",
+    -- },
+  },
 }

@@ -1,9 +1,6 @@
 -- local api = vim.api
 -- local ts = vim.treesitter
 --
--- vim.opt.shiftwidth = 4 -- Size of an indent
--- vim.pt.tabstop = 4 -- Number of spaces tabs count for
---
 -- vim.b.slime_cell_delimiter = '```'
 -- vim.b['quarto_is_r_mode'] = nil
 -- vim.b['reticulate_running'] = false
@@ -23,6 +20,12 @@
 -- vim.api.nvim_set_hl(ns, '@markup.strikethrough', { strikethrough = false })
 -- vim.api.nvim_set_hl(ns, '@markup.doublestrikethrough', { strikethrough = true })
 -- vim.api.nvim_win_set_hl_ns(0, ns)
+--
+-- -- ts based code chunk highlighting uses a change
+-- -- only availabl in nvim >= 0.10
+-- if vim.fn.has 'nvim-0.10.0' == 0 then
+--   return
+-- end
 --
 -- -- highlight code cells similar to
 -- -- 'lukas-reineke/headlines.nvim'

@@ -8,51 +8,120 @@
 -- map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 -- map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 -- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
---
 
-vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+local nmap = function(key, effect)
+  vim.keymap.set("n", key, effect, { silent = true, noremap = true })
+end
+
+local vmap = function(key, effect)
+  vim.keymap.set("v", key, effect, { silent = true, noremap = true })
+end
+
+local imap = function(key, effect)
+  vim.keymap.set("i", key, effect, { silent = true, noremap = true })
+end
+
+local function toggle_light_dark_theme()
+  if vim.o.background == 'light' then
+    vim.o.background = 'dark'
+  else
+    vim.o.background = 'light'
+  end
+end
+
+local function get_color_scheme()
+  if vim.o.background == 'light' then
+    return 'bluoco-light'
+  else
+    return 'onelight'
+  end
+end
+
+local cmap = function(key, effect)
+  vim.keymap.set("c", key, effect, { silent = true, noremap = true })
+end
+
+
+
+-- save with ctrl+s
+imap('<C-s>', '<esc>:update<cr><esc>')
+nmap('<C-s>', '<cmd>:update<cr><esc>')
+
+-- keep selection after indent / dedent
+vmap('>', '>gv')
+vmap('<', '<gv')
+
+-- center after search and jumps
+nmap('n', 'nzz')
+nmap('<c-d>', '<c-d>zz')
+nmap('<c-u>', '<c-u>zz')
+
+
+-- BarBar
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Move to previous/next
+map("n", "H", "<Cmd>BufferPrevious<CR>", opts)
+map("n", "L", "<Cmd>BufferNext<CR>", opts)
+
+-- Re-order to previous/next
+map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
+map("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
+
+-- Goto buffer in position...
+map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
+map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
+map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
+map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
+map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
+map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
+map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
+map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
+map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
+map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+
+-- Pin/unpin buffer
+map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
+
+-- Goto pinned/unpinned buffer
+--                 :BufferGotoPinned
+--                 :BufferGotoUnpinned
+
+-- Close buffer
+map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
+
+-- Wipeout buffer
+--                 :BufferWipeout
+
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+
+-- Magic buffer-picking mode
+map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
+map("n", "<C-s-p>", "<Cmd>BufferPickDelete<CR>", opts)
+
+-- Sort automatically by...
+map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
+map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
+map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
+map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
+map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
+
+
+-- Other:
+-- :BarbarEnable - enables barbar (enabled by default)
+-- :BarbarDisable - very bad command, should never be used
+
+vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
   expr = true,
-  replace_keycodes = false
+  replace_keycodes = false,
 })
 vim.g.copilot_no_tab_map = true
-
--- if !get(g:, 'copilot_no_maps')
---   imap <Plug>(copilot-dismiss)     <Cmd>call copilot#Dismiss()<CR>
---   if empty(mapcheck('<C-]>', 'i'))
---     imap <silent><script><nowait><expr> <C-]> copilot#Dismiss() . "\<C-]>"
---   endif
---   imap <Plug>(copilot-next)     <Cmd>call copilot#Next()<CR>
---   imap <Plug>(copilot-previous) <Cmd>call copilot#Previous()<CR>
---   imap <Plug>(copilot-suggest)  <Cmd>call copilot#Suggest()<CR>
---   imap <script><silent><nowait><expr> <Plug>(copilot-accept-word) copilot#AcceptWord()
---   imap <script><silent><nowait><expr> <Plug>(copilot-accept-line) copilot#AcceptLine()
---   try
---     if !has('nvim') && &encoding ==# 'utf-8'
---       " avoid 8-bit meta collision with UTF-8 characters
---       let s:restore_encoding = 1
---       silent noautocmd set encoding=cp949
---     endif
---     if empty(mapcheck('<M-]>', 'i'))
---       imap <M-]> <Plug>(copilot-next)
---     endif
---     if empty(mapcheck('<M-[>', 'i'))
---       imap <M-[> <Plug>(copilot-previous)
---     endif
---     if empty(mapcheck('<M-Bslash>', 'i'))
---       imap <M-Bslash> <Plug>(copilot-suggest)
---     endif
---     if empty(mapcheck('<M-Right>', 'i'))
---       imap <M-Right> <Plug>(copilot-accept-word)
---     endif
---     if empty(mapcheck('<M-C-Right>', 'i'))
---       imap <M-C-Right> <Plug>(copilot-accept-line)
---     endif
---   finally
---     if exists('s:restore_encoding')
---       silent noautocmd set encoding=utf-8
---     endif
---   endtry
--- endif
 
 vim.keymap.set(
   { "v" },

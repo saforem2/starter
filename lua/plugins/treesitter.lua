@@ -1,9 +1,6 @@
-if true then return {} end
-
 return {
   {
     "romgrk/nvim-treesitter-context",
-    enabled = false,
     config = function()
       require("treesitter-context").setup({
         min_window_height = 50,
@@ -76,7 +73,7 @@ return {
       {
         "nfrid/markdown-togglecheck",
         dependencies = { "nfrid/treesitter-utils" },
-        ft = { "markdown", "qmd" },
+        ft = { "markdown", "qmd", "quarto", },
       },
     },
     --     config = function()
@@ -104,7 +101,7 @@ return {
           enable = true,
           disable = {},
           updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-          persist_queries = false, -- Whether the query persists across vim sessions
+          persist_queries = true, -- Whether the query persists across vim sessions
           keybindings = {
             toggle_query_editor = "o",
             toggle_hl_groups = "i",
@@ -122,7 +119,7 @@ return {
           enable = true,
         },
         ensure_installed = {
-          "r",
+          -- "r",
           "python",
           "markdown",
           "markdown_inline",
@@ -139,7 +136,6 @@ return {
           "dot",
           "javascript",
           "mermaid",
-          "norg",
           "typescript",
         },
         highlight = {
