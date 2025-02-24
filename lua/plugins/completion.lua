@@ -3,7 +3,7 @@ return {
     "Exafunction/codeium.vim",
     event = "BufEnter",
     config = function()
-      --   require("codeium").setup({})
+      -- require("codeium.vim").setup({})
       vim.g.codeium_disable_bindings = 1
       vim.keymap.set("i", "<c-g>", function()
         return vim.fn["codeium#Accept"]()
@@ -22,12 +22,12 @@ return {
         return vim.fn["codeium#Clear"]()
       end, { expr = true })
     end,
-    -- dependencies = {
-    --   "nvim-lua/plenary.nvim",
-    --   "hrsh7th/nvim-cmp",
-    -- },
-    -- lazy = false,
-    -- enabled = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    lazy = false,
+    enabled = true,
     -- config = function() require("codeium").setup {} end,
   },
 
