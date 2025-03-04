@@ -112,7 +112,7 @@ return {
         -- dark_float = true,
         hide_eob = true,
       })
-      vim.api.nvim_set_option_value("background", "light", {})
+      -- vim.api.nvim_set_option_value("background", "light", {})
       -- vim.cmd("colorscheme bluoco-light")
       -- vim.cmd("TSEnable highlight")
       -- vim.cmd("syntax enable")
