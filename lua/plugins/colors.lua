@@ -1,5 +1,16 @@
 return {
   {
+    'linrongbin16/colorbox.nvim',
+
+    -- don't lazy load
+    lazy = false,
+    -- load with highest priority
+    priority = 1000,
+
+    build = function() require("colorbox").update() end,
+    config = function() require("colorbox").setup() end,
+  },
+  {
     "CodeGradox/onehalf-lush",
     lazy = false,
     enabled = true,
@@ -112,7 +123,7 @@ return {
         -- dark_float = true,
         hide_eob = true,
       })
-      vim.api.nvim_set_option_value("background", "light", {})
+      -- vim.api.nvim_set_option_value("background", "light", {})
       -- vim.cmd("colorscheme bluoco-light")
       -- vim.cmd("TSEnable highlight")
       -- vim.cmd("syntax enable")

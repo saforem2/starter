@@ -16,16 +16,22 @@ return {
           vim.cmd("colorscheme onelight")
           vim.cmd("TSEnable highlight")
           vim.cmd("syntax enable")
+          -- " highlight @string guifg=#F8FCDC guibg=#F8FCDC
           vim.cmd([[
+              highlight Normal guibg=#FFFFFF
               highlight @variable.member guifg=#EA76CB
-              highlight @string.documentation.python guifg=#cccccc
-              highlight @string guifg=#FF5722
+              highlight @string guifg=#FD971F guibg=#FFE7CB
+              highlight @string.documentation.python guibg=#FFFFFF guifg=#757575
+              highlight @variable guifg=#444444
+              highlight semshiImported guifg=#05A551
+              highlight @module guifg=#01A9F4
+              highlight @function.call guifg=#EC407A
               ]])
         end,
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
-        fallback = "dark",
+        fallback = "light",
       })
     end,
   },
