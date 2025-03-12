@@ -5,36 +5,34 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 --
-local animals = require('style').animals
+local animals = require("style").animals
 vim.opt.termguicolors = true
 
-vim.opt.shortmess:append 'A'
+vim.opt.shortmess:append("A")
 
 -- Sets how neovim will display certain whitespace in the editor.
 --  See :help 'list'
 --  and :help 'listchars'
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- don't continue comments automagically
 -- https://neovim.io/doc/user/options.html#'formatoptions'
-vim.opt.formatoptions:remove 'c'
-vim.opt.formatoptions:remove 'r'
-vim.opt.formatoptions:remove 'o'
+vim.opt.formatoptions:remove("c")
+vim.opt.formatoptions:remove("r")
+vim.opt.formatoptions:remove("o")
 
 vim.g.vim_markdown_auto_insert_bullets = 0
 vim.g.vim_markdown_new_list_item_indent = 0
 vim.g.vim_markdown_strikethrough = 1
-vim.g.tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
-vim.g.tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
+vim.g.tex_superscripts = "[0-9a-zA-W.,:;+-<>/()=]"
+vim.g.tex_subscripts = "[0-9aehijklmnoprstuvx,+-/().]"
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_math = 1
 -- vim.g.vim_markdown_fenced_languages = { "csharp=cs", "python=py" }
 vim.g.vim_markdown_folding_level = 2
 -- LazyVim auto format
 vim.g.autoformat = false
-
-
 
 -- Options for the LazyVim statuscolumn
 -- vim.g.lazyvim_statuscolumn = {
@@ -85,8 +83,14 @@ opt.fillchars = {
 opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Treesitter folding
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Treesitter folding
 opt.foldmethod = "expr" -- Treesitter folding
+-- Make cursor blink
+opt.guicursor = {
+  "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50",
+  "a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
+  "sm:block-blinkwait175-blinkoff150-blinkon175",
+}
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
@@ -100,12 +104,13 @@ opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 15 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
-opt.scrolloff = 4 -- Lines of context
+opt.scrolloff = 10 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- Dont show mode since we have a statusline
+opt.showbreak = "↳"
 opt.sidescrolloff = 10 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
