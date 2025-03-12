@@ -4,11 +4,17 @@ return {
 
     -- don't lazy load
     lazy = false,
+    -- -- load with highest priority
+    -- priority = 1000,
+    --
+    -- build = function() require("colorbox").update() end,
+    -- config = function() require("colorbox").setup() end,
+    -- enabled = true,
     -- load with highest priority
     priority = 1000,
 
     build = function() require("colorbox").update() end,
-    config = function() require("colorbox").setup() end,
+    config = function() require("colorbox").setup({ filter = false }) end,
   },
   {
     "CodeGradox/onehalf-lush",
