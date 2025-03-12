@@ -10,6 +10,9 @@ return {
         set_dark_mode = function()
           vim.api.nvim_set_option_value("background", "dark", {})
           vim.cmd("colorscheme cyberdream")
+          vim.cmd([[
+            highlight BufferCurrent guifg=#eeeeee
+          ]])
         end,
         set_light_mode = function()
           vim.api.nvim_set_option_value("background", "light", {})
@@ -26,6 +29,11 @@ return {
               highlight semshiImported guifg=#05A551
               highlight @module guifg=#01A9F4
               highlight @function.call guifg=#EC407A
+              " highlight @string.documentation.python guifg=#cccccc
+              " highlight @string guifg=#FF5722
+              " highlight @string.documentation.python guifg=#cccccc
+              " highlight @string guifg=#FF5722
+              highlight BufferCurrent guifg=#111111
               ]])
         end,
         -- your configuration comes here
