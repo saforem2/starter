@@ -294,15 +294,35 @@ return {
   },
 
   {
-    -- "code-stats/code-stats-vim",
-    "https://gitlab.com/code-stats/code-stats-vim.git",
+    'YannickFricke/codestats.nvim',
     config = function()
-      -- REQUIRED: set your API key
-      -- TODO: Replace with environment variable ??
-      vim.g["codestats_api_key"] = { os.getenv("CODESTATS_API_KEY") }
-      -- vim.g['codestats_api_key'] = {os.getenv('CODESTATS_API_KEY')}
+        require('codestats-nvim').setup()
     end,
+    requires = {{'nvim-lua/plenary.nvim'}}
   },
+
+
+  -- {
+  --   "Freed-Wu/code-stats.nvim",
+  --   config = function()
+  --     require("code-stats").setup({
+  --       dotenv = "~/codestats.sh",
+  --     })
+  --   end
+  --
+  -- },
+
+  -- {
+  --   -- "code-stats/code-stats-vim",
+  --   "https://gitlab.com/code-stats/code-stats-vim.git",
+  --   config = function()
+  --     requ
+  --     -- REQUIRED: set your API key
+  --     -- TODO: Replace with environment variable ??
+  --     vim.g["codestats_api_key"] = { os.getenv("CODESTATS_API_KEY") }
+  --     -- vim.g['codestats_api_key'] = {os.getenv('CODESTATS_API_KEY')}
+  --   end,
+  -- },
   {
     "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
