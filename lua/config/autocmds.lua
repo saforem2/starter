@@ -12,8 +12,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
   callback = function()
     vim.diagnostic.config({
-      virtual_text = false,
+      virtual_text = { current_line = true },
     })
+
     -- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     -- vim.opt.foldmethod = "expr"
     -- -- vim.opt.foldtext = ""
