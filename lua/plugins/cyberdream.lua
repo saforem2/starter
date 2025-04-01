@@ -22,7 +22,7 @@ return {
         -- Enable transparent background
         transparent = true,
         -- Enable italics comments
-        italic_comments = true,
+        italic_comments = false,
 
         -- Replace all fillchars with ' ' for the ultimate clean look
         hide_fillchars = false,
@@ -78,6 +78,8 @@ return {
               ["@variable.member"] = { fg = "#FA99CD" },
               ["@Identifier"] = { fg = "#65d8ee", bold = true },
               ["RenderMarkdownCodeInline"] = { fg = "#D3FF3B", bg = "#1c1c1c" },
+              ["@string.documentation"] = { fg = "#838383" },
+
               -- ["RenderMarkdownH1Bg"] = {
               --   bg = "#FF8787",
               --   fg = "#000000",
