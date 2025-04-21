@@ -2,7 +2,7 @@ return {
   { -- install without yarn or npm
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
+    ft = { "markdown", "quarto" },
     -- build = function() vim.fn["mkdp#util#install"]() end,
   },
 
@@ -111,7 +111,7 @@ return {
         -- event = "VeryLazy",
         enabled = true,
         lazy = false,
-        ft = { "markdown", "quarto", "qmd" },
+        ft = { "markdown", "quarto", "pandoc" },
         opts = {
           mappings = {
             inline_surround_toggle = "gs", -- (string|boolean) toggle inline style
@@ -193,7 +193,7 @@ return {
       -- Turn on / off code block & inline code rendering
       enabled = true,
       -- Turn on / off any sign column related rendering
-      sign = false,
+      sign = true,
       -- Determines how code blocks & inline code are rendered:
       --  none:     disables all rendering
       --  normal:   adds highlight group to code blocks & inline code, adds padding to code blocks

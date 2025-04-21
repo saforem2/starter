@@ -1,18 +1,88 @@
 return {
 
+  { "vim-pandoc/vim-pandoc-syntax", lazy = false, enabled = true },
+  {
+    "KeitaNakamura/tex-conceal.vim",
+    lazy = false,
+    enabled = true,
+    -- config = function()
+    -- end,
+  },
+
+  -- {
+  --   "quarto-dev/quarto-vim",
+  --   lazy = false,
+  --   requires = {
+  --     { "vim-pandoc/vim-pandoc-syntax" },
+  --   },
+  --   ft = { "quarto" },
+  -- },
+  {
+    "quarto-dev/quarto-vim",
+    -- enabled = true,
+    lazy = false,
+    ft = { "quarto", "markdown", "qmd" },
+    requires = { "vim-pandoc/vim-pandoc-syntax" },
+    -- dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
+    -- note: needs additional syntax highlighting enabled for markdown
+    -- in `nvim-treesitter`
+    config = function()
+      -- conceal can be tricky because both
+      -- the treesitter highlighting and the
+      -- regex vim syntax files can define conceal
+      -- s
+      -- see `:h conceallevel`
+      -- vim.opt.conceallevel = 0
+      -- -- disable conceal in markdown/quarto
+      -- vim.g['pandoc#syntax#conceal#use'] = true
+      -- -- embeds are already handled by treesitter injectons
+      -- vim.g['pandoc#syntax#codeblocks#embeds#use'] = true
+      -- vim.g['pandoc#syntax#conceal#blacklist'] = { 'codeblock_delim', 'codeblock_start' }
+      -- but allow some types of conceal in math regions:
+      -- see `:h g:tex_conceal`
+      vim.g["tex_conceal"] = "gm"
+    end,
+  },
+
   { -- requires plugins in lua/plugins/treesitter.lua and lua/plugins/lsp.lua
     -- for complete functionality (language features)
     "quarto-dev/quarto-nvim",
     enabled = true,
     lazy = false,
     ft = { "quarto" },
-    opts = {},
+    -- opts = {},
     dependencies = {
       -- for language features in code cells
       -- configured in lua/plugins/lsp.lua and
       -- added as a nvim-cmp source in lua/plugins/completion.lua
       "jmbuhr/otter.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
+    config = function()
+      require("quarto").setup({
+        debug = false,
+        closePreviewOnExit = true,
+        lspFeatures = {
+          enabled = true,
+          chunks = "curly",
+          languages = { "r", "python", "julia", "bash", "html" },
+          diagnostics = {
+            enabled = true,
+            triggers = { "BufWritePost" },
+          },
+          completion = {
+            enabled = true,
+          },
+        },
+        codeRunner = {
+          enabled = true,
+          default_method = "slime", -- "molten", "slime", "iron" or <function>
+          ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
+          -- Takes precedence over `default_method`
+          never_run = { "yaml" }, -- filetypes which are never sent to a code runner
+        },
+      })
+    end,
   },
 
   { -- directly open ipynb files as quarto docuements
