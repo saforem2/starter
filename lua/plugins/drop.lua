@@ -23,9 +23,9 @@ return {
       ---  { theme = "spring", from = { month = 3, day = 20 }, to = { month = 6, day = 20 } },
       ---  { theme = "summer", from = { month = 6, day = 21 }, to = { month = 9, day = 21 } },
       ---},
-      max = 75, -- maximum number of drops on the screen
+      max = 25, -- maximum number of drops on the screen
       interval = 100, -- every 150ms we update the drops
-      screensaver = 1000 * 60 * 5, -- show after 5 minutes. Set to false, to disable
+      screensaver = 1000 * 60 * 30, -- show after 5 minutes. Set to false, to disable
       winblend = 100, -- winblend for the drop window
     },
   },

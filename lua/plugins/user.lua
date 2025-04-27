@@ -1,5 +1,11 @@
 return {
   {
+    "rmagatti/logger.nvim",
+    required = true,
+    lazy = false,
+  },
+
+  {
     "ptdewey/yankbank-nvim",
     dependencies = "kkharji/sqlite.lua",
     config = function()
@@ -27,11 +33,6 @@ return {
       vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
-  },
-  {
-    "github/copilot.vim",
-    lazy = false,
-    enabled = true,
   },
   { "lyokha/vim-publish-helper", lazy = false, enabled = true },
   { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
@@ -294,13 +295,12 @@ return {
   },
 
   {
-    'YannickFricke/codestats.nvim',
+    "YannickFricke/codestats.nvim",
     config = function()
-        require('codestats-nvim').setup()
+      require("codestats-nvim").setup()
     end,
-    requires = {{'nvim-lua/plenary.nvim'}}
+    requires = { { "nvim-lua/plenary.nvim" } },
   },
-
 
   -- {
   --   "Freed-Wu/code-stats.nvim",

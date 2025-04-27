@@ -35,12 +35,12 @@ return {
       -- vim.keymap.set("i", "<C-g>", function()
       -- return vim.fn["codeium#Accept"]()
       -- end, { expr = true })
-      vim.keymap.set("i", "<c-.>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true })
-      vim.keymap.set("i", "<c-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true })
+      -- vim.keymap.set("i", "<c-.>", function()
+      --   return vim.fn["codeium#CycleCompletions"](1)
+      -- end, { expr = true })
+      -- vim.keymap.set("i", "<c-,>", function()
+      --   return vim.fn["codeium#CycleCompletions"](-1)
+      -- end, { expr = true })
       vim.keymap.set("i", "<c-x>", function()
         return vim.fn["codeium#Clear"]()
       end, { expr = true })
@@ -64,14 +64,19 @@ return {
 
   { -- completion
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
+    enabled = true,
+    lazy = false,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
+      -- "hrsh7th/cmp-path",
+      "dmitmel/cmp-cmdline-history",
+      "FelipeLema/cmp-async-path",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-nvim-lua",
       "saadparwaiz1/cmp_luasnip",
       "f3fora/cmp-spell",
       "ray-x/cmp-treesitter",
@@ -86,6 +91,7 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
+      local otter = require("otter")
 
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -141,16 +147,16 @@ return {
             end
           end, { "i", "s" }),
 
-          ["<C-l>"] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { "i", "s" }),
-          ["<C-h>"] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { "i", "s" }),
+          -- ["<C-l>"] = cmp.mapping(function()
+          --   if luasnip.expand_or_locally_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   end
+          -- end, { "i", "s" }),
+          -- ["<C-h>"] = cmp.mapping(function()
+          --   if luasnip.locally_jumpable(-1) then
+          --     luasnip.jump(-1)
+          --   end
+          -- end, { "i", "s" }),
         },
         autocomplete = false,
 
@@ -172,22 +178,28 @@ return {
               calc = "[calc]",
               latex_symbols = "[tex]",
               emoji = "[emoji]",
+              async_path = "[async]",
+              cmdline_history = "[hist]",
+              copilot = "[copilot]",
             },
           }),
         },
         sources = {
-          { name = "otter" }, -- for code chunks in quarto
-          { name = "path" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "nvim_lsp" },
+          { name = "copilot.lua" },
+          { name = "codeium" },
+          { name = "nvim_lua" },
+          { name = "nvim_lsp", keyword_length = 3, max_item_count = 3 },
           { name = "luasnip", keyword_length = 3, max_item_count = 3 },
-          { name = "pandoc_references" },
           { name = "buffer", keyword_length = 5, max_item_count = 3 },
           { name = "spell" },
           { name = "treesitter", keyword_length = 5, max_item_count = 3 },
           { name = "calc" },
           { name = "latex_symbols" },
           { name = "emoji" },
+          { name = "otter" }, -- for code chunks in quarto
+          { name = "async_path" },
+          { name = "cmdline_history" },
+          { name = "nvim_lsp_signature_help" },
         },
         view = {
           entries = "native",

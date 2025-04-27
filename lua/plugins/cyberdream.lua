@@ -71,6 +71,7 @@ return {
               Keyword = { fg = "#00CCFF" },
               -- Normal = { bg = "#1c1c1c", fg = "#B3B3B3" },
               Comment = { italic = false, fg = "#5F6972" },
+              CopilotSuggestion = { fg = "#FF3BD3", bg = "#1c1c1c" },
               -- ["@variable"] = { fg = "#cccccc" },
               ["@keyword.import"] = { fg = "#D3FF3B" },
               ["@keyword.type"] = { fg = "#E599F7" },
