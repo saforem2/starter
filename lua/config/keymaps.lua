@@ -22,18 +22,18 @@ local imap = function(key, effect)
 end
 
 local function toggle_light_dark_theme()
-  if vim.o.background == 'light' then
-    vim.o.background = 'dark'
+  if vim.o.background == "light" then
+    vim.o.background = "dark"
   else
-    vim.o.background = 'light'
+    vim.o.background = "light"
   end
 end
 
 local function get_color_scheme()
-  if vim.o.background == 'light' then
-    return 'bluoco-light'
+  if vim.o.background == "light" then
+    return "bluoco-light"
   else
-    return 'onelight'
+    return "onelight"
   end
 end
 
@@ -41,21 +41,18 @@ local cmap = function(key, effect)
   vim.keymap.set("c", key, effect, { silent = true, noremap = true })
 end
 
-
-
 -- save with ctrl+s
-imap('<C-s>', '<esc>:update<cr><esc>')
-nmap('<C-s>', '<cmd>:update<cr><esc>')
+imap("<C-s>", "<esc>:update<cr><esc>")
+nmap("<C-s>", "<cmd>:update<cr><esc>")
 
 -- keep selection after indent / dedent
-vmap('>', '>gv')
-vmap('<', '<gv')
+vmap(">", ">gv")
+vmap("<", "<gv")
 
 -- center after search and jumps
-nmap('n', 'nzz')
-nmap('<c-d>', '<c-d>zz')
-nmap('<c-u>', '<c-u>zz')
-
+nmap("n", "nzz")
+nmap("<c-d>", "<c-d>zz")
+nmap("<c-u>", "<c-u>zz")
 
 -- BarBar
 local map = vim.api.nvim_set_keymap
@@ -113,17 +110,80 @@ map("n", "<Space>bd", "<Cmd>BufferClose<CR>", opts)
 map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 
-
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
+--
+map("i", "<C-J>", 'copilot#Accept("")', {
+  expr = true,
+  replace_keycodes = false,
+})
+map("i", "<C-L>", 'copilot#AcceptLine("")', {
+  expr = true,
+  replace_keycodes = false,
+})
 
-map("i", "<C-j>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+map("i", "<C-\\>", "copilot#Suggest()", {
+  expr = true,
+  replace_keycodes = false,
+})
+
+map("i", "<C-.>", 'copilot#Next("")', {
+  expr = true,
+  replace_keycodes = false,
+})
+map("i", "<C-,>", 'copilot#Previous("")', {
+  expr = true,
+  replace_keycodes = false,
+})
+map("i", "<C-k>", 'copilot#Suggest("")', {
+  expr = true,
+  replace_keycodes = false,
+})
+
+map("i", "<c-g>", 'codeium#Accept()', {
+  expr = true,
+  replace_keycodes = false,
+})
+
+-- map <c-x> to clear
+map("i", "<c-x>", 'codeium#Clear()', {
+  expr = true,
+  replace_keycodes = false,
+})
+
+-- map <c-.> to cycle completions
+-- map("i", "<c-.>", 'codeium#CycleCompletions(1)', {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
+
+-- vim.keymap.set("i", "<c-g>", function()
+-- return vim.fn["codeium#Accept"]()
+-- end, { expr = true })
+-- -- nvim_set_keymap("i", "<C-g>", "v:lua.codeium#Accept()", { expr = true })
+-- vim.keymap.set("i", "<C-g>", function()
+-- return vim.fn["codeium#Accept"]()
+-- end, { expr = true })
+-- vim.keymap.set("i", "<c-.>", function()
+--   return vim.fn["codeium#CycleCompletions"](1)
+-- end, { expr = true })
+-- vim.keymap.set("i", "<c-,>", function()
+--   return vim.fn["codeium#CycleCompletions"](-1)
+-- end, { expr = true })
+-- vim.keymap.set("i", "<c-x>", function()
+-- return vim.fn["codeium#Clear"]()
+-- end, { expr = true })
+
+-- map("i", "<C-k>", "<Plug>(copilot-suggest) <Cmd>call copilot#Suggest()<CR>", { expr = true, replace_keycodes = false })
+-- map("i", "<C-k>", 'copilot#Suggest("\\<CR>")', { expr = true, replace_keycodes = false })
+-- map("i", "<C-l>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+-- map("i", "<C-j>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
 -- vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
 --   expr = true,
 --   replace_keycodes = false,
 -- })
-vim.g.copilot_no_tab_map = true
+-- vim.g.copilot_no_tab_map = true
 
 -- vim.keymap.set(
 --   { "v" },
@@ -144,6 +204,26 @@ map("n", "]]", "<Plug>(markdown_go_next_heading)<CR>", { desc = "Jump to Next He
 map("n", "<leader>\\", "<cmd>QuartoPreview<cr>", { desc = "Quarto Preview" })
 map("n", "0", "^", { desc = "Beginning of line" })
 map("n", "X", [[:keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>]], { desc = "Split line" })
+
+
+local wk = require("which-key"
+local non_lsp_mappings = {
+  ["<leader>"] = {
+    e = { vim.cmd.Ex, "Open file explorer" },
+    p = { "\"_dP", "Paste without overwrite" },
+    ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Toggle comment" },
+    s = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and replace word under cursor" },
+    -- t = { ":Today<CR>", "Open today's note" },
+  },
+  J = { "mzJ`z", "Join lines and keep cursor position" },
+  ["<C-d>"] = { "<C-d>zz", "Half page down and center" },
+  ["<C-u>"] = { "<C-u>zz", "Half page up and center" },
+  n = { "nzzzv", "Next search result and center" },
+  N = { "Nzzzv", "Previous search result and center" },
+  Q = { "<nop>", "Disable Ex mode" },
+}
+
+wk.register(non_lsp_mappings)
 
 -- vim.keymap.set({ "n" }, "[v", [[<Plug>Markdown_MoveToNextHeader<CR>]], { desc = "Set cursor to next heading" })
 -- vim.keymap.set({ "n" }, "]v", [[:<Plug>Markdown_MoveToPreviousHeader<CR>]], { desc = "Set cursor to previous heading" })
