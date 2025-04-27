@@ -7,5 +7,5 @@ vim.wo.linebreak = true
 vim.wo.breakindent = true
 vim.wo.showbreak = "|"
 
-vim.opt.shiftwidth = 2 -- Size of an indent
-vim.opt.tabstop = 2 -- Number of spaces tabs count for
+vim.opt.shiftwidth = 4 -- Size of an indent
+vim.opt.tabstop = 4 -- Number of spaces tabs count for
