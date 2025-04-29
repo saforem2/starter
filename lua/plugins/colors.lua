@@ -2,6 +2,8 @@ return {
   {
     "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
+    enabled = true,
+    lazy = false,
     config = function()
       require("colorizer").setup({
         filetypes = { "*" }, -- Filetype options.  Accepts table like `user_default_options`
@@ -38,7 +40,7 @@ return {
             update_names = false, -- When using tailwind = 'both', update tailwind names from LSP results.  See tailwind section
           },
           -- parsers can contain values used in `user_default_options`
-          sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
+          sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
           -- Highlighting mode.  'background'|'foreground'|'virtualtext'
           mode = "background", -- Set the display mode
           -- Virtualtext character to use
@@ -95,7 +97,6 @@ return {
   -- { "navarasu/onedark.nvim.git", name="navarasu-onedark", lazy = false },
   { "saforem2/glitz", lazy = false, enabled = true },
   { "p00f/nvim-ts-rainbow", enabled = true, lazy = false },
-
   { "NTBBloodbath/doom-one.nvim" },
   { "marko-cerovac/material.nvim" },
   { "sainnhe/sonokai" },
