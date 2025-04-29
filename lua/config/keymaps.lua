@@ -113,12 +113,12 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
---
-map("i", "<C-J>", 'copilot#Accept("")', {
+
+map("i", "<C-j>", 'copilot#Accept("")', {
   expr = true,
   replace_keycodes = false,
 })
-map("i", "<C-L>", 'copilot#AcceptLine("")', {
+map("i", "<C-l>", 'copilot#AcceptLine("")', {
   expr = true,
   replace_keycodes = false,
 })
@@ -136,10 +136,10 @@ map("i", "<C-,>", 'copilot#Previous("")', {
   expr = true,
   replace_keycodes = false,
 })
-map("i", "<C-k>", 'copilot#Suggest("")', {
-  expr = true,
-  replace_keycodes = false,
-})
+-- map("i", "<C-k>", 'copilot#Suggest("")', {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
 
 map("i", "<c-g>", 'codeium#Accept()', {
   expr = true,
@@ -204,26 +204,26 @@ map("n", "]]", "<Plug>(markdown_go_next_heading)<CR>", { desc = "Jump to Next He
 map("n", "<leader>\\", "<cmd>QuartoPreview<cr>", { desc = "Quarto Preview" })
 map("n", "0", "^", { desc = "Beginning of line" })
 map("n", "X", [[:keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>]], { desc = "Split line" })
+-- map("n", "<leader>/",)
 
-
-local wk = require("which-key"
-local non_lsp_mappings = {
-  ["<leader>"] = {
-    e = { vim.cmd.Ex, "Open file explorer" },
-    p = { "\"_dP", "Paste without overwrite" },
-    ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Toggle comment" },
-    s = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and replace word under cursor" },
-    -- t = { ":Today<CR>", "Open today's note" },
-  },
-  J = { "mzJ`z", "Join lines and keep cursor position" },
-  ["<C-d>"] = { "<C-d>zz", "Half page down and center" },
-  ["<C-u>"] = { "<C-u>zz", "Half page up and center" },
-  n = { "nzzzv", "Next search result and center" },
-  N = { "Nzzzv", "Previous search result and center" },
-  Q = { "<nop>", "Disable Ex mode" },
-}
-
-wk.register(non_lsp_mappings)
+-- local wk = require("which-key")
+-- local non_lsp_mappings = {
+--   ["<leader>"] = {
+--     e = { vim.cmd.Ex, "Open file explorer" },
+--     p = { "\"_dP", "Paste without overwrite" },
+--     ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Toggle comment" },
+--     s = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and replace word under cursor" },
+--     -- t = { ":Today<CR>", "Open today's note" },
+--   },
+--   J = { "mzJ`z", "Join lines and keep cursor position" },
+--   ["<C-d>"] = { "<C-d>zz", "Half page down and center" },
+--   ["<C-u>"] = { "<C-u>zz", "Half page up and center" },
+--   n = { "nzzzv", "Next search result and center" },
+--   N = { "Nzzzv", "Previous search result and center" },
+--   Q = { "<nop>", "Disable Ex mode" },
+-- }
+--
+-- wk.register(non_lsp_mappings)
 
 -- vim.keymap.set({ "n" }, "[v", [[<Plug>Markdown_MoveToNextHeader<CR>]], { desc = "Set cursor to next heading" })
 -- vim.keymap.set({ "n" }, "]v", [[:<Plug>Markdown_MoveToPreviousHeader<CR>]], { desc = "Set cursor to previous heading" })
