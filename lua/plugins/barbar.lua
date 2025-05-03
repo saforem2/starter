@@ -1,5 +1,5 @@
 return {
-  { "lewis6991/gitsigns.nvim", enabled = false },
+  { "lewis6991/gitsigns.nvim", enabled = true },
   { "akinsho/bufferline.nvim", enabled = false },
   { "nvim-lualine/lualine.lua", enabled = false },
   {
@@ -7,7 +7,7 @@ return {
     lazy = false,
     enabled = true,
     dependencies = {
-      -- "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+      "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
       "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
     },
     init = function()
@@ -25,23 +25,23 @@ return {
       hide = { extensions = true },
 
       -- Disable highlighting alternate buffers
-      highlight_alternate = true,
+      highlight_alternate = false,
 
       -- Disable highlighting file icons in inactive buffers
       highlight_inactive_file_icons = false,
 
       -- Enable highlighting visible buffers
-      highlight_visible = true,
+      highlight_visible = false,
 
       icons = {
         -- Configure the base icons on the bufferline.
         -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
         buffer_index = false,
         buffer_number = false,
-        button = "",
+        -- button = "",
         -- Enables / disables diagnostic symbols
         diagnostics = {
-          [vim.diagnostic.severity.ERROR] = { enabled = true, icon = "ﬀ" },
+          [vim.diagnostic.severity.ERROR] = { enabled = true, icon = " " },
           [vim.diagnostic.severity.WARN] = { enabled = false },
           [vim.diagnostic.severity.INFO] = { enabled = false },
           [vim.diagnostic.severity.HINT] = { enabled = true },
@@ -70,11 +70,11 @@ return {
         pinned = { button = "", filename = true },
 
         -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
-        preset = "default",
+        preset = "powerline",
 
         -- Configure the icons on the bufferline based on the visibility of a buffer.
         -- Supports all the base icon options, plus `modified` and `pinned`.
-        alternate = { filetype = { enabled = false } },
+        -- alternate = { filetype = { enabled = false } },
         current = { buffer_index = false },
         inactive = { },
         visible = { modified = { buffer_number = false } },

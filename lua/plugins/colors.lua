@@ -1,4 +1,5 @@
 return {
+    -- { "typicode/bg.nvim", lazy = false },
   {
     "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
