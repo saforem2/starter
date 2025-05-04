@@ -1,0 +1,44 @@
+return {
+    "TheLazyCat00/focus-nvim",
+    event = "BufReadPre",
+
+    -- these are also the defaults
+    opts = {
+        languages = {
+            -- add your languages here
+            -- NOTE: you have to set a capture group
+            -- the name of the group can be anything
+            -- here it's @func
+            ["lua"] = "(function_declaration) @func"
+        },
+
+        -- fallback for when the language is not set in languages
+        -- NOTE: also set a capture group here
+        fallback = "(function_definition) @func",
+
+        -- function whose return value is used as a display text
+        -- used for diagnostics inside the fold which cannot be seen
+        -- this example would simply display the amount of errors
+        -- the default function for this is defined  1 section further below
+
+        -- callback = function(errors, warns, infos, hints)
+        --     -- consider taking a look at:
+        --         vim.diagnostic.config().virtual_text
+        --     ----------------------------------------
+        --
+        --     return errors
+        -- end,
+
+        -- the highlight-group for the diagnostic message
+        hlGroup = "NonText"
+    },
+
+    -- add this to your config to make opening folds easier
+    keys = {
+        {
+            "l", -- you can also use other keys, for example h
+            function () require("focus-nvim").open("l") end,
+            desc = "Right"
+        }
+    }
+}

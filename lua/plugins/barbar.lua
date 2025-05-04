@@ -1,11 +1,11 @@
 return {
   { "lewis6991/gitsigns.nvim", enabled = true },
-  { "akinsho/bufferline.nvim", enabled = false },
+  { "akinsho/bufferline.nvim", enabled = true },
   { "nvim-lualine/lualine.lua", enabled = false },
   {
     "romgrk/barbar.nvim",
     lazy = false,
-    enabled = true,
+    enabled = false,
     dependencies = {
       "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
       "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
