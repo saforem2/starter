@@ -26,11 +26,11 @@ return {
     cmd = "TSHighlightCapturesUnderCursor",
   },
 
-  {
-    "nfrid/markdown-togglecheck",
-    dependencies = { "nfrid/treesitter-utils" },
-    ft = { "markdown", "qmd" },
-  },
+  -- {
+  --   "nfrid/markdown-togglecheck",
+  --   dependencies = { "nfrid/treesitter-utils" },
+  --   ft = { "markdown", "qmd" },
+  -- },
 
   {
     "Wansmer/treesj",
@@ -66,15 +66,16 @@ return {
       "RRethy/nvim-treesitter-endwise",
       "mfussenegger/nvim-ts-hint-textobject",
       "nvim-treesitter/nvim-treesitter-textobjects",
+      "tadmccorkle/markdown.nvim",
       {
         "nvim-treesitter/playground",
         cmd = "TSHighlightCapturesUnderCursor",
       },
-      {
-        "nfrid/markdown-togglecheck",
-        dependencies = { "nfrid/treesitter-utils" },
-        ft = { "markdown", "qmd", "quarto", },
-      },
+      -- {
+      --   "nfrid/markdown-togglecheck",
+      --   dependencies = { "nfrid/treesitter-utils" },
+      --   ft = { "markdown", "quarto" },
+      -- },
     },
     --     config = function()
     --       require("free.config.treesitter")
@@ -138,6 +139,9 @@ return {
           "mermaid",
           "typescript",
         },
+        markdown = {
+          enable = true,
+        },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = true,
@@ -154,71 +158,71 @@ return {
             node_decremental = "grm",
           },
         },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ip"] = "@parameter.inner",
-              ["ap"] = "@parameter.outer",
-              ["ib"] = "@block.inner",
-              ["ab"] = "@block.outer",
-              ["im"] = "@class.inner", -- m as in "(M)odule"
-              ["am"] = "@class.outer",
-              ["aa"] = "@call.outer", -- a as in "function (A)pplication"
-              ["ia"] = "@call.inner",
-              ["a/"] = "@comment.outer",
-              ["i/"] = "@comment.outer",
-              ["ao"] = "@codechunk.outer",
-              ["io"] = "@codechunk.inner",
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              ["]h"] = "@header",
-              ["]f"] = "@function.outer",
-              ["]m"] = "@class.outer",
-              ["]p"] = "@parameter.outer",
-              ["]]"] = "@block.outer",
-              ["]b"] = "@block.outer",
-              ["]a"] = "@call.outer",
-              ["]/"] = "@comment.outer",
-            },
-            goto_next_end = {
-              ["]F"] = "@function.outer",
-              ["]M"] = "@class.outer",
-              ["]P"] = "@parameter.outer",
-              ["]["] = "@block.outer",
-              ["]B"] = "@block.outer",
-              ["]A"] = "@call.outer",
-              ["]\\"] = "@comment.outer",
-            },
-            goto_previous_start = {
-              ["[h"] = "@header",
-              ["[f"] = "@function.outer",
-              ["[m"] = "@class.outer",
-              ["[p"] = "@parameter.outer",
-              ["[["] = "@block.outer",
-              ["[b"] = "@block.outer",
-              ["[a"] = "@call.outer",
-              ["[/"] = "@comment.outer",
-            },
-            goto_previous_end = {
-              ["[F"] = "@function.outer",
-              ["[M"] = "@class.outer",
-              ["[P"] = "@parameter.outer",
-              ["[]"] = "@block.outer",
-              ["[B"] = "@block.outer",
-              ["[A"] = "@call.outer",
-              ["[\\"] = "@comment.outer",
-            },
-          },
-        },
+        -- textobjects = {
+        --   select = {
+        --     enable = true,
+        --     lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        --     keymaps = {
+        --       -- You can use the capture groups defined in textobjects.scm
+        --       ["af"] = "@function.outer",
+        --       ["if"] = "@function.inner",
+        --       ["ip"] = "@parameter.inner",
+        --       ["ap"] = "@parameter.outer",
+        --       ["ib"] = "@block.inner",
+        --       ["ab"] = "@block.outer",
+        --       ["im"] = "@class.inner", -- m as in "(M)odule"
+        --       ["am"] = "@class.outer",
+        --       ["aa"] = "@call.outer", -- a as in "function (A)pplication"
+        --       ["ia"] = "@call.inner",
+        --       ["a/"] = "@comment.outer",
+        --       ["i/"] = "@comment.outer",
+        --       ["ao"] = "@codechunk.outer",
+        --       ["io"] = "@codechunk.inner",
+        --     },
+        --   },
+        --   move = {
+        --     enable = true,
+        --     set_jumps = true, -- whether to set jumps in the jumplist
+        --     goto_next_start = {
+        --       ["]h"] = "@header",
+        --       ["]f"] = "@function.outer",
+        --       ["]m"] = "@class.outer",
+        --       ["]p"] = "@parameter.outer",
+        --       ["]]"] = "@block.outer",
+        --       ["]b"] = "@block.outer",
+        --       ["]a"] = "@call.outer",
+        --       ["]/"] = "@comment.outer",
+        --     },
+        --     goto_next_end = {
+        --       ["]F"] = "@function.outer",
+        --       ["]M"] = "@class.outer",
+        --       ["]P"] = "@parameter.outer",
+        --       ["]["] = "@block.outer",
+        --       ["]B"] = "@block.outer",
+        --       ["]A"] = "@call.outer",
+        --       ["]\\"] = "@comment.outer",
+        --     },
+        --     goto_previous_start = {
+        --       ["[h"] = "@header",
+        --       ["[f"] = "@function.outer",
+        --       ["[m"] = "@class.outer",
+        --       ["[p"] = "@parameter.outer",
+        --       ["[["] = "@block.outer",
+        --       ["[b"] = "@block.outer",
+        --       ["[a"] = "@call.outer",
+        --       ["[/"] = "@comment.outer",
+        --     },
+        --     goto_previous_end = {
+        --       ["[F"] = "@function.outer",
+        --       ["[M"] = "@class.outer",
+        --       ["[P"] = "@parameter.outer",
+        --       ["[]"] = "@block.outer",
+        --       ["[B"] = "@block.outer",
+        --       ["[A"] = "@call.outer",
+        --       ["[\\"] = "@comment.outer",
+        --     },
+        --   },
+        -- },
       })
     end,
   },

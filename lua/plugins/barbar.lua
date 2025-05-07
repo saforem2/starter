@@ -1,11 +1,11 @@
 return {
   { "lewis6991/gitsigns.nvim", enabled = true },
-  { "akinsho/bufferline.nvim", enabled = true },
+  { "akinsho/bufferline.nvim", enabled = false },
   { "nvim-lualine/lualine.lua", enabled = false },
   {
     "romgrk/barbar.nvim",
     lazy = false,
-    enabled = false,
+    enabled = true,
     dependencies = {
       "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
       "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
@@ -70,7 +70,7 @@ return {
         pinned = { button = "", filename = true },
 
         -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
-        preset = "powerline",
+        preset = "default",
 
         -- Configure the icons on the bufferline based on the visibility of a buffer.
         -- Supports all the base icon options, plus `modified` and `pinned`.

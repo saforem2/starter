@@ -1,6 +1,6 @@
-if true then
-  return {}
-end
+-- if true then
+--   return {}
+-- end
 
 return {
 
@@ -293,10 +293,10 @@ return {
         },
       })
 
-      -- lspconfig.ruff_lsp.setup {
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      -- }
+      lspconfig.ruff.setup({
+        capabilities = capabilities,
+        flags = lsp_flags,
+      })
 
       -- See https://github.com/neovim/neovim/issues/23291
       -- disable lsp watcher.

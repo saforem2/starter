@@ -71,8 +71,8 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- Move to previous/next
-map("n", "H", "<Cmd>bprevious<CR>", opts)
-map("n", "L", "<Cmd>bnext<CR>", opts)
+map("n", "H", "<Cmd>BufferPrevious<CR>", opts)
+map("n", "L", "<Cmd>BufferNext<CR>", opts)
 
 -- Re-order to previous/next
 -- map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
@@ -112,7 +112,7 @@ map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
 
 -- Magic buffer-picking mode
 map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
-map("n", "<C-s-p>", "<Cmd>BufferPickDelete<CR>", opts)
+-- map("n", "<C-s-p>", "<Cmd>BufferPickDelete<CR>", opts)
 
 -- Sort automatically by...
 map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
@@ -126,40 +126,40 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
-map("i", "<C-j>", 'copilot#Accept("")', {
-  expr = true,
-  replace_keycodes = false,
-})
+-- map("i", "<C-j>", 'copilot#Accept("")', {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
 map("i", "<C-l>", 'copilot#AcceptLine("")', {
   expr = true,
   replace_keycodes = false,
 })
 
-map("i", "<C-\\>", "copilot#Suggest()", {
-  expr = true,
-  replace_keycodes = false,
-})
-
-map("i", "<C-.>", 'copilot#Next("")', {
-  expr = true,
-  replace_keycodes = false,
-})
-map("i", "<C-,>", 'copilot#Previous("")', {
-  expr = true,
-  replace_keycodes = false,
-})
+-- map("i", "<C-\\>", "copilot#Suggest()", {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
+--
+-- map("i", "<C-.>", 'copilot#Next("")', {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
+-- map("i", "<C-,>", 'copilot#Previous("")', {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
 -- map("i", "<C-k>", 'copilot#Suggest("")', {
 --   expr = true,
 --   replace_keycodes = false,
 -- })
 
-map("i", "<c-g>", 'codeium#Accept()', {
+map("i", "<c-g>", "codeium#Accept()", {
   expr = true,
   replace_keycodes = false,
 })
 
 -- map <c-x> to clear
-map("i", "<c-x>", 'codeium#Clear()', {
+map("i", "<c-x>", "codeium#Clear()", {
   expr = true,
   replace_keycodes = false,
 })

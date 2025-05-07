@@ -21,7 +21,7 @@ return {
     "quarto-dev/quarto-vim",
     -- enabled = true,
     lazy = false,
-    ft = { "quarto", "markdown", "qmd" },
+    ft = { "quarto", "markdown" },
     requires = { "vim-pandoc/vim-pandoc-syntax" },
     -- dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
     -- note: needs additional syntax highlighting enabled for markdown
