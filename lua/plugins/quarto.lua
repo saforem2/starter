@@ -34,10 +34,10 @@ return {
       -- see `:h conceallevel`
       -- vim.opt.conceallevel = 0
       -- -- disable conceal in markdown/quarto
-      -- vim.g['pandoc#syntax#conceal#use'] = true
+      vim.g["pandoc#syntax#conceal#use"] = true
       -- -- embeds are already handled by treesitter injectons
-      -- vim.g['pandoc#syntax#codeblocks#embeds#use'] = true
-      -- vim.g['pandoc#syntax#conceal#blacklist'] = { 'codeblock_delim', 'codeblock_start' }
+      vim.g["pandoc#syntax#codeblocks#embeds#use"] = true
+      vim.g["pandoc#syntax#conceal#blacklist"] = { "codeblock_delim", "codeblock_start" }
       -- but allow some types of conceal in math regions:
       -- see `:h g:tex_conceal`
       vim.g["tex_conceal"] = "gm"
@@ -65,7 +65,7 @@ return {
         lspFeatures = {
           enabled = true,
           chunks = "curly",
-          languages = { "r", "python", "julia", "bash", "html" },
+          languages = { "python", "julia", "bash", "html" },
           diagnostics = {
             enabled = true,
             triggers = { "BufWritePost" },
