@@ -108,7 +108,7 @@ return {
   { "rafcamlet/nvim-luapad" },
   { "tpope/vim-repeat" },
   { "easymotion/vim-easymotion" },
-  { "lervag/vimtex" },
+  -- { "lervag/vimtex" },
   { "folke/trouble.nvim", cmd = "TroubleToggle", enabled = true, lazy = false },
   { "knubie/vim-kitty-navigator" },
   { "fladson/vim-kitty" },

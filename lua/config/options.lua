@@ -25,8 +25,8 @@ vim.opt.formatoptions:remove("o")
 vim.g.vim_markdown_auto_insert_bullets = 0
 vim.g.vim_markdown_new_list_item_indent = 0
 vim.g.vim_markdown_strikethrough = 1
-vim.g.tex_superscripts = "[0-9a-zA-W.,:;+-<>/()=]"
-vim.g.tex_subscripts = "[0-9aehijklmnoprstuvx,+-/().]"
+-- vim.g.tex_superscripts = "[0-9a-zA-W.,:;+-<>/()=]"
+-- vim.g.tex_subscripts = "[0-9aehijklmnoprstuvx,+-/().]"
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_math = 1
 -- vim.g.vim_markdown_fenced_languages = { "csharp=cs", "python=py" }
@@ -146,4 +146,6 @@ else
 end
 
 -- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+vim.g.markdown_recommended_style = 1
+
+vim.lsp.enable('ty')
