@@ -1,5 +1,11 @@
 return {
-    -- { "typicode/bg.nvim", lazy = false },
+  {
+    "neko-night/nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  -- { "typicode/bg.nvim", lazy = false },
   {
     "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
