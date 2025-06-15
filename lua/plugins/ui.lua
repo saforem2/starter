@@ -77,7 +77,7 @@ return {
 
           msg_styles = {
             default = {
-              duration = 500,
+              duration = 1000,
 
               modifier = nil,
               decorations = {

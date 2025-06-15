@@ -14,8 +14,10 @@ return {
     -- version = "0.*",
     lazy = false,
     dependencies = {
+      -- "hrsh7th/cmp-path",
       -- add source
-      "jc-doyle/cmp-pandoc-references",
+      -- "jc-doyle/cmp-pandoc-references",
+      -- "jmbuhr/cmp-pandoc-references",
       "saghen/blink.compat",
       { "dmitmel/cmp-digraphs" },
       { "hrsh7th/cmp-nvim-lsp" },

@@ -63,8 +63,8 @@ vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Pr
 vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
-nmap("<c-d>", "<c-d>zz")
-nmap("<c-u>", "<c-u>zz")
+-- nmap("<c-d>", "<c-d>zz")
+-- nmap("<c-u>", "<c-u>zz")
 
 -- BarBar
 local map = vim.api.nvim_set_keymap

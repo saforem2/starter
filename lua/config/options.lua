@@ -31,6 +31,8 @@ vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_math = 1
 -- vim.g.vim_markdown_fenced_languages = { "csharp=cs", "python=py" }
 vim.g.vim_markdown_folding_level = 2
+vim.opt.foldminlines = 0 -- Allow folding/hiding single lines
+vim.opt.fillchars = "fold: " -- remove the trailing dots
 -- LazyVim auto format
 vim.g.autoformat = false
 

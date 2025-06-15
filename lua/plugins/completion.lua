@@ -88,7 +88,7 @@ return {
   { -- completion
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
-    enabled = true,
+    enabled = false,
     lazy = false,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",

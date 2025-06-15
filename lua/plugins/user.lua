@@ -40,7 +40,7 @@ return {
           default_animation = "fade",
         },
         search = {
-          enabled = false,
+          enabled = true,
           default_animation = "pulse",
 
           -- Keys to navigate to the next match
@@ -60,7 +60,7 @@ return {
           Paste_mapping = "P",
         },
         undo = {
-          enabled = false,
+          enabled = true,
 
           default_animation = {
             name = "fade",
@@ -75,7 +75,7 @@ return {
           undo_mapping = "u",
         },
         redo = {
-          enabled = false,
+          enabled = true,
 
           default_animation = {
             name = "fade",
@@ -102,7 +102,7 @@ return {
         --     },
         --})
         substitute = {
-          enabled = false,
+          enabled = true,
 
           -- Can also be a table. Refer to overwrite.search for more information
           default_animation = "fade",
@@ -114,7 +114,7 @@ return {
         -- Enable animation on cursorline when an event in `on_events` is triggered
         -- Similar to `pulsar.el`
         pulsar = {
-          enabled = false,
+          enabled = true,
           on_events = { "CursorMoved", "CmdlineEnter", "WinEnter" },
           default_animation = {
             name = "fade",
@@ -266,6 +266,10 @@ return {
             ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
           },
         },
+        cmdline = {
+          enabled = false,
+          view = "cmdline",
+        },
         -- you can enable a preset for easier configuration
         presets = {
           bottom_search = true, -- use a classic bottom cmdline for search
@@ -378,7 +382,6 @@ return {
   {
     "jmbuhr/otter.nvim",
     dependencies = {
-      "hrsh7th/nvim-cmp", -- optional, for completion
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
