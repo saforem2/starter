@@ -2,6 +2,7 @@ return {
   {
     "OXY2DEV/ui.nvim",
     lazy = false,
+    enabled = false,
     config = function()
       require("ui").setup({
         popupmenu = {
