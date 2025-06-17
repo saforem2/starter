@@ -86,8 +86,8 @@ opt.fillchars = {
 opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Treesitter folding
 opt.foldmethod = "expr" -- Treesitter folding
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Treesitter folding
 -- Make cursor blink
 opt.guicursor = {
   "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50",
@@ -137,17 +137,17 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 opt.showmatch = true
 
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
-else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
+-- if vim.fn.has("nvim-0.10") == 1 then
+--   opt.smoothscroll = true
+--   opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+--   opt.foldmethod = "expr"
+--   opt.foldtext = ""
+-- else
+--   opt.foldmethod = "indent"
+--   opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+-- end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 1
 
-vim.lsp.enable('ty')
+vim.lsp.enable("ty")
