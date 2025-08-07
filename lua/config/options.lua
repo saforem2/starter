@@ -7,7 +7,6 @@
 --
 local animals = require("style").animals
 vim.opt.termguicolors = true
-
 vim.opt.shortmess:append("A")
 
 -- Sets how neovim will display certain whitespace in the editor.
@@ -35,6 +34,11 @@ vim.opt.foldminlines = 0 -- Allow folding/hiding single lines
 vim.opt.fillchars = "fold: " -- remove the trailing dots
 -- LazyVim auto format
 vim.g.autoformat = false
+
+-- set to `true` to follow the main branch
+-- you need to have a working rust toolchain to build the plugin
+-- in this case.
+vim.g.lazyvim_blink_main = true
 
 -- Options for the LazyVim statuscolumn
 -- vim.g.lazyvim_statuscolumn = {
@@ -123,8 +127,8 @@ opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
 -- opt.statuscolumn = [[%!v:lua.require'lazyvim.util'.ui.statuscolumn()]]
-opt.shiftwidth = 4 -- Size of an indent
-opt.tabstop = 4 -- Number of spaces tabs count for
+opt.shiftwidth = 2 -- Size of an indent
+opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
@@ -150,4 +154,9 @@ opt.showmatch = true
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 1
 
-vim.lsp.enable("ty")
+vim.lsp.enable({
+  "ruff",
+  "luals",
+  "pyright",
+  "ty",
+})
