@@ -4,7 +4,7 @@ return {
     -- don't lazy load
     lazy = false,
     -- load with highest priority
-    enabled = true,
+    enabled = false,
     priority = 1000,
 
     build = function()
