@@ -202,8 +202,8 @@ Language Generation with LLM's API]],
 --     },
 --     config = function()
 --       require("image").setup({
---         backend = "ueberzug",
---         -- backend = "kitty",
+--         -- backend = "ueberzug",
+--         backend = "kitty",
 --         kitty_method = "normal",
 --         integrations = {
 --           markdown = {
