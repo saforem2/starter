@@ -47,11 +47,12 @@ return {
       --   vim.cmd("colorscheme cyberdream")
       -- end
       require("cyberdream").setup({
+        vim.api.nvim_set_option_value("background", "dark", {}),
         -- Add a custom keybinding to toggle the colorscheme
         vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true }),
         -- vim.cmd("colorscheme ".. require('config.keymaps').get_color_scheme()),
         -- Enable transparent background
-        transparent = true,
+        transparent = false,
         -- Enable italics comments
         italic_comments = false,
 
@@ -100,7 +101,7 @@ return {
             -- Example:
             return {
               Keyword = { fg = "#00CCFF" },
-              -- Normal = { bg = "#1c1c1c", fg = "#B3B3B3" },
+              Normal = { bg = "#1c1c1c", fg = "#B3B3B3" },
               Comment = { italic = false, fg = "#5F6972" },
               CopilotSuggestion = { fg = "#FF3BD3", bg = "#1c1c1c" },
               BufferDefaultCurrentADDED = { bg = "NONE" },
