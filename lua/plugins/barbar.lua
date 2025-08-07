@@ -1,7 +1,7 @@
 return {
   { "lewis6991/gitsigns.nvim", enabled = true },
   { "akinsho/bufferline.nvim", enabled = false },
-  { "nvim-lualine/lualine.lua", enabled = false },
+  -- { "nvim-lualine/lualine.lua", enabled = false },
   {
     "romgrk/barbar.nvim",
     lazy = false,

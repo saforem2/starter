@@ -169,6 +169,13 @@ return {
           MkdnFoldSection = { "n", "<leader>k" },
           MkdnUnfoldSection = { "n", "<leader>K" },
         },
+        filetypes = {
+          md = true,
+          rmd = true,
+          markdown = true,
+          qmd = true,
+        },
+
         -- SAMPLE FOLDTEXT CONFIGURATION RECIPE WITH COMMENTS
         -- Other config options
         foldtext = {

@@ -38,15 +38,15 @@ return {
     end,
   },
   { "lukas-reinke/indent-blankline.nvim", enabled = false },
-  { "nvim-lualine/lualine.nvim", enabled = false },
-  {
-    "echasnovski/mini.statusline",
-    version = false,
-    enabled = true,
-    config = function()
-      require("mini.statusline").setup()
-    end,
-  },
+  -- { "nvim-lualine/lualine.nvim", enabled = false },
+  -- {
+  --   "echasnovski/mini.statusline",
+  --   version = false,
+  --   enabled = true,
+  --   config = function()
+  --     require("mini.statusline").setup()
+  --   end,
+  -- },
   {
     "toppair/peek.nvim",
     event = { "VeryLazy" },
