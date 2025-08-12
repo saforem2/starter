@@ -25,13 +25,13 @@ return {
       -- "jc-doyle/cmp-pandoc-references",
       -- "jmbuhr/cmp-pandoc-references",
       -- "saghen/blink.compat",
-      --       {
-      --   "Exafunction/codeium.nvim",
-      --   dependencies = {
-      --     "nvim-lua/plenary.nvim",
-      --   },
-      --   opts = {},
-      -- },
+      {
+        "Exafunction/codeium.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+        opts = {},
+      },
       { "folke/snacks.nvim" },
       { "mikavilpas/blink-ripgrep.nvim" },
       { "saghen/blink.compat", opts = { enable_events = true } },
