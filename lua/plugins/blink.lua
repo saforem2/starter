@@ -132,27 +132,6 @@ return {
         },
       },
       sources = {
-        completion = {
-          enabled_providers = {
-            "lsp",
-            "path",
-            "snippets",
-            "buffer",
-            "codeium",
-            "copilot",
-            "digraphs",
-            "cmdline",
-            "nvim_lua",
-            "spell",
-            "treesitter",
-            "calc",
-            "latex_symbols",
-            "emoji",
-            "async_path",
-            "cmdline_history",
-          },
-        },
-
         -- remember to enable your providers here
         default = {
           "lsp",
@@ -176,6 +155,27 @@ return {
           "async_path",
           "cmdline_history",
         },
+        completion = {
+          enabled_providers = {
+            "lsp",
+            "path",
+            "snippets",
+            "buffer",
+            "codeium",
+            "copilot",
+            "digraphs",
+            "cmdline",
+            "nvim_lua",
+            "spell",
+            "treesitter",
+            "calc",
+            "latex_symbols",
+            "emoji",
+            "async_path",
+            "cmdline_history",
+          },
+        },
+
         compat = { "pandoc_references", "codeium" },
         providers = {
           references = {
@@ -199,23 +199,28 @@ return {
             -- end,
           },
           codeium = {
-            kind = "Codeium",
-            score_offset = 100,
+            name = "Codeium",
+            module = "codeium.blink",
             async = true,
-            -- name = "codeium",
-            -- module = "blink-cmp-codeium",
-            -- score_offset = 100,
-            -- async = true,
-            -- transform_items = function(_, items)
-            --   local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-            --   local kind_idx = #CompletionItemKind + 1
-            --   CompletionItemKind[kind_idx] = "Codeium"
-            --   for _, item in ipairs(items) do
-            --     item.kind = kind_idx
-            --   end
-            --   return items
-            -- end,
           },
+          -- codeium = {
+          --   kind = "Codeium",
+          --   score_offset = 100,
+          --   async = true,
+          --   name = "codeium",
+          --   module = "blink-cmp-codeium",
+          --   score_offset = 100,
+          --   async = true,
+          --   transform_items = function(_, items)
+          --     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          --     local kind_idx = #CompletionItemKind + 1
+          --     CompletionItemKind[kind_idx] = "Codeium"
+          --     for _, item in ipairs(items) do
+          --       item.kind = kind_idx
+          --     end
+          --     return items
+          --   end,
+          -- },
           pyright = {
             name = "pyright",
             module = "blink.compat.source",

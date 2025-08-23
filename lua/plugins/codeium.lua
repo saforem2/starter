@@ -1,8 +1,8 @@
 return {
   {
-    "Exafunction/codeium.vim",
+    "Exafunction/codeium.nvim",
     events = { "InsertEnter" },
-    lazy = false,
+    -- lazy = false,
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -11,7 +11,10 @@ return {
     lazy = false,
     -- config = function() require("codeium").setup {} end,
     config = function()
-      -- require("codeium.vim").setup({})
+      -- local api_key = os.getenv("CODESTATS_API_KEY") or ""
+      -- require("codeium.vim").setup({
+      --   api_key = api_key,
+      -- })
       vim.g.codeium_disable_bindings = 1
       vim.keymap.set("i", "<c-g>", function()
         return vim.fn["codeium#Accept"]()
