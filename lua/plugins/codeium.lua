@@ -11,6 +11,22 @@ return {
     lazy = false,
     -- config = function() require("codeium").setup {} end,
     config = function()
+      require("codeium").setup({
+        -- panel = {
+        --   enabled = true,
+        -- },
+        -- suggestion = {
+        --   enabled = true,
+        --   auto_trigger = true,
+        --   debounce = 75,
+        --   keymap = {
+        --     accept = "<C-g>",
+        --     next = "<C-.>",
+        --     prev = "<C-,>",
+        --     dismiss = "<C-x>",
+        --   },
+        -- },
+      })
       -- local api_key = os.getenv("CODESTATS_API_KEY") or ""
       -- require("codeium.vim").setup({
       --   api_key = api_key,
