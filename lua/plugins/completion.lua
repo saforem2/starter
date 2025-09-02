@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 return {
   {
     -- for lsp features in code cells / embedded code

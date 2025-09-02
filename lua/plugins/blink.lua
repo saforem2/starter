@@ -25,13 +25,13 @@ return {
       -- "jc-doyle/cmp-pandoc-references",
       -- "jmbuhr/cmp-pandoc-references",
       -- "saghen/blink.compat",
-      {
-        "Exafunction/codeium.nvim",
-        dependencies = {
-          "nvim-lua/plenary.nvim",
-        },
-        opts = {},
-      },
+      -- {
+      --   "Exafunction/codeium.nvim",
+      --   dependencies = {
+      --     "nvim-lua/plenary.nvim",
+      --   },
+      --   opts = {},
+      -- },
       { "folke/snacks.nvim" },
       { "mikavilpas/blink-ripgrep.nvim" },
       { "saghen/blink.compat", opts = { enable_events = true } },
@@ -139,7 +139,7 @@ return {
           "nvim_lsp_signature_help",
           "omni",
           "path",
-          "codeium",
+          
           "copilot",
           "snippets",
           "digraphs",
@@ -161,7 +161,7 @@ return {
             "path",
             "snippets",
             "buffer",
-            "codeium",
+            -- "codeium",
             "copilot",
             "digraphs",
             "cmdline",
@@ -176,7 +176,7 @@ return {
           },
         },
 
-        compat = { "pandoc_references", "codeium" },
+        compat = { "pandoc_references" },  -- , "codeium" },
         providers = {
           references = {
             name = "pandoc_references",
@@ -198,11 +198,11 @@ return {
             --   return items
             -- end,
           },
-          codeium = {
-            name = "Codeium",
-            module = "codeium.blink",
-            async = true,
-          },
+
+          --   name = "Codeium",
+          --   module = "codeium.blink",
+          --   async = true,
+          -- },
           -- codeium = {
           --   kind = "Codeium",
           --   score_offset = 100,

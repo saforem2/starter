@@ -160,10 +160,10 @@ map("i", "<c-g>", "codeium#Accept()", {
 })
 
 -- map <c-x> to clear
-map("i", "<c-x>", "codeium#Clear()", {
-  expr = true,
-  replace_keycodes = false,
-})
+-- map("i", "<c-x>", "codeium#Clear()", {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
 
 -- map <c-.> to cycle completions
 -- map("i", "<c-.>", 'codeium#CycleCompletions(1)', {
