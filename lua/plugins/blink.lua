@@ -139,11 +139,10 @@ return {
           "nvim_lsp_signature_help",
           "omni",
           "path",
-          
           "copilot",
           "snippets",
           "digraphs",
-          "cmdline",
+          -- "cmdline",
           "nvim_lua",
           "spell",
           "treesitter",

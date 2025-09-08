@@ -254,10 +254,12 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+-- map("n", "<S-h>", "<cmd>BufferPrevious<cr>", { desc = "Prev Buffer" })
+-- map("n", "<S-l>", "<cmd>BufferNext<cr>", { desc = "Next Buffer" })
+map("n", "H", ":BufferPrevious<CR>", { desc = "Prev Buffer" })
+map("n", "L", ":BufferNext<cr>", { desc = "Next Buffer" })
+map("n", "[b", "<cmd>BufferPrevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>BufferNext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
