@@ -1,3 +1,10 @@
+return {
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    event = { "WinLeave" },
+  },
+}
 -- return {
 --   {
 --     "nvim-zh/colorful-winsep.nvim",
@@ -29,10 +36,10 @@
 --     end,
 --   },
 -- }
-return {
-  {
-    "nvim-zh/colorful-winsep.nvim",
-    config = true,
-    event = { "WinLeave" },
-  },
-}
+-- return {
+--   {
+--     "nvim-zh/colorful-winsep.nvim",
+--     config = true,
+--     event = { "WinLeave" },
+--   },
+-- }

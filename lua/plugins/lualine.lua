@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local codestats = require("codestats")
 local xp = function()
   return codestats.get_xp(0) .. "/" .. codestats.get_xp() -- current buf language xp

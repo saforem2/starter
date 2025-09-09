@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 -- Eviline config for lualine
 -- Author: shadmansaleh
 -- Credit: glepnir
