@@ -9,6 +9,7 @@ local animals = require("style").animals
 vim.opt.termguicolors = true
 vim.opt.shortmess:append("A")
 
+
 -- Sets how neovim will display certain whitespace in the editor.
 --  See :help 'list'
 --  and :help 'listchars'
@@ -39,6 +40,7 @@ vim.g.autoformat = false
 -- you need to have a working rust toolchain to build the plugin
 -- in this case.
 vim.g.lazyvim_blink_main = true
+vim.g.lazyvim_cmp = "auto"
 
 -- Options for the LazyVim statuscolumn
 -- vim.g.lazyvim_statuscolumn = {
