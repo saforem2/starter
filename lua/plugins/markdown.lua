@@ -8,13 +8,13 @@ return {
     ft = { "markdown", "quarto" },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
-      {
-        "echasnovski/mini.icons",
-        version = false,
-        config = function()
-          require("mini.icons").setup()
-        end,
-      },
+      -- {
+      --   "echasnovski/mini.icons",
+      --   version = false,
+      --   config = function()
+      --     require("mini.icons").setup()
+      --   end,
+      -- },
       -- { "echasnovski/mini.icons" },
     },
     opts = {
