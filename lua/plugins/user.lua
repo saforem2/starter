@@ -8,9 +8,9 @@ return {
     event = "VeryLazy",
   },
   { "knubie/vim-kitty-navigator" },
-  { "fladson/vim-kitty" },
+  { "fladson/vim-kitty", lazy = false, enabled = true },
   { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
-  { "p00f/nvim-ts-rainbow" },
+  { "p00f/nvim-ts-rainbow", lazy = false, enabled = true },
   { "wakatime/vim-wakatime", lazy = false },
   { "jghauser/mkdir.nvim" },
   { "rktjmp/lush.nvim", lazy = false, enabled = true },
@@ -18,6 +18,13 @@ return {
     "nvim-zh/colorful-winsep.nvim",
     config = true,
     event = { "WinLeave" },
+  },
+
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    config = function()
+      require("rainbow-delimiters.setup").setup({})
+    end,
   },
   { -- gh copilot
     "zbirenbaum/copilot.lua",
@@ -226,8 +233,7 @@ return {
           multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
           multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
           before = "", -- "fg" or "bg" or empty
-          keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding cha
-racters, wide_fg acts accordingly but with fg)
+          keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding cha racters, wide_fg acts accordingly but with fg)
           after = "", -- "fg" or "bg" or empty
           pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
           comments_only = true, -- uses treesitter to match keywords in comments only
@@ -330,12 +336,5 @@ racters, wide_fg acts accordingly but with fg)
         desc = "copy selection to system clipboard (visual mode)",
       },
     },
-  },
-  { "wakatime/vim-wakatime" },
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    config = function()
-      require("rainbow-delimiters.setup").setup({})
-    end,
   },
 }
