@@ -22,6 +22,9 @@
 return {
   {
     "f-person/auto-dark-mode.nvim",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter"
+    },
     enabled = true,
     lazy = false,
     -- opts = {
@@ -106,7 +109,7 @@ return {
         set_light_mode = function()
           vim.api.nvim_set_option_value("background", "light", {})
           vim.cmd("colorscheme onelight")
-          vim.cmd("TSEnable highlight")
+	  -- vim.cmd("TSEnable highlight")
           vim.cmd("syntax enable")
           -- " highlight @string guifg=#F8FCDC guibg=#F8FCDC
           -- replace vim.cmd with lua equiv

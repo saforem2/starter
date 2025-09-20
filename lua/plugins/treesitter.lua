@@ -1,6 +1,6 @@
 return {
   {
-    "romgrk/nvim-treesitter-context",
+    "nvim-treesitter/nvim-treesitter-context",
     config = function()
       require("treesitter-context").setup({
         min_window_height = 50,
@@ -20,10 +20,6 @@ return {
         },
       })
     end,
-  },
-  {
-    "nvim-treesitter/playground",
-    cmd = "TSHighlightCapturesUnderCursor",
   },
 
   -- {
@@ -62,6 +58,8 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    lazy = false,
     dependencies = {
       "RRethy/nvim-treesitter-endwise",
       "mfussenegger/nvim-ts-hint-textobject",
@@ -69,30 +67,23 @@ return {
       "tadmccorkle/markdown.nvim",
       {
         "nvim-treesitter/playground",
+        dependencies = {
+          "nvim-treesitter/nvim-treesitter",
+          config = function()
+            require("nvim-treesitter.configs").setup({
+              query_linter = {
+                enable = true,
+                use_virtual_text = true,
+                lint_events = { "BufWrite", "CursorHold" },
+              }
+            })
+          end,
+        },
         cmd = "TSHighlightCapturesUnderCursor",
+        enabled = true,
       },
-      -- {
-      --   "nfrid/markdown-togglecheck",
-      --   dependencies = { "nfrid/treesitter-utils" },
-      --   ft = { "markdown", "quarto" },
-      -- },
     },
-    --     config = function()
-    --       require("free.config.treesitter")
-    -- --    local init_path = vim.fn.stdpath("config") .. "/.treesitter"
-    -- --    if not require("util").file_or_dir_exists(init_path) then
-    -- --      local init_file = io.open(init_path, "w")
-    -- --      if init_file ~= nil then
-    -- --        init_file:write("")
-    -- --        init_file:close()
-    -- --      end
-    -- --        init_file:close()
-    -- --      end
-    -- --      vim.cmd([[TSUpdate bash]])
-    -- --      vim.cmd([[TSUpdate c]])
-    -- --    end
-    --     end,
-    --   },
+
     build = ":TSUpdate",
     config = function()
       ---@diagnostic disable-next-line: missing-fields
@@ -102,7 +93,7 @@ return {
           enable = true,
           disable = {},
           updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-          -- persist_queries = true, -- Whether the query persists across vim sessions
+          persist_queries = true, -- Whether the query persists across vim sessions
           keybindings = {
             toggle_query_editor = "o",
             toggle_hl_groups = "i",
