@@ -127,10 +127,10 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
--- map("i", "<C-j>", 'copilot#Accept("")', {
---   expr = true,
---   replace_keycodes = false,
--- })
+map("i", "<C-j>", 'copilot#Accept("")', {
+  expr = true,
+  replace_keycodes = false,
+})
 map("i", "<C-l>", 'copilot#AcceptLine("")', {
   expr = true,
   replace_keycodes = false,
