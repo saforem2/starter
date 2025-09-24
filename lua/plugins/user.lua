@@ -10,7 +10,7 @@ return {
   { "knubie/vim-kitty-navigator" },
   { "fladson/vim-kitty", lazy = false, enabled = true },
   { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
-  { "p00f/nvim-ts-rainbow", lazy = false, enabled = true },
+  -- { "p00f/nvim-ts-rainbow", lazy = false, enabled = true },
   { "wakatime/vim-wakatime", lazy = false },
   { "jghauser/mkdir.nvim" },
   { "rktjmp/lush.nvim", lazy = false, enabled = true },

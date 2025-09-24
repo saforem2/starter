@@ -34,7 +34,7 @@ return {
   -- { "sainnhe/sonokai" },
   -- { "tanvirtin/monokai.nvim" },
   --
-  { "p00f/nvim-ts-rainbow", enabled = true, lazy = false },
+  -- { "p00f/nvim-ts-rainbow", enabled = true, lazy = false },
   { "NTBBloodbath/doom-one.nvim" },
   { "marko-cerovac/material.nvim" },
   { "sainnhe/sonokai" },
