@@ -20,37 +20,37 @@ return {
     event = { "WinLeave" },
   },
 
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      -- require("rainbow-delimiters.setup").setup({})
-      ---@type rainbow_delimiters.config
-      vim.g.rainbow_delimiters = {
-          strategy = {
-              [''] = 'rainbow-delimiters.strategy.global',
-              vim = 'rainbow-delimiters.strategy.local',
-          },
-          query = {
-              [''] = 'rainbow-delimiters',
-              lua = 'rainbow-blocks',
-          },
-          priority = {
-              [''] = 110,
-              lua = 210,
-          },
-          highlight = {
-              'RainbowDelimiterRed',
-              'RainbowDelimiterYellow',
-              'RainbowDelimiterBlue',
-              'RainbowDelimiterOrange',
-              'RainbowDelimiterGreen',
-              'RainbowDelimiterViolet',
-              'RainbowDelimiterCyan',
-          },
-      }
-    end,
-  },
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   config = function()
+  --     -- require("rainbow-delimiters.setup").setup({})
+  --     ---@type rainbow_delimiters.config
+  --     vim.g.rainbow_delimiters = {
+  --         strategy = {
+  --             [''] = 'rainbow-delimiters.strategy.global',
+  --             vim = 'rainbow-delimiters.strategy.local',
+  --         },
+  --         query = {
+  --             [''] = 'rainbow-delimiters',
+  --             lua = 'rainbow-blocks',
+  --         },
+  --         priority = {
+  --             [''] = 110,
+  --             lua = 210,
+  --         },
+  --         highlight = {
+  --             'RainbowDelimiterRed',
+  --             'RainbowDelimiterYellow',
+  --             'RainbowDelimiterBlue',
+  --             'RainbowDelimiterOrange',
+  --             'RainbowDelimiterGreen',
+  --             'RainbowDelimiterViolet',
+  --             'RainbowDelimiterCyan',
+  --         },
+  --     }
+  --   end,
+  -- },
   { -- gh copilot
     "zbirenbaum/copilot.lua",
     enabled = true,

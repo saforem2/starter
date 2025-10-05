@@ -135,6 +135,7 @@ map("i", "<C-l>", 'copilot#AcceptLine("")', {
   expr = true,
   replace_keycodes = false,
 })
+map("i", "<esc>", "<C-C>", { desc = "Escape from insert mode" })
 
 -- map("i", "<C-\\>", "copilot#Suggest()", {
 --   expr = true,

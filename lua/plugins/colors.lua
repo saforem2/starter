@@ -42,12 +42,12 @@ return {
   { "tanvirtin/monokai.nvim" },
   { "folke/lsp-colors.nvim", event = "BufRead" },
   { "brenoprata10/nvim-highlight-colors" },
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    config = function()
-      require("rainbow-delimiters.setup").setup({})
-    end,
-  },
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   config = function()
+  --     require("rainbow-delimiters.setup").setup({})
+  --   end,
+  -- },
   { "NTBBloodbath/doom-one.nvim" },
   { "marko-cerovac/material.nvim" },
   { "yonlu/omni.vim", lazy = false },
