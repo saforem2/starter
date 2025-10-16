@@ -135,7 +135,19 @@ map("i", "<C-l>", 'copilot#AcceptLine("")', {
   expr = true,
   replace_keycodes = false,
 })
-map("i", "<esc>", "<C-C>", { desc = "Escape from insert mode" })
+map("i", "<esc>", "<C-[>", {
+  desc = "Escape from insert mode",
+  expr = true,
+  replace_keycodes = false,
+})
+map(
+  "i", "jj", "<Esc>", {
+    desc = "Escape from insert mode",
+    expr = false,
+    replace_keycodes = false 
+  }
+)
+vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
 
 -- map("i", "<C-\\>", "copilot#Suggest()", {
 --   expr = true,
@@ -271,12 +283,12 @@ map("n", "<leader>bo", function()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
--- Clear search and stop snippet on escape
-map({ "i", "n", "s" }, "<esc>", function()
-  vim.cmd("noh")
-  LazyVim.cmp.actions.snippet_stop()
-  return "<esc>"
-end, { expr = true, desc = "Escape and Clear hlsearch" })
+-- -- Clear search and stop snippet on escape
+-- map({ "i", "n", "s" }, "<esc>", function()
+--   vim.cmd("noh")
+--   LazyVim.cmp.actions.snippet_stop()
+--   return "<esc>"
+-- end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
