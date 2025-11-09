@@ -9,6 +9,13 @@ return {
   },
   { "knubie/vim-kitty-navigator" },
   { "fladson/vim-kitty", lazy = false, enabled = true },
+  { "rrethy/vim-illuminate" },
+  {
+    "nvimdev/hlsearch.nvim",
+    enabled = true,
+    lazy = false,
+    opts = {},
+  },
   { "Bekaboo/deadcolumn.nvim", lazy = false, enabled = true },
   -- { "p00f/nvim-ts-rainbow", lazy = false, enabled = true },
   { "wakatime/vim-wakatime", lazy = false },
