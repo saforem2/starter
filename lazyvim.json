@@ -1,11 +1,12 @@
 {
   "extras": [
     "lazyvim.plugins.extras.ai.codeium",
-    "lazyvim.plugins.extras.ai.copilot",
+    "lazyvim.plugins.extras.ai.sidekick",
     "lazyvim.plugins.extras.coding.blink",
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.neogen",
     "lazyvim.plugins.extras.coding.nvim-cmp",
+    "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.dap.nlua",
     "lazyvim.plugins.extras.editor.fzf",
@@ -25,6 +26,7 @@
     "lazyvim.plugins.extras.lsp.neoconf",
     "lazyvim.plugins.extras.lsp.none-ls",
     "lazyvim.plugins.extras.test.core",
+    "lazyvim.plugins.extras.ui.dashboard-nvim",
     "lazyvim.plugins.extras.util.mini-hipatterns",
     "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.util.rest",

@@ -243,7 +243,7 @@ return {
   {
     "tadmccorkle/markdown.nvim",
     event = "VeryLazy",
-    enabled = true,
+    enabled = false,
     -- lazy = false,
     ft = { "markdown", "quarto" },
     opts = {

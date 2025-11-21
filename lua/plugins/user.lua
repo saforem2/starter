@@ -1,4 +1,5 @@
 return {
+  { "tpope/vim-repeat" },
   { "machakann/vim-sandwich" },
   { "vim-python/python-syntax" },
   { "Vimjas/vim-python-pep8-indent" },
