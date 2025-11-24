@@ -125,7 +125,7 @@ return {
             highlight(0, "@function.call", { fg = "#EC407A" })
             highlight(0, "BufferCurrent", { fg = "#111111" })
             highlight(0, "RenderMarkdownBullet", { fg = "#e05661" })
-            highlight(0, "@markup.list.markdown", { fg = "#118dc3" })
+            highlight(1, "@markup.list.markdown", { fg = "#118dc3" })
             highlight(0, "RenderMarkdownH2Bg", { bg = "#e3eff4" })
             highlight(0, "RenderMarkdownH2", { fg = "#118dc3", bold = true })
             highlight(0, "@markup.heading.2.markdown", { fg = "#118dc3" })
