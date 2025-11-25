@@ -135,19 +135,19 @@ map("i", "<C-l>", 'copilot#AcceptLine("")', {
   expr = true,
   replace_keycodes = false,
 })
-map("i", "<esc>", "<C-[>", {
-  desc = "Escape from insert mode",
-  expr = true,
-  replace_keycodes = false,
-})
-map(
-  "i", "jj", "<Esc>", {
-    desc = "Escape from insert mode",
-    expr = false,
-    replace_keycodes = false 
-  }
-)
-vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
+-- map("i", "<esc>", "<C-[>", {
+--   desc = "Escape from insert mode",
+--   expr = true,
+--   replace_keycodes = false,
+-- })
+-- map(
+--   "i", "jj", "<Esc>", {
+--     desc = "Escape from insert mode",
+--     expr = false,
+--     replace_keycodes = false 
+--   }
+-- )
+-- vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
 
 -- map("i", "<C-\\>", "copilot#Suggest()", {
 --   expr = true,
