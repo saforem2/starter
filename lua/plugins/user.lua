@@ -1,4 +1,5 @@
 return {
+  { "xiyaowong/nvim-cursorword" },
   { "tpope/vim-repeat" },
   { "machakann/vim-sandwich" },
   { "vim-python/python-syntax" },

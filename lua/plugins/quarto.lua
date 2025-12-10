@@ -22,7 +22,7 @@ return {
     -- enabled = true,
     lazy = false,
     ft = { "quarto", "markdown" },
-    requires = { "vim-pandoc/vim-pandoc-syntax" },
+    dependencies = { "vim-pandoc/vim-pandoc-syntax" },
     -- dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
     -- note: needs additional syntax highlighting enabled for markdown
     -- in `nvim-treesitter`
@@ -32,7 +32,9 @@ return {
       -- regex vim syntax files can define conceal
       -- s
       -- see `:h conceallevel`
-      -- vim.opt.conceallevel = 0
+      ts = require("nvim-treesitter")
+      ts.syntax.enable()
+      vim.opt.conceallevel = 0
       -- -- disable conceal in markdown/quarto
       vim.g["pandoc#syntax#conceal#use"] = true
       -- -- embeds are already handled by treesitter injectons
@@ -55,8 +57,8 @@ return {
       -- for language features in code cells
       -- configured in lua/plugins/lsp.lua and
       -- added as a nvim-cmp source in lua/plugins/completion.lua
-      "jmbuhr/otter.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      { "jmbuhr/otter.nvim", lazy = false, enabled = true },
+      { "nvim-treesitter/nvim-treesitter", lazy = false, enabled = true },
     },
     config = function()
       require("quarto").setup({
