@@ -45,6 +45,8 @@ end
 imap("<C-s>", "<esc>:update<cr><esc>")
 nmap("<C-s>", "<cmd>:update<cr><esc>")
 
+vim.keymap.set({"i"}, "<Esc>", "<cmd>nohlsearch<cr><Esc>", { silent = true })
+
 -- keep selection after indent / dedent
 vmap(">", ">gv")
 vmap("<", "<gv")
@@ -269,8 +271,6 @@ map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", {
 -- buffers
 -- map("n", "<S-h>", "<cmd>BufferPrevious<cr>", { desc = "Prev Buffer" })
 -- map("n", "<S-l>", "<cmd>BufferNext<cr>", { desc = "Next Buffer" })
-map("n", "H", ":BufferPrevious<CR>", { desc = "Prev Buffer" })
-map("n", "L", ":BufferNext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>BufferPrevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>BufferNext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
@@ -283,12 +283,18 @@ map("n", "<leader>bo", function()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
--- -- Clear search and stop snippet on escape
--- map({ "i", "n", "s" }, "<esc>", function()
---   vim.cmd("noh")
---   LazyVim.cmp.actions.snippet_stop()
---   return "<esc>"
--- end, { expr = true, desc = "Escape and Clear hlsearch" })
+-- Clear search and stop snippet on escape
+vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
+  pcall(vim.cmd, "noh")
+  pcall(function()
+    local ok, cmp = pcall(require, "lazyvim.util.cmp")
+    if ok and cmp and cmp.actions and cmp.actions.snippet_stop then
+      cmp.actions.snippet_stop()
+    end
+  end)
+  return "<Esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
+
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
