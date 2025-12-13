@@ -33,7 +33,7 @@ return {
       -- s
       -- see `:h conceallevel`
       ts = require("nvim-treesitter")
-      ts.syntax.enable()
+      -- ts.syntax.enable()
       vim.opt.conceallevel = 0
       -- -- disable conceal in markdown/quarto
       vim.g["pandoc#syntax#conceal#use"] = true
