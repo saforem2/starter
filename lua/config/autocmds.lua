@@ -48,3 +48,14 @@ vim.api.nvim_create_autocmd("FileType", {
 --           autocmd FileType markdown nmap <buffer> ]v <Plug>Markdown_MoveToNextHeader
 --           autocmd FileType markdown nmap <buffer> [v <Plug>Markdown_MoveToPreviousHeader
 --       ]]
+--
+
+-- set tab size 4 for bash files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sh",
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.expandtab = true
+  end,
+})
