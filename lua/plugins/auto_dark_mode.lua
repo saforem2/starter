@@ -120,6 +120,7 @@ return {
             highlight(0, "@function.builtin", { fg = "#1da912" })
             highlight(0, "@string.documentation.python", { bg = "#FFFFFF", fg = "#757575" })
             highlight(0, "@variable", { fg = "#444444" })
+            highlight(0, "@constant.python", { fg="#F92672" })
             highlight(0, "semshiImported", { fg = "#05A551" })
             highlight(0, "@module", { fg = "#01A9F4" })
             highlight(0, "@function.call", { fg = "#EC407A" })

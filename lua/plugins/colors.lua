@@ -4,6 +4,19 @@
 
 return {
   {
+    "olimorris/onedarkpro.nvim",
+    -- priority = 1000, -- Ensure it loads first
+    -- config = function()
+    --   require("onedarkpro").setup({
+    --     onelight = {
+    --       constant = {
+    --         fg="#F92672"
+    --       },
+    --     }
+    --   })
+    -- end
+  },
+  {
     "eero-lehtinen/oklch-color-picker.nvim",
     event = "VeryLazy",
     version = "*",
@@ -152,10 +165,6 @@ return {
       -- setup must be called before loading
       -- vim.cmd("colorscheme github_dark")
     end,
-  },
-  {
-    "olimorris/onedarkpro.nvim",
-    priority = 1000, -- Ensure it loads first
   },
   {
     "uloco/bluloco.nvim",

@@ -160,6 +160,5 @@ vim.g.markdown_recommended_style = 1
 vim.lsp.enable({
   "ruff",
   "luals",
-  "pyright",
   "ty",
 })
