@@ -60,28 +60,33 @@ return {
   --     }
   --   end,
   -- },
-  { -- gh copilot
-    "zbirenbaum/copilot.lua",
-    enabled = true,
-    config = function()
-      require("copilot").setup({
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = "<C-j>",
-            -- accept_word = false,
-            -- accept_line = false,
-            next = "<C-]>",
-            prev = "<C-[>",
-            dismiss = "<C-\\>",
-          },
-        },
-        panel = { enabled = false },
-      })
-    end,
-  },
+  -- { -- gh copilot
+  --   "zbirenbaum/copilot.lua",
+  --   enabled = true,
+  --   dependencies = {
+  --     "copilotlsp-nvim/copilot-lsp"
+  --   },
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         debounce = 75,
+  --         keymap = {
+  --           accept = "<C-j>",
+  --           -- accept_word = false,
+  --           -- accept_line = false,
+  --           next = "<C-]>",
+  --           prev = "<C-[>",
+  --           dismiss = "<C-\\>",
+  --         },
+  --       },
+  --       panel = { enabled = false },
+  --     })
+  --   end,
+  -- },
   {
     "OXY2DEV/ui.nvim",
     lazy = false,

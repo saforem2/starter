@@ -5,52 +5,52 @@
 return {
   {
     "olimorris/onedarkpro.nvim",
-    -- priority = 1000, -- Ensure it loads first
-    -- config = function()
-    --   require("onedarkpro").setup({
-    --     onelight = {
-    --       constant = {
-    --         fg="#F92672"
-    --       },
-    --     }
-    --   })
-    -- end
+    priority = 1000, -- Ensure it loads first
+    config = function()
+      require("onedarkpro").setup({
+        onelight = {
+          constant = {
+            fg="#F92672"
+          },
+        }
+      })
+    end
   },
-  {
-    "eero-lehtinen/oklch-color-picker.nvim",
-    event = "VeryLazy",
-    version = "*",
-    keys = {
-      -- One handed keymap recommended, you will be using the mouse
-      {
-        "<leader>v",
-        function()
-          require("oklch-color-picker").pick_under_cursor()
-        end,
-        desc = "Color pick under cursor",
-      },
-    },
-    ---@type oklch.Opts
-    opts = {
-      highlight = {
-        enabled = true,
-        -- Async delay in ms.
-        edit_delay = 60,
-        -- Async delay in ms.
-        scroll_delay = 0,
-        -- Options: 'background'|'foreground'|'virtual_left'|'virtual_eol'|'foreground+virtual_left'|'foreground+virtual_eol'
-        style = "background",
-        bold = false,
-        italic = false,
-        -- `● ` also looks nice, nerd fonts also have bigger shapes ` `, `󰝤 `, and ` `.
-        virtual_text = "■ ",
-        -- Less than user hl by default (:help vim.highlight.priorities)
-        priority = 175,
-        -- Prevent attaching to buffers with these filetypes.
-        ignore_ft = { "blink-cmp-menu" },
-      },
-    },
-  },
+  -- {
+  --   "eero-lehtinen/oklch-color-picker.nvim",
+  --   event = "VeryLazy",
+  --   version = "*",
+  --   keys = {
+  --     -- One handed keymap recommended, you will be using the mouse
+  --     {
+  --       "<leader>v",
+  --       function()
+  --         require("oklch-color-picker").pick_under_cursor()
+  --       end,
+  --       desc = "Color pick under cursor",
+  --     },
+  --   },
+  --   ---@type oklch.Opts
+  --   opts = {
+  --     highlight = {
+  --       enabled = true,
+  --       -- Async delay in ms.
+  --       edit_delay = 60,
+  --       -- Async delay in ms.
+  --       scroll_delay = 0,
+  --       -- Options: 'background'|'foreground'|'virtual_left'|'virtual_eol'|'foreground+virtual_left'|'foreground+virtual_eol'
+  --       style = "background",
+  --       bold = false,
+  --       italic = false,
+  --       -- `● ` also looks nice, nerd fonts also have bigger shapes ` `, `󰝤 `, and ` `.
+  --       virtual_text = "■ ",
+  --       -- Less than user hl by default (:help vim.highlight.priorities)
+  --       priority = 175,
+  --       -- Prevent attaching to buffers with these filetypes.
+  --       ignore_ft = { "blink-cmp-menu" },
+  --     },
+  --   },
+  -- },
   -- {
   --   "neko-night/nvim",
   --   lazy = false,
