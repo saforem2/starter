@@ -19,6 +19,7 @@
 -- hi TabLineSel guibg=none
 -- hi TermCursor guibg=none
 -- -- return {}
+--
 return {
   {
     "f-person/auto-dark-mode.nvim",
@@ -30,6 +31,7 @@ return {
     -- opts = {
     config = function()
       require("auto-dark-mode").setup({
+        cyberdream = require("plugins.cyberdream"),
         set_dark_mode = function()
           vim.api.nvim_set_option_value("background", "dark", {})
           vim.cmd("colorscheme cyberdream")
