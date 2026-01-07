@@ -172,4 +172,16 @@ vim.lsp.enable({
   "luals",
 })
 
+vim.lsp.config(
+  "ty", {
+    settings = {
+      ty = {
+        inlayHints = {
+          variableTypes = false,
+        },
+      },
+    }
+  }
+)
+
 -- vim.cmd([[colorscheme onelight]])
