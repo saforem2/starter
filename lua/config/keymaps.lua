@@ -124,6 +124,8 @@ map("n", "<Space>bD", "<Cmd>BufferOrderByDirectory<CR>", opts)
 map("n", "<Space>bd", "<Cmd>BufferClose<CR>", opts)
 map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
+map("n", "<Space>b<", "<Cmd>BufferMovePrevious<CR>", opts)
+map("n", "<Space>b>", "<Cmd>BufferMoveNext<CR>", opts)
 
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
