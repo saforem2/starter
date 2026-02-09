@@ -171,6 +171,7 @@ vim.lsp.enable({
   "ruff",
   "luals",
   "ltex_plus",
+  "copilot-language-server",
 })
 
 vim.lsp.config("ty", {

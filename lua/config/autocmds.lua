@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown", "markdown.mdx", "quarto" },
+  pattern = { "markdown", "markdown.mdx", "quarto", "qmd" },
   callback = function()
     vim.keymap.set("n", "]v", "<Plug>Markdown_MoveToNextHeader", { buffer = true })
     vim.keymap.set("n", "[v", "<Plug>Markdown_MoveToPreviousHeader", { buffer = true })
