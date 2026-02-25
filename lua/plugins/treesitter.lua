@@ -33,7 +33,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     keys = {
       {
-        "<leader>tt",
+        "<leader>tT",
         "<CMD>TSJToggle<CR>",
         desc = "Toggle Treesitter Join",
       },
@@ -65,23 +65,6 @@ return {
       "mfussenegger/nvim-ts-hint-textobject",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "tadmccorkle/markdown.nvim",
-      {
-        "nvim-treesitter/playground",
-        dependencies = {
-          "nvim-treesitter/nvim-treesitter",
-          config = function()
-            require("nvim-treesitter.configs").setup({
-              query_linter = {
-                enable = true,
-                use_virtual_text = true,
-                lint_events = { "BufWrite", "CursorHold" },
-              }
-            })
-          end,
-        },
-        cmd = "TSHighlightCapturesUnderCursor",
-        enabled = true,
-      },
     },
 
     build = ":TSUpdate",
@@ -89,24 +72,6 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
         auto_install = true,
-        playground = {
-          enable = true,
-          disable = {},
-          updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-          persist_queries = true, -- Whether the query persists across vim sessions
-          keybindings = {
-            toggle_query_editor = "o",
-            toggle_hl_groups = "i",
-            toggle_injected_languages = "t",
-            toggle_anonymous_nodes = "a",
-            toggle_language_display = "I",
-            focus_language = "f",
-            unfocus_language = "F",
-            update = "R",
-            goto_node = "<cr>",
-            show_help = "?",
-          },
-        },
         matchup = {
           enable = true,
         },
@@ -216,5 +181,10 @@ return {
         -- },
       })
     end,
+  },
+  {
+    "nvim-treesitter/playground",
+    cmd = "TSHighlightCapturesUnderCursor",
+    enabled = false,
   },
 }

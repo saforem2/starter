@@ -12,6 +12,15 @@ return {
     },
     init = function()
       vim.g.barbar_auto_setup = false
+
+      -- Work around nightly startup errors when barbar removes missing watchers.
+      local g_bufferline = vim.g.bufferline
+      if type(g_bufferline) ~= "table" or vim.islist(g_bufferline) then
+        vim.g.bufferline = vim.empty_dict()
+      end
+
+      pcall(vim.cmd, "call dictwatcheradd(g:, 'bufferline', 'barbar#events#dict_changed')")
+      pcall(vim.cmd, "call dictwatcheradd(g:bufferline, '*', 'barbar#events#on_option_changed')")
     end,
     opts = {
       -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
@@ -76,7 +85,7 @@ return {
         -- Supports all the base icon options, plus `modified` and `pinned`.
         -- alternate = { filetype = { enabled = false } },
         current = { buffer_index = false },
-        inactive = { },
+        inactive = {},
         visible = { modified = { buffer_number = false } },
       },
       -- insert_at_start = true,

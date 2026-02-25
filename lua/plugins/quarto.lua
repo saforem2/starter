@@ -1,10 +1,15 @@
 return {
-
-  { "vim-pandoc/vim-pandoc-syntax", lazy = false, enabled = true },
+  {
+    "vim-pandoc/vim-pandoc-syntax",
+    enabled = true,
+    lazy = true,
+    ft = { "markdown", "quarto", "pandoc", "rmd" },
+  },
   {
     "KeitaNakamura/tex-conceal.vim",
-    lazy = false,
     enabled = true,
+    lazy = true,
+    ft = { "tex", "markdown", "quarto" },
     -- config = function()
     -- end,
   },
@@ -20,8 +25,8 @@ return {
   {
     "quarto-dev/quarto-vim",
     -- enabled = true,
-    lazy = false,
-    ft = { "quarto", "markdown" },
+    lazy = true,
+    ft = { "quarto", "markdown", "qmd" },
     dependencies = { "vim-pandoc/vim-pandoc-syntax" },
     -- dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
     -- note: needs additional syntax highlighting enabled for markdown
@@ -32,7 +37,7 @@ return {
       -- regex vim syntax files can define conceal
       -- s
       -- see `:h conceallevel`
-      ts = require("nvim-treesitter")
+      require("nvim-treesitter")
       -- ts.syntax.enable()
       vim.opt.conceallevel = 0
       -- -- disable conceal in markdown/quarto
@@ -50,15 +55,15 @@ return {
     -- for complete functionality (language features)
     "quarto-dev/quarto-nvim",
     enabled = true,
-    lazy = false,
-    ft = { "quarto" },
+    lazy = true,
+    ft = { "quarto", "markdown", "qmd" },
     -- opts = {},
     dependencies = {
       -- for language features in code cells
       -- configured in lua/plugins/lsp.lua and
       -- added as a nvim-cmp source in lua/plugins/completion.lua
-      { "jmbuhr/otter.nvim", lazy = false, enabled = true },
-      { "nvim-treesitter/nvim-treesitter", lazy = false, enabled = true },
+      { "jmbuhr/otter.nvim", enabled = true },
+      { "nvim-treesitter/nvim-treesitter", enabled = true },
     },
     config = function()
       require("quarto").setup({
@@ -90,6 +95,8 @@ return {
   { -- directly open ipynb files as quarto docuements
     -- and convert back behind the scenes
     "GCBallesteros/jupytext.nvim",
+    lazy = true,
+    event = { "BufReadPre *.ipynb", "BufNewFile *.ipynb" },
     opts = {
       custom_language_formatting = {
         python = {
@@ -110,6 +117,8 @@ return {
     -- like ipython, R, bash
     "jpalardy/vim-slime",
     dev = false,
+    lazy = true,
+    ft = { "quarto", "markdown", "python", "r" },
     init = function()
       vim.b["quarto_is_python_chunk"] = false
       Quarto_is_in_python_chunk = function()

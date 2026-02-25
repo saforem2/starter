@@ -23,64 +23,60 @@
 return {
   {
     "f-person/auto-dark-mode.nvim",
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter"
-    },
     enabled = true,
     lazy = false,
     -- opts = {
     config = function()
       require("auto-dark-mode").setup({
-        cyberdream = require("plugins.cyberdream"),
         set_dark_mode = function()
           vim.api.nvim_set_option_value("background", "dark", {})
           vim.cmd("colorscheme cyberdream")
           local highlight = vim.api.nvim_set_hl
-            highlight(0, "Normal", { bg = "#1c1c1c" })
-            highlight(0, "@keyword.import", { fg = "#00CCFF" })
-            highlight(0, "@keyword.conditional", { fg = "#D69AFF" })
-            highlight(0, "BufferCurrent", { fg = "#eeeeee" })
-            highlight(0, "RenderMarkdownH1Bg", { bg = "#442927" })
-            highlight(0, "@markup.list.markdown", { fg = "#118dc3" })
-            highlight(0, "RenderMarkdownH1", { fg = "#FF5252", bold = true })
-            highlight(0, "@markup.heading.1.markdown", { fg = "#FF5252", bold = true })
-            highlight(0, "RainbowDelimiterRed", { fg = "#FF8787" })
-            highlight(0, "String", { fg = "#99FFA2" })
-            highlight(0, "RenderMarkdownH2Bg", { bg = "#203a26" })
-            highlight(0, "RenderMarkdownH2", { fg = "#5eff6c", bold = true })
-            highlight(0, "@markup.heading.2.markdown", { fg = "#5eff6c", bold = true })
-            highlight(0, "RenderMarkdownH3Bg", { bg = "#202c3c" })
-            highlight(0, "RenderMarkdownH3", { fg = "#5ea1ff", bold = true })
-            highlight(0, "@markup.heading.3.markdown", { fg = "#5ea1ff", bold = true })
-            highlight(0, "RenderMarkdownH4Bg", { bg = "#2f223c" })
-            highlight(0, "RenderMarkdownH4", { fg = "#bd5eff", bold = true })
-            highlight(0, "@markup.heading.4.markdown", { fg = "#bd5eff", bold = true })
-            highlight(0, "RenderMarkdownH5Bg", { bg = "#333300" })
-            highlight(0, "RenderMarkdownH5", { fg = "#FFFF00", bold = true })
-            highlight(0, "@markup.heading.5.markdown", { fg = "#FFFF00", bold = true })
-            highlight(0, "RenderMarkdownH6Bg", { bg = "#383024" })
-            highlight(0, "RenderMarkdownH6", { fg = "#ffbd5e", bold = true })
-            highlight(0, "@markup.heading.6.markdown", { fg = "#ffbd5e", bold = true })
-            highlight(0, "BufferDefaultCurrent", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentADDED", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentCHANGED", { bg = "none" })
-            highlight(0, "BufferDefaultDELETED", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentERROR", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentHINT", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentINFO", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentIndex", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentMod", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentSign", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentTarget", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentWarn", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentChanged", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentDeleted", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentAdded", { bg = "none" })
-            highlight(0, "FlashCursor", { bg = "none" })
-            highlight(0, "NoiceCursor", { bg = "none" })
-            highlight(0, "TabLineSel",  { bg = "none" })
-            highlight(0, "TermCursor", { bg = "none" })
-            highlight(0, "BufferDefaultCurrentCHANGED", { bg = "none" })
+          highlight(0, "Normal", { bg = "#1c1c1c" })
+          highlight(0, "@keyword.import", { fg = "#00CCFF" })
+          highlight(0, "@keyword.conditional", { fg = "#D69AFF" })
+          highlight(0, "BufferCurrent", { fg = "#eeeeee" })
+          highlight(0, "RenderMarkdownH1Bg", { bg = "#442927" })
+          highlight(0, "@markup.list.markdown", { fg = "#118dc3" })
+          highlight(0, "RenderMarkdownH1", { fg = "#FF5252", bold = true })
+          highlight(0, "@markup.heading.1.markdown", { fg = "#FF5252", bold = true })
+          highlight(0, "RainbowDelimiterRed", { fg = "#FF8787" })
+          highlight(0, "String", { fg = "#99FFA2" })
+          highlight(0, "RenderMarkdownH2Bg", { bg = "#203a26" })
+          highlight(0, "RenderMarkdownH2", { fg = "#5eff6c", bold = true })
+          highlight(0, "@markup.heading.2.markdown", { fg = "#5eff6c", bold = true })
+          highlight(0, "RenderMarkdownH3Bg", { bg = "#202c3c" })
+          highlight(0, "RenderMarkdownH3", { fg = "#5ea1ff", bold = true })
+          highlight(0, "@markup.heading.3.markdown", { fg = "#5ea1ff", bold = true })
+          highlight(0, "RenderMarkdownH4Bg", { bg = "#2f223c" })
+          highlight(0, "RenderMarkdownH4", { fg = "#bd5eff", bold = true })
+          highlight(0, "@markup.heading.4.markdown", { fg = "#bd5eff", bold = true })
+          highlight(0, "RenderMarkdownH5Bg", { bg = "#333300" })
+          highlight(0, "RenderMarkdownH5", { fg = "#FFFF00", bold = true })
+          highlight(0, "@markup.heading.5.markdown", { fg = "#FFFF00", bold = true })
+          highlight(0, "RenderMarkdownH6Bg", { bg = "#383024" })
+          highlight(0, "RenderMarkdownH6", { fg = "#ffbd5e", bold = true })
+          highlight(0, "@markup.heading.6.markdown", { fg = "#ffbd5e", bold = true })
+          highlight(0, "BufferDefaultCurrent", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentADDED", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentCHANGED", { bg = "none" })
+          highlight(0, "BufferDefaultDELETED", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentERROR", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentHINT", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentINFO", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentIndex", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentMod", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentSign", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentTarget", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentWarn", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentChanged", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentDeleted", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentAdded", { bg = "none" })
+          highlight(0, "FlashCursor", { bg = "none" })
+          highlight(0, "NoiceCursor", { bg = "none" })
+          highlight(0, "TabLineSel", { bg = "none" })
+          highlight(0, "TermCursor", { bg = "none" })
+          highlight(0, "BufferDefaultCurrentCHANGED", { bg = "none" })
           -- vim.cmd([[
           --   highlight @keyword.import guifg=#00CCFF
           --   highlight @keyword.conditional guifg=#D69AFF
@@ -95,7 +91,7 @@ return {
           --   highlight RenderMarkdownH2 guifg=#5eff6c cterm=bold gui=bold
           --   highlight @markup.heading.2.markdown guifg=#5eff6c gui=bold
           --   highlight RenderMarkdownH3Bg guibg=#202c3c
-          --   highlight RenderMarkdownH3 guifg=#5ea1ff cterm=bold gui=bold 
+          --   highlight RenderMarkdownH3 guifg=#5ea1ff cterm=bold gui=bold
           --   highlight @markup.heading.3.markdown guifg=#5ea1ff cterm=bold gui=bold
           --   highlight RenderMarkdownH4Bg guibg=#2f223c
           --   highlight RenderMarkdownH4 guifg=#bd5eff cterm=bold gui=bold
@@ -111,39 +107,39 @@ return {
         set_light_mode = function()
           vim.api.nvim_set_option_value("background", "light", {})
           vim.cmd("colorscheme onelight")
-	  -- vim.cmd("TSEnable highlight")
+          -- vim.cmd("TSEnable highlight")
           vim.cmd("syntax enable")
           -- " highlight @string guifg=#F8FCDC guibg=#F8FCDC
           -- replace vim.cmd with lua equiv
           local highlight = vim.api.nvim_set_hl
-            highlight(0, "Normal", { bg = "#FFFFFF" })
-            highlight(0, "@variable.member", { fg = "#EA76CB" })
-            highlight(0, "@string", { fg = "#FD971F", bg = "none" })
-            highlight(0, "@function.builtin", { fg = "#1da912" })
-            highlight(0, "@string.documentation.python", { bg = "#FFFFFF", fg = "#757575" })
-            highlight(0, "@variable", { fg = "#444444" })
-            highlight(0, "@constant.python", { fg="#F92672" })
-            highlight(0, "semshiImported", { fg = "#05A551" })
-            highlight(0, "@module", { fg = "#01A9F4" })
-            highlight(0, "@function.call", { fg = "#EC407A" })
-            highlight(0, "BufferCurrent", { fg = "#111111" })
-            highlight(0, "RenderMarkdownBullet", { fg = "#e05661" })
-            highlight(1, "@markup.list.markdown", { fg = "#118dc3" })
-            highlight(0, "RenderMarkdownH2Bg", { bg = "#e3eff4" })
-            highlight(0, "RenderMarkdownH2", { fg = "#118dc3", bold = true })
-            highlight(0, "@markup.heading.2.markdown", { fg = "#118dc3" })
-            highlight(0, "RenderMarkdownH3Bg", { bg = "#e4f2e3" })
-            highlight(0, "RenderMarkdownH3", { fg = "#1da912", bold = true })
-            highlight(0, "@markup.heading.3.markdown", { fg = "#1da912" })
-            highlight(0, "RenderMarkdownH4Bg", { bg = "#f0edf6" })
-            highlight(0, "@markup.heading.4.markdown", { fg = "#9a77cf" })
-            highlight(0, "RenderMarkdownH4", { fg = "#9a77cf", bold = true })
-            highlight(0, "RenderMarkdownH5Bg", { bg = "#eaf3f4" })
-            highlight(0, "@markup.heading.5.markdown", { fg = "#56b6c2" })
-            highlight(0, "RenderMarkdownH5", { fg = "#56b6c2", bold = true })
-            highlight(0, "RenderMarkdownH6Bg", { bg = "#ffe7cb" })
-            highlight(0, "@markup.heading.6.markdown", { fg = "#fd971f" })
-            highlight(0, "RenderMarkdownH6", { fg = "#fd971f", bold = true })
+          highlight(0, "Normal", { bg = "#FFFFFF" })
+          highlight(0, "@variable.member", { fg = "#EA76CB" })
+          highlight(0, "@string", { fg = "#FD971F", bg = "none" })
+          highlight(0, "@function.builtin", { fg = "#1da912" })
+          highlight(0, "@string.documentation.python", { bg = "#FFFFFF", fg = "#757575" })
+          highlight(0, "@variable", { fg = "#444444" })
+          highlight(0, "@constant.python", { fg = "#F92672" })
+          highlight(0, "semshiImported", { fg = "#05A551" })
+          highlight(0, "@module", { fg = "#01A9F4" })
+          highlight(0, "@function.call", { fg = "#EC407A" })
+          highlight(0, "BufferCurrent", { fg = "#111111" })
+          highlight(0, "RenderMarkdownBullet", { fg = "#e05661" })
+          highlight(1, "@markup.list.markdown", { fg = "#118dc3" })
+          highlight(0, "RenderMarkdownH2Bg", { bg = "#e3eff4" })
+          highlight(0, "RenderMarkdownH2", { fg = "#118dc3", bold = true })
+          highlight(0, "@markup.heading.2.markdown", { fg = "#118dc3" })
+          highlight(0, "RenderMarkdownH3Bg", { bg = "#e4f2e3" })
+          highlight(0, "RenderMarkdownH3", { fg = "#1da912", bold = true })
+          highlight(0, "@markup.heading.3.markdown", { fg = "#1da912" })
+          highlight(0, "RenderMarkdownH4Bg", { bg = "#f0edf6" })
+          highlight(0, "@markup.heading.4.markdown", { fg = "#9a77cf" })
+          highlight(0, "RenderMarkdownH4", { fg = "#9a77cf", bold = true })
+          highlight(0, "RenderMarkdownH5Bg", { bg = "#eaf3f4" })
+          highlight(0, "@markup.heading.5.markdown", { fg = "#56b6c2" })
+          highlight(0, "RenderMarkdownH5", { fg = "#56b6c2", bold = true })
+          highlight(0, "RenderMarkdownH6Bg", { bg = "#ffe7cb" })
+          highlight(0, "@markup.heading.6.markdown", { fg = "#fd971f" })
+          highlight(0, "RenderMarkdownH6", { fg = "#fd971f", bold = true })
           -- vim.cmd([[
           --   highlight Normal guibg=#FFFFFF
           --   highlight @variable.member guifg=#EA76CB
@@ -168,7 +164,7 @@ return {
           --   highlight @markup.heading.2.markdown guifg=#118dc3
           --
           --   highlight RenderMarkdownH3Bg guibg=#e4f2e3
-          --   highlight RenderMarkdownH3 guifg=#1da912 cterm=bold gui=bold 
+          --   highlight RenderMarkdownH3 guifg=#1da912 cterm=bold gui=bold
           --   highlight @markup.heading.3.markdown guifg=#1da912
           --
           --   highlight RenderMarkdownH4Bg guibg=#f0edf6
