@@ -81,6 +81,8 @@ return {
       keymap = {
         preset = "enter",
         ["<C-y>"] = { "select_and_accept" },
+        ["<C-e>"] = { "cancel", "fallback" },
+        ["<C-c>"] = { "cancel", "fallback" },
       },
     },
     ---@param opts blink.cmp.Config | { sources: { compat: string[] } }

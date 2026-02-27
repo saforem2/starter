@@ -151,7 +151,6 @@ return {
   },
 
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow", ft = { "markdown", "quarto" } },
-  { "vim-pandoc/vim-pandoc-syntax", lazy = false, filetypes = { "markdown", "vimwiki", "quarto" } },
   -- {
   --   "hedyhli/markdown-toc.nvim",
   --   ft = "markdown", -- Lazy load on markdown filetype
