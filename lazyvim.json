@@ -1,6 +1,7 @@
 {
   "extras": [
     "lazyvim.plugins.extras.ai.avante",
+    "lazyvim.plugins.extras.ai.claudecode",
     "lazyvim.plugins.extras.ai.copilot",
     "lazyvim.plugins.extras.coding.blink",
     "lazyvim.plugins.extras.coding.luasnip",
@@ -21,7 +22,6 @@
     "lazyvim.plugins.extras.lsp.neoconf",
     "lazyvim.plugins.extras.lsp.none-ls",
     "lazyvim.plugins.extras.util.mini-hipatterns",
-    "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.util.startuptime"
   ],
   "install_version": 8,
