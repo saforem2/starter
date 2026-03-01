@@ -1,13 +1,21 @@
 return {
+    {"folke/flash.nvim", enabled = false},
   { "xiyaowong/nvim-cursorword" },
   { "tpope/vim-repeat" },
-  { 
-    "kylechui/nvim-surround",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({})
-    end
-  },
+  {
+        'nvim-mini/mini.nvim',
+        version = false,
+        config = function()
+            require("mini.surround").setup()
+        end,
+    },
+  -- { 
+  --   "kylechui/nvim-surround",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("nvim-surround").setup({})
+  --   end
+  -- },
   -- { "machakann/vim-sandwich" },
   { "vim-python/python-syntax" },
   { "Vimjas/vim-python-pep8-indent" },
