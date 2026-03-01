@@ -10,19 +10,10 @@ return {
     build = vim.g.lazyvim_blink_main and "cargo build --release",
     opts_extend = {
       "sources.completion.enabled_providers",
-      "sources.compat",
       "sources.default",
     },
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "jc-doyle/cmp-pandoc-references",
-      -- add blink.compat to dependencies
-      {
-        "saghen/blink.compat",
-        optional = true, -- make optional so it's only enabled if any extras need it
-        opts = {},
-        version = not vim.g.lazyvim_blink_main and "*",
-      },
     },
     event = "InsertEnter",
 
@@ -68,9 +59,6 @@ return {
       -- signature = { enabled = true },
 
       sources = {
-        -- adding any nvim-cmp sources here will enable them
-        -- with blink.compat
-        compat = { "pandoc_references" },
         default = { "lsp", "path", "snippets", "buffer" },
       },
 
@@ -85,21 +73,8 @@ return {
         ["<C-c>"] = { "cancel", "fallback" },
       },
     },
-    ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
+    ---@param opts blink.cmp.Config
     config = function(_, opts)
-      -- setup compat sources
-      local enabled = opts.sources.default
-      for _, source in ipairs(opts.sources.compat or {}) do
-        opts.sources.providers[source] = vim.tbl_deep_extend(
-          "force",
-          { name = source, module = "blink.compat.source" },
-          opts.sources.providers[source] or {}
-        )
-        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-          table.insert(enabled, source)
-        end
-      end
-
       -- add ai_accept to <Tab> key
       if not opts.keymap["<Tab>"] then
         if opts.keymap.preset == "super-tab" then -- super-tab
