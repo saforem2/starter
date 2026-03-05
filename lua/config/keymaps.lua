@@ -45,8 +45,6 @@ end
 imap("<C-s>", "<esc>:update<cr><esc>")
 nmap("<C-s>", "<cmd>:update<cr><esc>")
 
-vim.keymap.set({"i"}, "<Esc>", "<cmd>nohlsearch<cr><Esc>", { silent = true })
-
 -- keep selection after indent / dedent
 vmap(">", ">gv")
 vmap("<", "<gv")
@@ -285,16 +283,9 @@ map("n", "<leader>bo", function()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
--- Clear search, stop snippet, and dismiss completion on escape
+-- Clear search, stop snippet on escape
 vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
   pcall(vim.cmd, "noh")
-  -- Dismiss blink.cmp completion menu if visible
-  pcall(function()
-    local ok, blink = pcall(require, "blink.cmp")
-    if ok and blink.is_visible and blink.is_visible() then
-      blink.cancel()
-    end
-  end)
   pcall(function()
     local ok, cmp = pcall(require, "lazyvim.util.cmp")
     if ok and cmp and cmp.actions and cmp.actions.snippet_stop then
