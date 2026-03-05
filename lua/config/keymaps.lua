@@ -41,31 +41,6 @@ local cmap = function(key, effect)
   vim.keymap.set("c", key, effect, { silent = true, noremap = true })
 end
 
--- save with ctrl+s
-imap("<C-s>", "<esc>:update<cr><esc>")
-nmap("<C-s>", "<cmd>:update<cr><esc>")
-
--- keep selection after indent / dedent
-vmap(">", ">gv")
-vmap("<", "<gv")
-
--- center after search and jumps
--- nmap("n", "nzz")
-vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
-vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
-vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-
--- nmap("<c-d>", "<c-d>zz")
--- nmap("<c-u>", "<c-u>zz")
-
 -- BarBar
 -- local map = vim.api.nvim_set_keymap
 local map = LazyVim.safe_keymap_set
@@ -116,10 +91,7 @@ map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
 -- map("n", "<C-s-p>", "<Cmd>BufferPickDelete<CR>", opts)
 
 -- Sort automatically by...
-map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
 map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
-map("n", "<Space>bD", "<Cmd>BufferOrderByDirectory<CR>", opts)
-map("n", "<Space>bd", "<Cmd>BufferClose<CR>", opts)
 map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 map("n", "<Space>b<", "<Cmd>BufferMovePrevious<CR>", opts)
