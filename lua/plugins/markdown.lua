@@ -161,6 +161,7 @@ return {
   -- },
   {
     "jakewvincent/mkdnflow.nvim",
+    enabled = false,
     ft = { "markdown", "quarto" },
     config = function()
       require("mkdnflow").setup({
