@@ -1,5 +1,15 @@
 return {
 
+  -- Override render-markdown.nvim heading icons (from LazyVim markdown extra)
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = function(_, opts)
+      opts.heading = opts.heading or {}
+      opts.heading.position = "overlay"
+      opts.heading.icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " }
+    end,
+  },
+
   -- {
   --   -- "MeanderingProgrammer/markdown.nvim",
   --   "MeanderingProgrammer/render-markdown.nvim",
@@ -147,7 +157,7 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown", "quarto" },
     lazy = true,
-    -- build = function() vim.fn["mkdp#util#install"]() end,
+    build = function() vim.fn["mkdp#util#install"]() end,
   },
 
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow", ft = { "markdown", "quarto" } },

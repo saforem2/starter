@@ -1,15 +1,15 @@
 return {
-    {"folke/flash.nvim", enabled = false},
+  { "folke/flash.nvim" },
   { "xiyaowong/nvim-cursorword" },
   { "tpope/vim-repeat" },
   {
-        'nvim-mini/mini.nvim',
-        version = false,
-        config = function()
-            require("mini.surround").setup()
-        end,
-    },
-  -- { 
+    "nvim-mini/mini.nvim",
+    version = false,
+    config = function()
+      require("mini.surround").setup()
+    end,
+  },
+  -- {
   --   "kylechui/nvim-surround",
   --   event = "VeryLazy",
   --   config = function()

@@ -26,10 +26,7 @@ return {
         wilder.renderer_mux({
           [":"] = wilder.popupmenu_renderer({
             highlighter = wilder.lua_fzy_highlighter(),
-            left = {
-              " ",
-              wilder.popupmenu_devicons(),
-            },
+            left = { " " },
             right = {
               " ",
               wilder.popupmenu_scrollbar(),

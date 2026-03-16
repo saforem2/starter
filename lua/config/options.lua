@@ -143,6 +143,7 @@ opt.shiftwidth = 2 -- Size of an indent
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
+opt.ttimeoutlen = 10 -- Low value for terminal key codes; avoids Esc delay while still receiving Alt-key sequences
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.undodir")
 opt.undolevels = 10000
