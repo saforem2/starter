@@ -60,6 +60,10 @@ return {
 
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
+        providers = {
+          lsp = { score_offset = 200 },
+          copilot = { score_offset = 50 },
+        },
       },
 
       cmdline = {

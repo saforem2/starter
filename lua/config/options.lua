@@ -175,6 +175,16 @@ vim.lsp.enable({
   "copilot-language-server",
 })
 
+vim.lsp.config("ltex_plus", {
+  settings = {
+    ltex = {
+      dictionary = {
+        ["en-US"] = { ":" .. vim.fn.stdpath("config") .. "/spell/ltex-dictionary-en.txt" },
+      },
+    },
+  },
+})
+
 vim.lsp.config("ty", {
   settings = {
     ty = {

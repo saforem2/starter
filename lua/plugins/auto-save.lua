@@ -8,8 +8,13 @@ return {
     },
     -- event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
     opts = {
-      -- your config goes here
-      -- or just leave it empty :)
+      condition = function(buf)
+        local bufname = vim.api.nvim_buf_get_name(buf)
+        if bufname:match("%(proposed%)") or bufname:match("%(NEW FILE") then
+          return false
+        end
+        return true
+      end,
     },
   },
 }

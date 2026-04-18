@@ -1,218 +1,29 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
---
--- use `vim.keymap.set` instead
--- better up/down
--- map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
--- map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
--- map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
--- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
-local nmap = function(key, effect)
-  vim.keymap.set("n", key, effect, { silent = true, noremap = true })
-end
-
-local vmap = function(key, effect)
-  vim.keymap.set("v", key, effect, { silent = true, noremap = true })
-end
-
-local imap = function(key, effect)
-  vim.keymap.set("i", key, effect, { silent = true, noremap = true })
-end
-
-local function toggle_light_dark_theme()
-  if vim.o.background == "light" then
-    vim.o.background = "dark"
-  else
-    vim.o.background = "light"
-  end
-end
-
-local function get_color_scheme()
-  if vim.o.background == "light" then
-    return "onelight"
-  else
-    return "cyberdream"
-  end
-end
-
-local cmap = function(key, effect)
-  vim.keymap.set("c", key, effect, { silent = true, noremap = true })
-end
-
--- BarBar
--- local map = vim.api.nvim_set_keymap
-local map = LazyVim.safe_keymap_set
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- Move to previous/next
+-- BarBar
 map("n", "H", "<Cmd>BufferPrevious<CR>", opts)
 map("n", "L", "<Cmd>BufferNext<CR>", opts)
-
--- Re-order to previous/next
--- map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
--- map("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
-
--- Goto buffer in position...
--- map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
--- map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
--- map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
--- map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
--- map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
--- map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
--- map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
--- map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
--- map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
--- map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
-
--- Pin/unpin buffer
 map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
-
--- Goto pinned/unpinned buffer
---                 :BufferGotoPinned
---                 :BufferGotoUnpinned
-
--- Close buffer
 map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
-
--- Wipeout buffer
---                 :BufferWipeout
-
--- Close commands
---                 :BufferCloseAllButCurrent
---                 :BufferCloseAllButPinned
---                 :BufferCloseAllButCurrentOrPinned
---                 :BufferCloseBuffersLeft
---                 :BufferCloseBuffersRight
-
--- Magic buffer-picking mode
 map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
--- map("n", "<C-s-p>", "<Cmd>BufferPickDelete<CR>", opts)
-
--- Sort automatically by...
 map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
 map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 map("n", "<Space>b<", "<Cmd>BufferMovePrevious<CR>", opts)
 map("n", "<Space>b>", "<Cmd>BufferMoveNext<CR>", opts)
 
--- Other:
--- :BarbarEnable - enables barbar (enabled by default)
--- :BarbarDisable - very bad command, should never be used
-
--- map("i", "<C-j>", 'copilot#Accept("")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- map("i", "<C-l>", 'copilot#AcceptLine("")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- map("i", "<esc>", "<C-[>", {
---   desc = "Escape from insert mode",
---   expr = true,
---   replace_keycodes = false,
--- })
--- map(
---   "i", "jj", "<Esc>", {
---     desc = "Escape from insert mode",
---     expr = false,
---     replace_keycodes = false 
---   }
--- )
--- vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
-
--- map("i", "<C-\\>", "copilot#Suggest()", {
---   expr = true,
---   replace_keycodes = false,
--- })
---
--- map("i", "<C-.>", 'copilot#Next("")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- map("i", "<C-,>", 'copilot#Previous("")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- map("i", "<C-k>", 'copilot#Suggest("")', {
---   expr = true,
---   replace_keycodes = false,
--- })
-
-map("i", "<c-g>", "codeium#Accept()", {
-  expr = true,
-  replace_keycodes = false,
-})
-
--- map <c-x> to clear
--- map("i", "<c-x>", "codeium#Clear()", {
---   expr = true,
---   replace_keycodes = false,
--- })
-
--- map <c-.> to cycle completions
--- map("i", "<c-.>", 'codeium#CycleCompletions(1)', {
---   expr = true,
---   replace_keycodes = false,
--- })
-
--- vim.keymap.set("i", "<c-g>", function()
--- return vim.fn["codeium#Accept"]()
--- end, { expr = true })
--- -- nvim_set_keymap("i", "<C-g>", "v:lua.codeium#Accept()", { expr = true })
--- vim.keymap.set("i", "<C-g>", function()
--- return vim.fn["codeium#Accept"]()
--- end, { expr = true })
--- vim.keymap.set("i", "<c-.>", function()
---   return vim.fn["codeium#CycleCompletions"](1)
--- end, { expr = true })
--- vim.keymap.set("i", "<c-,>", function()
---   return vim.fn["codeium#CycleCompletions"](-1)
--- end, { expr = true })
--- vim.keymap.set("i", "<c-x>", function()
--- return vim.fn["codeium#Clear"]()
--- end, { expr = true })
-
--- map("i", "<C-k>", "<Plug>(copilot-suggest) <Cmd>call copilot#Suggest()<CR>", { expr = true, replace_keycodes = false })
--- map("i", "<C-k>", 'copilot#Suggest("\\<CR>")', { expr = true, replace_keycodes = false })
--- map("i", "<C-l>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
--- map("i", "<C-j>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
--- vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- vim.g.copilot_no_tab_map = true
-
--- vim.keymap.set(
---   { "v" },
---   "<leader>c",
---   "require('osc52').copy_visual()",
---   { desc = "copy visual selection to system clipboard" }
--- )
--- vim.keymap.set(
---   { "n" },
---   "<leader>c",
---   "require('osc52').copy_operator()",
---   { desc = "copy visual selection to system clipboard" }
--- )
---
-
-map("v", "<leader>c", "<Plug>(osc52-copy-visual)", { desc = "Copy to system clipboard" })
-map("n", "<leader>c", "<Plug>(osc52-copy-operator)", { desc = "Copy to system clipboard" })
-map("n", "[h", "MkdnPrevHeading", { desc = "Jump to Previous Heading" })
-map("n", "]h", "MkdnNextHeading", { desc = "Jump to Next Heading" })
+-- markdown navigation
+map("n", "[h", "<cmd>MkdnPrevHeading<cr>", { desc = "Jump to Previous Heading" })
+map("n", "]h", "<cmd>MkdnNextHeading<cr>", { desc = "Jump to Next Heading" })
 map("n", "<leader>\\", "<cmd>QuartoPreview<cr>", { desc = "Quarto Preview" })
+
+-- misc
 map("n", "0", "^", { desc = "Beginning of line" })
 map("n", "X", [[:keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>]], { desc = "Split line" })
-
-
--- This file is automatically loaded by lazyvim.config.init
-
--- DO NOT USE `LazyVim.safe_keymap_set` IN YOUR OWN CONFIG!!
--- use `vim.keymap.set` instead
--- local map = LazyVim.safe_keymap_set
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -241,8 +52,6 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
--- map("n", "<S-h>", "<cmd>BufferPrevious<cr>", { desc = "Prev Buffer" })
--- map("n", "<S-l>", "<cmd>BufferNext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>BufferPrevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>BufferNext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
@@ -256,7 +65,7 @@ end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Clear search, stop snippet on escape
-vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
+map({ "i", "n", "s" }, "<esc>", function()
   pcall(vim.cmd, "noh")
   pcall(function()
     local ok, cmp = pcall(require, "lazyvim.util.cmp")
@@ -267,9 +76,7 @@ vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
   return "<Esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
-
 -- Clear search, diff update and redraw
--- taken from runtime/lua/_editor.lua
 map(
   "n",
   "<leader>ur",
@@ -334,21 +141,20 @@ map({ "n", "v" }, "<leader>cf", function()
   LazyVim.format({ force = true })
 end, { desc = "Format" })
 
--- diagnostic
-local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+-- diagnostic (using vim.diagnostic.jump for Neovim 0.11+)
+local diagnostic_jump = function(count, severity)
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    vim.diagnostic.jump({ count = count, severity = severity })
   end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "]d", diagnostic_jump(1), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_jump(-1), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_jump(1, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_jump(-1, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_jump(1, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_jump(-1, "WARN"), { desc = "Prev Warning" })
 
 -- stylua: ignore start
 
@@ -425,128 +231,3 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
--- native snippets. only needed on < 0.11, as 0.11 creates these by default
-if vim.fn.has("nvim-0.11") == 0 then
-  map("s", "<Tab>", function()
-    return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-  end, { expr = true, desc = "Jump Next" })
-  map({ "i", "s" }, "<S-Tab>", function()
-    return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-  end, { expr = true, desc = "Jump Previous" })
-end
-
--- map("n", "<leader>/",)
-
--- local wk = require("which-key")
--- local non_lsp_mappings = {
---   ["<leader>"] = {
---     e = { vim.cmd.Ex, "Open file explorer" },
---     p = { "\"_dP", "Paste without overwrite" },
---     ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Toggle comment" },
---     s = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and replace word under cursor" },
---     -- t = { ":Today<CR>", "Open today's note" },
---   },
---   J = { "mzJ`z", "Join lines and keep cursor position" },
---   ["<C-d>"] = { "<C-d>zz", "Half page down and center" },
---   ["<C-u>"] = { "<C-u>zz", "Half page up and center" },
---   n = { "nzzzv", "Next search result and center" },
---   N = { "Nzzzv", "Previous search result and center" },
---   Q = { "<nop>", "Disable Ex mode" },
--- }
---
--- wk.register(non_lsp_mappings)
-
--- vim.keymap.set({ "n" }, "[v", [[<Plug>Markdown_MoveToNextHeader<CR>]], { desc = "Set cursor to next heading" })
--- vim.keymap.set({ "n" }, "]v", [[:<Plug>Markdown_MoveToPreviousHeader<CR>]], { desc = "Set cursor to previous heading" })
--- vim.keymap.set({ "n" }, "[v", "<Plug>(Markdown_MoveToPreviousHeader)<cr>", { desc = "Set cursor to previous heading" })
--- vim.keymap.set({ "n" }, "]v", "<Plug>(Markdown_MoveToNextHeader)<cr>", { desc = "Set cursor to next heading" })
---
--- vim.keymap.set({ "n" }, "<leader>\\", "<cmd>QuartoPreview<cr>", { desc = "Quarto Preview" })
--- vim.keymap.set({ "n" }, "0", "^", { desc = "Beginning of line" })
--- vim.keymap.set({ "n" }, "X", [[:keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>]], { desc = "Split line" })
---     ["<leader>\\"] = {"<cmd>QuartoPreview<cr>", desc = "Quarto Preview"},
---     ["0"] = {"^", desc = "Beginning of line"},
---     ["X"] = {
---         [[:keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>]],
---         desc = "Split line"
---     },
--- v = {
---     ["<leader>c"] = {
---         require('osc52').copy_visual(),
---     },
--- },
--- n = {
---     -- ["<leader>c"] = {
---     --     require('osc52').copy_operator(),
---     --     expr = true,
---     -- },
---     ["[["] = {
---         "<Plug>(markdown_go_prev_heading)<CR>",
---         desc="Jump to Previous Heading",
---     },
---     ["]]"] = {
---         "<Plug>(markdown_go_next_heading)<CR>",
---         desc="Jump to Next Heading",
---     },
---     -- ["[["] = {
---     --     "<Plug>(Markdown_MoveToPreviousHeader)<CR>",
---     --     desc="Set cursor to previous heading",
---     -- },
---     -- ["]]"] = {
---     --     "<Plug>(Markdown_MoveToNextHeader)<CR>",
---     --     desc="Set cursor to next heading",
---     -- },
---     ["<leader>cc"] = {
---         "<leader>c_",
---         remap = true,
---     },
---     ["<S-W"] = {
---         "<cmd>HopWord<CR>",
---         desc = "Hop Word",
---         opts = opts,
---     },
---     ["<S-h>"] = {
---         "<cmd>HopChar2<CR>",
---         desc = "Hop Char 2",
---         opts = opts,
---     },
---     ["<leader>b<"] = {
---         "<cmd>BufferMovePrevious<cr>",
---         desc="[BarBar] Buffer Move Previous",
---         opts = opts,
---     },
---     ["<leader>b>"] = {
---         "<cmd>BufferMoveNext<cr>",
---         desc="[BarBar] Buffer Move Next"
---     },
---     -- second key is the lefthand side of the map
---     -- mappings seen under group name "Buffer"
---     ["\\"] = {
---         "<cmd>lua require('notify').dismiss()<CR>",
---         desc = "Dismiss Notification"
---     },
---     ["gD"] = {
---         vim.lsp.buf.declaration,
---     },
---     ["<leader>d"] = {[["_d]], desc = "Beginning of line"},
---     ["<C-J>"] = {"J", desc = "Join line"},
---     ["<leader>bn"] = {"<cmd>tabnew<cr>", desc = "New tab"},
---     ["<leader>bD"] = {
---         function()
---             require("astronvim.utils.status").heirline.buffer_picker(
---                 function(bufnr)
---                     require("astronvim.utils.buffer").close(bufnr)
---                 end)
---         end,
---         desc = "Pick to close"
---     },
---     -- tables with the `name` key will be registered with which-key if it's installed
---     -- this is useful for naming menus
---     ["<leader>b"] = {name = "Buffers"},
---     ["<leader>tr"] = {"<cmd>IronRepl<cr>", desc = "Iron REPL"},
---     ["<leader>t<space>"] = {"<cmd>IronFocus<cr>", desc = "Iron Focus"},
---     ["<leader>tH"] = {"<cmd>IronHide<cr>", desc = "Iron Hide"}
---     -- quick save
---     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
--- },

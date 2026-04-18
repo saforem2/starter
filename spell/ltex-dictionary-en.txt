@@ -1,0 +1,7 @@
+EvoQEC
+LLM
+AlphaEvolve
+ShinkaEvolve
+Graphiti
+whitepaper
+QEC
