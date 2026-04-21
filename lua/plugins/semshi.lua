@@ -1,6 +1,7 @@
 return {
   -- "numiras/semshi",
   "wookayin/semshi", -- use a maintained fork
+  enabled = false, -- doesn't support Python 3.14; treesitter + LSP cover highlighting
   lazy = false,
   ft = { "python", "quarto", "markdown", "pandoc" },
   build = ":UpdateRemotePlugins",

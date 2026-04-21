@@ -36,10 +36,12 @@ return {
       },
       completion = {
         accept = {
-          -- experimental auto-brackets support
           auto_brackets = {
             enabled = true,
           },
+        },
+        list = {
+          selection = { preselect = false, auto_insert = false },
         },
         menu = {
           draw = {
