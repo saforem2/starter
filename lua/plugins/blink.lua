@@ -14,6 +14,7 @@ return {
     },
     dependencies = {
       "rafamadriz/friendly-snippets",
+      "saghen/blink.lib",
     },
     event = "InsertEnter",
 
@@ -77,6 +78,8 @@ return {
         ["<C-y>"] = { "select_and_accept" },
         ["<C-e>"] = { "cancel", "fallback" },
         ["<C-c>"] = { "cancel", "fallback" },
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-@>"] = { "show", "show_documentation", "hide_documentation" },
       },
     },
     ---@param opts blink.cmp.Config
