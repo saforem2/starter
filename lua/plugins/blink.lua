@@ -7,7 +7,9 @@ return {
   {
     "saghen/blink.cmp",
     version = not vim.g.lazyvim_blink_main and "*",
-    build = vim.g.lazyvim_blink_main and "cargo build --release",
+    build = function()
+      require("blink.cmp").build():wait(60000)
+    end,
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.default",
