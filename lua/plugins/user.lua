@@ -38,7 +38,7 @@ return {
       require("kitty-scrollback").setup()
     end,
   },
-  { "rrethy/vim-illuminate" },
+  { "rrethy/vim-illuminate", enabled = false }, -- broken on Neovim 0.12-dev (treesitter locals API)
   {
     "nvimdev/hlsearch.nvim",
     enabled = true,
